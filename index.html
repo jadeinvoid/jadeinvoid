@@ -2700,6 +2700,112 @@
                 }
             }
         });
+
+        /* ─────────────────────────────────────────────────────────
+         * PROJECT DETAIL MODAL LOGIC
+         * ───────────────────────────────────────────────────────── */
+
+        // Modal open/close functionality
+        (function() {
+            const worksGrid = document.querySelector('.works-grid');
+            const modals = document.querySelectorAll('.work-detail-modal');
+
+            // Open modal when clicking work card
+            function openModal(projectNum) {
+                const modal = document.getElementById(`modal-${projectNum}`);
+                if (modal) {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            // Close modal
+            function closeModal(modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // Close all modals
+            function closeAllModals() {
+                modals.forEach(modal => closeModal(modal));
+            }
+
+            // Event delegation for work cards
+            if (worksGrid) {
+                worksGrid.addEventListener('click', function(e) {
+                    const card = e.target.closest('.work-card');
+                    if (card) {
+                        const cardNum = card.querySelector('.card-num')?.textContent;
+                        if (cardNum) {
+                            openModal(cardNum);
+                        }
+                    }
+                });
+
+                // Keyboard support for work cards
+                worksGrid.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        const card = e.target.closest('.work-card');
+                        if (card) {
+                            const cardNum = card.querySelector('.card-num')?.textContent;
+                            if (cardNum) {
+                                openModal(cardNum);
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Modal close handlers
+            modals.forEach(modal => {
+                // Close button click
+                const closeBtn = modal.querySelector('.tui-close-btn');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => closeModal(modal));
+                }
+
+                // Overlay click
+                const overlay = modal.querySelector('.modal-overlay');
+                if (overlay) {
+                    overlay.addEventListener('click', () => closeModal(modal));
+                }
+
+                // Carousel functionality
+                const thumbs = modal.querySelectorAll('.carousel-thumbs .thumb');
+                const mainImg = modal.querySelector('.carousel-main img');
+
+                if (thumbs.length > 0 && mainImg) {
+                    thumbs.forEach(thumb => {
+                        thumb.addEventListener('click', function() {
+                            // Update main image
+                            const fullSrc = this.getAttribute('data-full-src');
+                            if (fullSrc) {
+                                mainImg.style.opacity = '0';
+                                setTimeout(() => {
+                                    mainImg.src = fullSrc;
+                                    mainImg.style.opacity = '1';
+                                }, 200);
+                            }
+
+                            // Update active state
+                            thumbs.forEach(t => t.classList.remove('active'));
+                            this.classList.add('active');
+                        });
+                    });
+                }
+            });
+
+            // ESC key to close modals
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const activeModal = document.querySelector('.work-detail-modal.active');
+                    if (activeModal) {
+                        closeModal(activeModal);
+                    }
+                }
+            });
+        })();
+
     </script>
 </body>
 </html>
