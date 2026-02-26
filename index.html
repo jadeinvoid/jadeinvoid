@@ -2705,24 +2705,110 @@
          * PROJECT DETAIL MODAL LOGIC
          * ───────────────────────────────────────────────────────── */
 
+        /* ─────────────────────────────────────────────────────────
+         * FLIP ANIMATION FOR MODALS
+         * First, Last, Invert, Play - Paul Lewis technique
+         * ───────────────────────────────────────────────────────── */
+
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // FLIP animation for modal opening
+        function animateModalOpen(card, modal) {
+            if (prefersReducedMotion) {
+                modal.classList.add('active');
+                return;
+            }
+
+            const cardRect = card.getBoundingClientRect();
+            const modalRect = modal.getBoundingClientRect();
+
+            // Calculate transforms
+            const scaleX = cardRect.width / modalRect.width;
+            const scaleY = cardRect.height / modalRect.height;
+            const translateX = cardRect.left - modalRect.left;
+            const translateY = cardRect.top - modalRect.top;
+
+            // Apply initial state (inverted)
+            modal.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+            modal.style.opacity = '0';
+            modal.style.transition = 'none';
+
+            // Force reflow
+            modal.offsetHeight;
+
+            // Add active class and animate
+            modal.classList.add('active');
+            modal.style.transform = '';
+            modal.style.opacity = '';
+            modal.style.transition = 'opacity var(--modal-timing) var(--modal-easing), transform var(--modal-timing) var(--modal-easing)';
+
+            // Clean up after animation
+            setTimeout(() => {
+                modal.style.transform = '';
+                modal.style.opacity = '';
+                modal.style.transition = '';
+            }, 300);
+        }
+
+        // FLIP animation for modal closing
+        function animateModalClose(modal, card) {
+            if (prefersReducedMotion || !card) {
+                closeModal(modal);
+                return;
+            }
+
+            const modalRect = modal.getBoundingClientRect();
+            const cardRect = card.getBoundingClientRect();
+
+            // Calculate transforms to shrink back to card
+            const scaleX = cardRect.width / modalRect.width;
+            const scaleY = cardRect.height / modalRect.height;
+            const translateX = cardRect.left - modalRect.left;
+            const translateY = cardRect.top - modalRect.top;
+
+            // Apply closing animation
+            modal.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+            modal.style.opacity = '0';
+            modal.style.transition = 'opacity var(--modal-timing) var(--modal-easing), transform var(--modal-timing) var(--modal-easing)';
+
+            // Remove active class after animation
+            setTimeout(() => {
+                modal.classList.remove('active');
+                modal.style.transform = '';
+                modal.style.opacity = '';
+                modal.style.transition = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Store reference to last clicked card
+        let lastClickedCard = null;
+
+
         // Modal open/close functionality
         (function() {
             const worksGrid = document.querySelector('.works-grid');
             const modals = document.querySelectorAll('.work-detail-modal');
 
             // Open modal when clicking work card
-            function openModal(projectNum) {
+            function openModal(projectNum, card) {
                 const modal = document.getElementById(`modal-${projectNum}`);
                 if (modal) {
-                    modal.classList.add('active');
+                    lastClickedCard = card;
+                    animateModalOpen(card, modal);
                     document.body.style.overflow = 'hidden';
                 }
             }
 
             // Close modal
             function closeModal(modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
+                if (lastClickedCard) {
+                    animateModalClose(modal, lastClickedCard);
+                } else {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
             }
 
             // Close all modals
@@ -2737,7 +2823,7 @@
                     if (card) {
                         const cardNum = card.querySelector('.card-num')?.textContent;
                         if (cardNum) {
-                            openModal(cardNum);
+                            openModal(cardNum, card);
                         }
                     }
                 });
@@ -2749,7 +2835,7 @@
                         if (card) {
                             const cardNum = card.querySelector('.card-num')?.textContent;
                             if (cardNum) {
-                                openModal(cardNum);
+                                openModal(cardNum, card);
                             }
                         }
                     }
