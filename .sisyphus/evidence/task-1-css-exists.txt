@@ -1,0 +1,39 @@
+Task 1: CSS Foundation - COMPLETED
+
+CSS Classes Added:
+.work-detail-modal
+.work-detail-modal.active
+.modal-overlay
+.modal-content
+.modal-top-bar
+.modal-project-num
+.modal-body
+.carousel-section
+.carousel-main
+.carousel-main img
+.carousel-thumbs
+.carousel-thumbs::-webkit-scrollbar
+.carousel-thumbs::-webkit-scrollbar-track
+.carousel-thumbs::-webkit-scrollbar-thumb
+.carousel-thumbs .thumb
+.carousel-thumbs .thumb.active
+.info-section
+.info-title
+.info-description
+.info-tags
+.info-tag
+.work-detail-modal
+.modal-body
+.carousel-section,
+.info-section
+.carousel-thumbs .thumb
+.info-section
+
+Media Queries:
+1111:        @media (pointer: coarse) {
+1118:        @media (max-width: 768px) {
+1250:        @media (max-width: 480px) {
+1449:        @media (max-width: 768px) {
+1923:        // Cards on touch OR narrow screens skip JS animation — CSS @media handles layout
+2346:            // 모바일: JS 애니메이션 없이 CSS @media 에 위임
+2416:            // 모바일: inline style 없이 바로 클래스만 제거 (CSS @media가 처리)

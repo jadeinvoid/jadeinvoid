@@ -1,0 +1,29 @@
+Task 3: JavaScript Logic - COMPLETED
+
+JavaScript Functions Added:
+            const worksGrid = document.querySelector('.works-grid');
+            const modals = document.querySelectorAll('.work-detail-modal');
+            function openModal(projectNum) {
+                const modal = document.getElementById(`modal-${projectNum}`);
+            function closeModal(modal) {
+            function closeAllModals() {
+--
+                            const cardNum = card.querySelector('.card-num')?.textContent;
+                const closeBtn = modal.querySelector('.tui-close-btn');
+                const overlay = modal.querySelector('.modal-overlay');
+                const thumbs = modal.querySelectorAll('.carousel-thumbs .thumb');
+                const mainImg = modal.querySelector('.carousel-main img');
+                            const fullSrc = this.getAttribute('data-full-src');
+                    const activeModal = document.querySelector('.work-detail-modal.active');
+
+Event Listeners:
+2638:            card.addEventListener('click', () => {
+2651:            btn.addEventListener('click', (e) => {
+2661:            cardOverlay.addEventListener('click', () => {
+2669:        document.addEventListener('keydown', (e) => {
+2735:                worksGrid.addEventListener('click', function(e) {
+2746:                worksGrid.addEventListener('keydown', function(e) {
+2764:                    closeBtn.addEventListener('click', () => closeModal(modal));
+2770:                    overlay.addEventListener('click', () => closeModal(modal));
+2779:                        thumb.addEventListener('click', function() {
+2799:            document.addEventListener('keydown', function(e) {

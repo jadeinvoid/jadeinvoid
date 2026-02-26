@@ -1,0 +1,17 @@
+Task 2: HTML Containers - COMPLETED
+
+Modal Containers Added:
+1781:            <div class="work-detail-modal" id="modal-001" data-project="001" data-images="3" data-main-image="work_design/project1_main.jpg" data-process-images="work_design/p1_1.jpg,work_design/p1_2.jpg,work_design/p1_3.jpg">
+1813:            <div class="work-detail-modal" id="modal-002" data-project="002" data-images="4" data-main-image="work_illustration/crash.jpg" data-process-images="work_illustration/crash_p1.jpg,work_illustration/crash_p2.jpg,work_illustration/crash_p3.jpg,work_illustration/crash_p4.jpg">
+1846:            <div class="work-detail-modal" id="modal-003" data-project="003" data-images="3" data-main-image="work_design/project3_main.jpg" data-process-images="work_design/p3_1.jpg,work_design/p3_2.jpg,work_design/p3_3.jpg">
+1878:            <div class="work-detail-modal" id="modal-004" data-project="004" data-images="5" data-main-image="work_design/project4_main.jpg" data-process-images="work_design/p4_1.jpg,work_design/p4_2.jpg,work_design/p4_3.jpg,work_design/p4_4.jpg,work_design/p4_5.jpg">
+1912:            <div class="work-detail-modal" id="modal-005" data-project="005" data-images="3" data-main-image="work_illustration/project5_main.jpg" data-process-images="work_illustration/p5_1.jpg,work_illustration/p5_2.jpg,work_illustration/p5_3.jpg">
+1944:            <div class="work-detail-modal" id="modal-006" data-project="006" data-images="4" data-main-image="work_illustration/project6_main.jpg" data-process-images="work_illustration/p6_1.jpg,work_illustration/p6_2.jpg,work_illustration/p6_3.jpg,work_illustration/p6_4.jpg">
+
+Data Attributes:
+            <div class="work-detail-modal" id="modal-001" data-project="001" data-images="3" data-main-image="work_design/project1_main.jpg" data-process-images="work_design/p1_1.jpg,work_design/p1_2.jpg,work_design/p1_3.jpg">
+            <div class="work-detail-modal" id="modal-002" data-project="002" data-images="4" data-main-image="work_illustration/crash.jpg" data-process-images="work_illustration/crash_p1.jpg,work_illustration/crash_p2.jpg,work_illustration/crash_p3.jpg,work_illustration/crash_p4.jpg">
+            <div class="work-detail-modal" id="modal-003" data-project="003" data-images="3" data-main-image="work_design/project3_main.jpg" data-process-images="work_design/p3_1.jpg,work_design/p3_2.jpg,work_design/p3_3.jpg">
+            <div class="work-detail-modal" id="modal-004" data-project="004" data-images="5" data-main-image="work_design/project4_main.jpg" data-process-images="work_design/p4_1.jpg,work_design/p4_2.jpg,work_design/p4_3.jpg,work_design/p4_4.jpg,work_design/p4_5.jpg">
+            <div class="work-detail-modal" id="modal-005" data-project="005" data-images="3" data-main-image="work_illustration/project5_main.jpg" data-process-images="work_illustration/p5_1.jpg,work_illustration/p5_2.jpg,work_illustration/p5_3.jpg">
+            <div class="work-detail-modal" id="modal-006" data-project="006" data-images="4" data-main-image="work_illustration/project6_main.jpg" data-process-images="work_illustration/p6_1.jpg,work_illustration/p6_2.jpg,work_illustration/p6_3.jpg,work_illustration/p6_4.jpg">

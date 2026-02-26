@@ -1,0 +1,36 @@
+Modal Test Results - 2026-02-26T23:08:18.128Z
+==================================================
+
+[PASS] modal-001
+  Open: true
+  Close: true
+  Screenshot: modal-001-open.png
+
+[PASS] modal-002
+  Open: true
+  Close: true
+  Screenshot: modal-002-open.png
+
+[PASS] modal-003
+  Open: true
+  Close: true
+  Screenshot: modal-003-open.png
+
+[PASS] modal-004
+  Open: true
+  Close: true
+  Screenshot: modal-004-open.png
+
+[PASS] modal-005
+  Open: true
+  Close: true
+  Screenshot: modal-005-open.png
+
+[PASS] modal-006
+  Open: true
+  Close: true
+  Screenshot: modal-006-open.png
+
+
+Summary: 6/6 modals passed
+Screenshots saved to: .sisyphus/evidence/
