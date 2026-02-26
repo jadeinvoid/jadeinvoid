@@ -1263,6 +1263,214 @@
             }
         }
 
+        /* ─────────────────────────────────────────────────────────
+         * MODAL ANIMATION STORYBOARD
+         *
+         *    0ms   modal hidden (opacity: 0, scale: 0.95, display: none)
+         *  300ms   modal visible (opacity: 1, scale: 1.0, display: flex)
+         *          cubic-bezier(0.4, 0, 0.2, 1) easing
+         * ───────────────────────────────────────────────────────── */
+
+        /* Modal Timing Variables */
+        :root {
+            --modal-timing: 300ms;
+            --modal-easing: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Main Modal Container - Hidden by default */
+        .work-detail-modal {
+            position: fixed;
+            inset: 5%;
+            z-index: 10000;
+            display: none;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity var(--modal-timing) var(--modal-easing),
+                        transform var(--modal-timing) var(--modal-easing);
+        }
+
+        /* Modal Active State - Visible */
+        .work-detail-modal.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Modal Overlay - Click to close */
+        .modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(6, 107, 195, 0.85);
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+        }
+
+        /* Modal Content - TUI Frame */
+        .modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--color-border);
+            background: var(--color-background);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Modal Top Bar - [esc] button area */
+        .modal-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .modal-project-num {
+            font-family: var(--font-family-body);
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        /* Modal Body - 2 Column Layout */
+        .modal-body {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            overflow: hidden;
+        }
+
+        /* Carousel Section - Left Column */
+        .carousel-section {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            gap: var(--spacing-sm);
+        }
+
+        /* Main Image Display */
+        .carousel-main {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            background: rgba(232, 254, 197, 0.05);
+        }
+
+        .carousel-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.2s ease;
+        }
+
+        /* Thumbnail Grid */
+        .carousel-thumbs {
+            display: flex;
+            gap: 8px;
+            padding: var(--spacing-sm);
+            overflow-x: auto;
+            flex-shrink: 0;
+        }
+
+        .carousel-thumbs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .carousel-thumbs::-webkit-scrollbar-track {
+            background: var(--color-border);
+        }
+
+        .carousel-thumbs::-webkit-scrollbar-thumb {
+            background: var(--color-text-secondary);
+            border-radius: 2px;
+        }
+
+        /* Individual Thumbnail */
+        .carousel-thumbs .thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        /* Active Thumbnail */
+        .carousel-thumbs .thumb.active {
+            border-color: var(--color-accent-2);
+        }
+
+        /* Info Section - Right Column */
+        .info-section {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            overflow-y: auto;
+            border: 1px solid var(--color-border);
+        }
+
+        .info-title {
+            font-family: var(--font-family-heading);
+            font-size: clamp(1.2em, 2.5vw, 1.6em);
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+
+        .info-description {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+            line-height: var(--line-height-base);
+        }
+
+        .info-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .info-tag {
+            font-size: 0.85em;
+            color: var(--color-text-secondary);
+            padding: 4px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 0;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .work-detail-modal {
+                inset: 2%;
+            }
+
+            .modal-body {
+                flex-direction: column;
+            }
+
+            .carousel-section,
+            .info-section {
+                flex: none;
+                width: 100%;
+            }
+
+            .carousel-thumbs .thumb {
+                width: 60px;
+                height: 60px;
+            }
+
+            .info-section {
+                max-height: 40%;
+            }
+        }
+
     </style>
 </head>
 <body>
