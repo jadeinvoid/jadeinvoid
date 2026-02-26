@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe — Portfolio</title>
+<style>
+  /* ── RESET ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: #fff;
+    color: #222;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* ── WIREFRAME HELPERS ── */
+  .wf-box {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    display: flex; align-items: center; justify-content: center;
+    color: #999; font-size: 11px; text-align: center;
+  }
+  .wf-label {
+    font-size: 10px; color: #aaa;
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  /* ─────────────────────────────────────────
+     NAV
+  ───────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 32px;
+    background: #fff;
+    border-bottom: 1px solid #222;
+    height: 48px;
+  }
+  .nav-left  { display: flex; align-items: center; gap: 10px; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+
+  /* ─────────────────────────────────────────
+     HERO
+  ───────────────────────────────────────── */
+  .hero {
+    margin-top: 48px;
+    min-height: calc(100svh - 48px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    border-bottom: 1px solid #222;
+  }
+
+  .hero-visual {
+    border-right: 1px solid #222;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 12px;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .hero-art-card {
+    border: 1px solid #222;
+    display: flex; flex-direction: column;
+  }
+  .hac-label {
+    padding: 5px 8px;
+    border-bottom: 1px solid #ddd;
+    font-size: 10px; color: #aaa;
+  }
+  .hac-body {
+    flex: 1;
+    min-height: 100px;
+  }
+
+  .hero-text {
+    padding: 40px 48px;
+    display: flex; flex-direction: column;
+    justify-content: center; gap: 24px;
+  }
+  .hero-label-wf  { font-size: 10px; color: #aaa; }
+  .hero-title-wf  { font-size: 32px; line-height: 1.1; font-weight: 700; }
+  .hero-desc-wf   { font-size: 12px; line-height: 1.8; max-width: 38ch; color: #555; border-left: 2px solid #ddd; padding-left: 12px; }
+  .hero-roles-wf  { display: flex; flex-wrap: wrap; gap: 8px; }
+  .role-tag-wf    { border: 1px solid #222; padding: 4px 10px; font-size: 10px; }
+  .hero-cta-wf    { font-size: 11px; color: #aaa; }
+
+  .hero-strip {
+    grid-column: 1 / -1;
+    border-top: 1px solid #222;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+  }
+  .strip-item {
+    padding: 10px 20px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: #999;
+  }
+  .strip-item + .strip-item { border-left: 1px solid #222; }
+
+  /* ─────────────────────────────────────────
+     WORKS SECTION
+  ───────────────────────────────────────── */
+  .section-header {
+    padding: 32px 32px 20px;
+    border-bottom: 1px solid #222;
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+  .section-title { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .section-count { font-size: 10px; color: #aaa; }
+
+  .tag-bar {
+    padding: 12px 32px;
+    border-bottom: 1px solid #222;
+    display: flex; gap: 0; flex-wrap: wrap;
+    background: #fafafa;
+  }
+  .tag-btn {
+    font-family: monospace;
+    font-size: 10px; letter-spacing: 0.1em;
+    padding: 6px 14px; background: none;
+    border: none; border-right: 1px solid #ddd;
+    cursor: pointer; color: #999;
+    text-transform: uppercase;
+  }
+  .tag-btn.active { color: #222; background: #eee; }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #ddd;
+  }
+
+  .work-card {
+    background: #fff;
+    aspect-ratio: 3/4;
+    position: relative;
+    display: flex; flex-direction: column;
+    padding: 16px;
+    cursor: pointer;
+  }
+  .work-card:hover { background: #fafafa; }
+
+  .card-thumb {
+    flex: 1;
+    margin-bottom: 12px;
+  }
+  .card-meta { display: flex; flex-direction: column; gap: 6px; }
+  .card-num-wf  { font-size: 10px; color: #aaa; }
+  .card-title-wf { font-size: 13px; font-weight: 700; }
+  .card-type-wf  { font-size: 10px; color: #aaa; text-transform: uppercase; }
+  .card-tags-wf  { display: flex; gap: 4px; flex-wrap: wrap; }
+  .card-tag-wf   { border: 1px solid #ddd; font-size: 9px; padding: 2px 6px; color: #888; }
+  .card-arrow-wf { font-size: 11px; color: #ccc; }
+
+  .card-placeholder {
+    background: #fafafa;
+    aspect-ratio: 3/4;
+    display: flex; align-items: center; justify-content: center;
+    color: #ccc; font-size: 11px; border: 1px dashed #ddd;
+  }
+
+  /* ─────────────────────────────────────────
+     ABOUT SECTION
+  ───────────────────────────────────────── */
+  .about-section {
+    border-top: 1px solid #222;
+    display: grid; grid-template-columns: 1fr 2fr;
+  }
+  .about-left {
+    padding: 48px 32px;
+    border-right: 1px solid #222;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .about-right {
+    padding: 48px 40px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .about-label-wf { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.1em; }
+  .about-tagline-wf { font-size: 24px; font-weight: 700; line-height: 1.2; }
+  .about-tui-wf { font-size: 10px; color: #ccc; white-space: pre; }
+  .about-title-wf { font-size: 22px; font-weight: 700; line-height: 1.2; }
+  .about-body-wf { font-size: 12px; line-height: 1.9; color: #555; max-width: 52ch; }
+  .about-skills-wf {
+    display: flex; gap: 0; flex-wrap: wrap;
+    border: 1px solid #ddd; width: fit-content;
+  }
+  .skill-item-wf {
+    font-size: 10px; padding: 6px 14px;
+    border-right: 1px solid #ddd; color: #888;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .skill-item-wf:last-child { border-right: none; }
+
+  /* ─────────────────────────────────────────
+     FOOTER
+  ───────────────────────────────────────── */
+  footer {
+    border-top: 1px solid #222;
+    padding: 16px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 10px; color: #aaa;
+  }
+
+  /* ─────────────────────────────────────────
+     RESPONSIVE
+  ───────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { border-right: none; border-bottom: 1px solid #222; min-height: 40svh; }
+    .works-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-section { grid-template-columns: 1fr; }
+    .about-left { border-right: none; border-bottom: 1px solid #222; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <div class="wf-box" style="width:28px;height:28px;flex-shrink:0;">seal</div>
+    <span>UX Designer · Illustrator</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#works">Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="wf-label">● Available for projects</span>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- LEFT: artwork cards 2×2 grid -->
+  <div class="hero-visual">
+
+    <div class="hero-art-card">
+      <div class="hac-label">Design / TUI</div>
+      <div class="hac-body wf-box">TUI terminal<br>window illustration</div>
+    </div>
+
+    <div class="hero-art-card">
+      <div class="hac-label">Illustration</div>
+      <div class="hac-body wf-box">Hanbok<br>character</div>
+    </div>
+
+    <div class="hero-art-card">
+      <div class="hac-label">Korean / Print</div>
+      <div class="hac-body wf-box">Obangsaek<br>colour study</div>
+    </div>
+
+    <div class="hero-art-card">
+      <div class="hac-label">Illustration / Layout</div>
+      <div class="hac-body wf-box">Manhwa<br>panel grid</div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: text -->
+  <div class="hero-text">
+    <div class="hero-label-wf">UX Designer & Illustrator</div>
+
+    <div class="hero-title-wf">
+      Designing at the<br>
+      edge of terminal<br>
+      and canvas.
+    </div>
+
+    <div class="hero-desc-wf">
+      Hello! My name is Jade, I am a UX designer with background in
+      illustration and graphic design. Now, I design terminal interfaces
+      like I used to draw characters. Every line intentional, nothing
+      wasted, personality intact.
+    </div>
+
+    <div class="hero-roles-wf">
+      <span class="role-tag-wf">TUI / UX</span>
+      <span class="role-tag-wf">Illustration</span>
+      <span class="role-tag-wf">Research</span>
+    </div>
+
+    <span class="hero-cta-wf">View works ↓</span>
+  </div>
+
+  <!-- BOTTOM STRIP -->
+  <div class="hero-strip">
+    <div class="strip-item">01 — Designs</div>
+    <div class="strip-item">02 — Illustrations</div>
+    <div class="strip-item">03 — Miscellaneous</div>
+  </div>
+
+</section>
+
+
+<!-- WORKS -->
+<section id="works">
+
+  <div class="section-header">
+    <span class="section-title">Works</span>
+    <span class="section-count">6 works</span>
+  </div>
+
+  <div class="tag-bar">
+    <button class="tag-btn active">All</button>
+    <button class="tag-btn">Design</button>
+    <button class="tag-btn">Illustration</button>
+    <button class="tag-btn">Misc</button>
+    <button class="tag-btn">TUI</button>
+    <button class="tag-btn">Research</button>
+    <button class="tag-btn">Korean</button>
+  </div>
+
+  <div class="works-grid">
+
+    <!-- Card 1 -->
+    <div class="work-card">
+      <div class="card-thumb wf-box">thumbnail / illustration</div>
+      <div class="card-meta">
+        <div class="card-num-wf">001</div>
+        <div class="card-title-wf">Design Work #1</div>
+        <div class="card-type-wf">Design</div>
+        <div class="card-tags-wf">
+          <span class="card-tag-wf">TUI</span>
+          <span class="card-tag-wf">Case Study</span>
+        </div>
+        <div class="card-arrow-wf">→</div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="work-card">
+      <div class="card-thumb wf-box">thumbnail / illustration</div>
+      <div class="card-meta">
+        <div class="card-num-wf">002</div>
+        <div class="card-title-wf">Illustration Work #1</div>
+        <div class="card-type-wf">Illustration</div>
+        <div class="card-tags-wf">
+          <span class="card-tag-wf">Concept art</span>
+        </div>
+        <div class="card-arrow-wf">→</div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="work-card">
+      <div class="card-thumb wf-box">thumbnail / illustration</div>
+      <div class="card-meta">
+        <div class="card-num-wf">003</div>
+        <div class="card-title-wf">Design Work #2</div>
+        <div class="card-type-wf">Design</div>
+        <div class="card-tags-wf">
+          <span class="card-tag-wf">Graphic</span>
+          <span class="card-tag-wf">Research</span>
+        </div>
+        <div class="card-arrow-wf">→</div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="work-card">
+      <div class="card-thumb wf-box">thumbnail / illustration</div>
+      <div class="card-meta">
+        <div class="card-num-wf">004</div>
+        <div class="card-title-wf">Design Work #3</div>
+        <div class="card-type-wf">Design</div>
+        <div class="card-tags-wf">
+          <span class="card-tag-wf">TUI</span>
+          <span class="card-tag-wf">UX</span>
+        </div>
+        <div class="card-arrow-wf">→</div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="work-card">
+      <div class="card-thumb wf-box">thumbnail / illustration</div>
+      <div class="card-meta">
+        <div class="card-num-wf">005</div>
+        <div class="card-title-wf">Illustration Work #2</div>
+        <div class="card-type-wf">Illustration</div>
+        <div class="card-tags-wf">
+          <span class="card-tag-wf">Graphic</span>
+        </div>
+        <div class="card-arrow-wf">→</div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="work-card">
+      <div class="card-thumb wf-box">thumbnail / illustration</div>
+      <div class="card-meta">
+        <div class="card-num-wf">006</div>
+        <div class="card-title-wf">Illustration Work #3</div>
+        <div class="card-type-wf">Illustration</div>
+        <div class="card-tags-wf">
+          <span class="card-tag-wf">Concept art</span>
+        </div>
+        <div class="card-arrow-wf">→</div>
+      </div>
+    </div>
+
+    <div class="card-placeholder">coming soon</div>
+
+  </div>
+</section>
+
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+
+  <div class="about-left">
+    <div class="about-label-wf">About</div>
+    <div class="about-tagline-wf">Lean, yet<br>expressive craft.</div>
+    <pre class="about-tui-wf">┌─ identity ──┐
+│ Seoul → CA  │
+│ TUI focus   │
+│ Ink + code  │
+└─────────────┘</pre>
+  </div>
+
+  <div class="about-right">
+    <div class="about-title-wf">Where the terminal<br>meets the brush.</div>
+    <p class="about-body-wf">
+      Based in Montréal, rooted in Seoul. I design terminal interfaces and
+      illustration systems that carry the clarity of Korean craft —
+      purposeful, minimal, with meaning in every element.
+    </p>
+    <div class="about-skills-wf">
+      <span class="skill-item-wf">TUI / Terminal UI Design</span>
+      <span class="skill-item-wf">Editorial Illustration</span>
+      <span class="skill-item-wf">UX Research</span>
+      <span class="skill-item-wf">Animation</span>
+      <span class="skill-item-wf">Design-to-Code Prototyping</span>
+    </div>
+    <div class="wf-label">Available for freelance · yjcho0602@gmail.com</div>
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 — All works reserved</span>
+  <span class="wf-label">[obangsaek dots]</span>
+  <a href="#">↑ Back to top</a>
+</footer>
+
+</body>
+</html>

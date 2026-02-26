@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jade — UX Designer &amp; Illustrator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; font-size: 12px; color: #000; background: #fff; }
+
+    /* NAV */
+    nav { padding: 34px 33px; }
+    .nav-site-name { font-size: 12px; margin-bottom: 10px; }
+    .nav-links { display: flex; gap: 20px; margin-bottom: 10px; }
+    .nav-links a { text-decoration: none; color: #000; font-size: 12px; }
+    .nav-status { font-size: 12px; opacity: 0.6; }
+
+    /* HERO */
+    .hero { padding: 36px; }
+    .hero-label { font-size: 12px; margin-bottom: 16px; opacity: 0.6; }
+    .hero-title { font-size: 12px; line-height: 1.6; margin-bottom: 16px; }
+    .hero-description { font-size: 12px; line-height: 1.6; max-width: 346px; margin-bottom: 24px; }
+    .hero-caption { font-size: 12px; margin-bottom: 12px; opacity: 0.6; }
+    .hero-cards { display: flex; flex-direction: column; gap: 6px; }
+    .hero-cards span { font-size: 12px; }
+
+    /* WORKS */
+    .works { padding: 36px 20px; }
+    .works h2 { font-size: 12px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .work-card { display: flex; flex-direction: column; gap: 6px; }
+    .work-card .num { font-size: 12px; opacity: 0.4; }
+    .work-card .title { font-size: 12px; font-weight: 500; }
+    .work-card .category { font-size: 12px; opacity: 0.6; }
+    .work-card .tags { display: flex; gap: 8px; font-size: 12px; opacity: 0.5; }
+    .work-card .tag-list { font-size: 12px; opacity: 0.35; }
+
+    /* ABOUT */
+    .about { padding: 36px 31px; }
+    .about-tagline { font-size: 12px; margin-bottom: 10px; font-weight: 500; }
+    .about-bio { font-size: 12px; margin-bottom: 16px; max-width: 297px; }
+    .about-skills { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .about-skills span { font-size: 12px; }
+    .about-available { font-size: 12px; margin-bottom: 6px; opacity: 0.6; }
+    .about-email { font-size: 12px; }
+    .about-email a { color: #000; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav data-section="nav">
+    <div class="nav-site-name">UX Designer · Illustrator</div>
+    <div class="nav-links">
+      <a href="#works">Works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-status">Available for projects</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" data-section="hero">
+    <div class="hero-label">UX Designer &amp; Illustrator</div>
+    <div class="hero-title">
+      Designing at the<br>
+      edge of terminal<br>
+      and canvas.
+    </div>
+    <p class="hero-description">Hello! My name is Jade, I am a UX designer with background in illustration and graphic design. Now, I design terminal interfaces like I used to draw characters. Every line intentional, nothing wasted, personality intact.</p>
+    <div class="hero-caption">TUI · Illustration · 2026</div>
+    <div class="hero-cards">
+      <span>Design / TUI</span>
+      <span>Illustration</span>
+      <span>Korean / Print</span>
+      <span>Illustration / Layout</span>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section class="works" id="works" data-section="works">
+    <div class="works-grid">
+
+      <div class="work-card" data-card="001">
+        <span class="num">001</span>
+        <span class="title">Design Work #1</span>
+        <span class="category">Design</span>
+        <div class="tags"><span>TUI</span><span>Case Study</span></div>
+        <span class="tag-list">design tui casestudy</span>
+      </div>
+
+      <div class="work-card" data-card="002">
+        <span class="num">002</span>
+        <span class="title">Illustration Work #1</span>
+        <span class="category">Illustration</span>
+        <div class="tags"><span>Concept art</span></div>
+        <span class="tag-list">illustration concept art</span>
+      </div>
+
+      <div class="work-card" data-card="003">
+        <span class="num">003</span>
+        <span class="title">Design Work #2</span>
+        <span class="category">Design</span>
+        <div class="tags"><span>Graphic</span><span>Research</span></div>
+        <span class="tag-list">design graphic research</span>
+      </div>
+
+      <div class="work-card" data-card="004">
+        <span class="num">004</span>
+        <span class="title">Design Work #3</span>
+        <span class="category">Design</span>
+        <div class="tags"><span>TUI</span><span>UX</span></div>
+        <span class="tag-list">design tui ux</span>
+      </div>
+
+      <div class="work-card" data-card="005">
+        <span class="num">005</span>
+        <span class="title">Illustration Work #2</span>
+        <span class="category">Illustration</span>
+        <div class="tags"><span>Graphic</span></div>
+        <span class="tag-list">illustration graphic</span>
+      </div>
+
+      <div class="work-card" data-card="006">
+        <span class="num">006</span>
+        <span class="title">Illustration Work #3</span>
+        <span class="category">Illustration</span>
+        <div class="tags"><span>Concept art</span></div>
+        <span class="tag-list">illustration concept art</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about" data-section="about">
+    <div class="about-tagline">Lean, yet expressive craft.</div>
+    <p class="about-bio">I am a UX designer and illustrator based in Montreal.</p>
+    <div class="about-skills">
+      <span>TUI / Terminal UI Design</span>
+      <span>Editorial Illustration</span>
+      <span>UX Research</span>
+      <span>Animation</span>
+      <span>Design-to-Code Prototyping</span>
+    </div>
+    <div class="about-available">Available for freelance</div>
+    <div class="about-email"><a href="mailto:yjcho0602@gmail.com">yjcho0602@gmail.com</a></div>
+  </section>
+
+</body>
+</html>

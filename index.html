@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Jade's Portfolio</title>
+    <style>
+        /* ── BASE STYLES & RESET ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+        html { scroll-behavior: smooth; }
+
+        :root {
+            /* Colors */
+            --color-text-primary: #e8fec5;
+            --color-text-secondary: #a8d486;
+            --color-background: #066bc3;
+            --color-border: rgba(232, 254, 197, 0.3);
+            --color-accent-1: #e8fec5; /* Brush stroke color */
+            --color-accent-2: #ffd700; /* Gold for a subtle East Asian touch */
+
+            /* Typography */
+            --font-family-body: 'geist/font/mono', monospace;
+            --font-family-heading: 'geist/font/mono', monospace; /* Keeping monospace for headings as per aesthetic */
+            --font-size-base: clamp(13px, 1.1vw + 0.3vh, 16px);
+            --line-height-base: 1.6;
+
+            /* Spacing */
+            --spacing-unit: 8px;
+            --spacing-xs: var(--spacing-unit);
+            --spacing-sm: calc(var(--spacing-unit) * 2); /* 16px */
+            --spacing-md: calc(var(--spacing-unit) * 3); /* 24px */
+            --spacing-lg: calc(var(--spacing-unit) * 5); /* 40px */
+            --spacing-xl: calc(var(--spacing-unit) * 8); /* 64px */
+
+            /* Header height — single source of truth */
+            --header-h: clamp(52px, 7vh, 68px);
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-base);
+            color: var(--color-text-primary);
+            background-color: var(--color-background);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Grain Texture Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.035;
+            pointer-events: none;
+            z-index: 10003;
+            mix-blend-mode: overlay;
+        }
+
+        /* Custom ASCII Cursor */
+        #custom-cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10002;
+            font-family: monospace;
+            font-size: 40px;
+            color: transparent;        /* ▸ 기호 invisible */
+            transform: translate(-50%, -50%);
+            text-shadow: none;         /* glow 제거 */
+            -webkit-text-stroke: 0px;    /* border 제거 */
+            opacity: 0;
+            transition: opacity 0.3s ease, color 0.15s ease;
+            user-select: none;
+        }
+
+        #custom-cursor.visible {
+            opacity: 1;                 /* trail 유지 위해 DOM visible */
+            color: transparent;         /* 하지만 text는 계속 invisible */
+        }
+
+        /* [esc] 흡수 상태: 텍스트가 보임 */
+        #custom-cursor.show-esc {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            font-family: var(--font-family-body);
+            font-weight: 600;
+            -webkit-text-stroke: 0px;
+            text-shadow: none;
+        }
+
+        /* Dark mode toggle - example */
+        body.dark-mode {
+            --color-text-primary: #e8fec5;
+            --color-text-secondary: #a8d486;
+            --color-background: #044a85;
+            --color-border: rgba(232, 254, 197, 0.2);
+        }
+
+        a {
+            color: var(--color-text-primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover, a:focus {
+            color: var(--color-accent-1);
+        }
+        
+        /* Exclude nav-link from outline */
+        a:not(.nav-link):hover, a:not(.nav-link):focus {
+            outline: 2px dotted var(--color-accent-1);
+            outline-offset: 2px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-heading);
+            line-height: 1.2;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h1 { font-size: 2.8em; } /* Approx. 45px */
+        h2 { font-size: 2.2em; } /* Approx. 35px */
+        h3 { font-size: 1.8em; } /* Approx. 29px */
+        h4 { font-size: 1.4em; } /* Approx. 22px */
+        h5 { font-size: 1.2em; } /* Approx. 19px */
+        h6 { font-size: 1em; } /* Approx. 16px */
+
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* ── UTILITIES ── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+
+        /* ── NAVIGATION ── */
+        .header-main {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background-color: var(--color-background);
+            border-bottom: 1px solid var(--color-border);
+            padding: 0 var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: var(--header-h);
+        }
+
+        .header-logo {
+            font-size: 1.2em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 200px;
+        }
+
+        .header-logo-symbol {
+            display: block;
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-lg);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .nav-link {
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.12em;
+            padding: 4px 12px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .nav-link::before,
+        .nav-link::after {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .nav-link::before {
+            content: "[";
+            position: absolute;
+            left: 0;
+        }
+        
+        .nav-link::after {
+            content: "]";
+            position: absolute;
+            right: 0;
+        }
+        
+        .nav-link:hover::before,
+        .nav-link:hover::after,
+        .nav-link:focus::before,
+        .nav-link:focus::after,
+        .nav-link:active::before,
+        .nav-link:active::after {
+            opacity: 1;
+        }
+        
+        .nav-link:hover,
+        .nav-link:focus,
+        .nav-link:active {
+            color: var(--color-accent-1);
+        }
+
+        .nav-status {
+            font-size: 0.8em;
+            color: var(--color-text-primary);
+            opacity: 0.85;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 200px;
+            justify-content: flex-end;
+        }
+
+        /* Mobile navigation - Hidden by default */
+        .nav-toggle-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: var(--color-text-primary);
+        }
+
+        /* ── HERO SECTION ── */
+        /* Offset anchor scroll for fixed header */
+        section[id] {
+            scroll-margin-top: var(--header-h);
+        }
+
+        .hero {
+            margin-top: var(--header-h);
+            height: calc(100svh - var(--header-h));
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .hero-visuals {
+            border-right: 1px solid var(--color-border);
+            padding: clamp(var(--spacing-sm), 3vh, var(--spacing-lg));
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: clamp(6px, 1vh, var(--spacing-sm));
+            overflow-y: auto;
+        }
+
+        .hero-art-card {
+            border: none;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-background);
+            position: relative;
+            cursor: pointer;
+            padding: 8px;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        /* expand/collapse 애니메이션 — JS가 transition을 직접 제어 */
+        .hero-art-card.animating {
+            transition: left 0.25s ease-out, top 0.25s ease-out,
+                        width 0.25s ease-out, height 0.25s ease-out;
+        }
+
+        .tui-frame {
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+        }
+
+        .tui-top-bar {
+            font-family: monospace;
+            font-size: 0.85em;
+            color: var(--color-text-secondary);
+            padding: 6px 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tui-top-left {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .tui-number {
+            color: var(--color-accent-1);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .tui-number::before {
+            content: "[";
+            color: var(--color-border);
+            margin-right: 1px;
+        }
+
+        .tui-number::after {
+            content: "]";
+            color: var(--color-border);
+            margin-left: 1px;
+            margin-right: 6px;
+        }
+
+        .tui-divider {
+            color: var(--color-border);
+            margin: 0 4px;
+        }
+
+        .tui-title {
+            color: var(--color-text-secondary);
+        }
+
+        .tui-close-btn {
+            font-family: var(--font-family-body);
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            background: none;
+            border: none;
+            padding: 2px 8px;
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+        }
+
+        .tui-btn-bracket {
+            color: var(--color-border);
+        }
+        .tui-btn-key {
+            color: var(--color-accent-1);
+            font-weight: bold;
+        }
+
+        .tui-close-btn.in-zone {
+            opacity: 0;                /* proximity zone 안에서만 invisible */
+        }
+
+        /* [o] open 버튼 — tui-close-btn과 동일 스타일 */
+        .tui-open-btn {
+            font-family: var(--font-family-body);
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            background: none;
+            border: none;
+            padding: 2px 8px;
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .tui-open-btn.in-zone {
+            opacity: 0;
+        }
+
+        /* expanded 시에만 표시 */
+        .hero-art-card:not(.expanded) .tui-open-btn {
+            display: none;
+        }
+
+        /* work card highlight 효과 */
+        .work-card.highlight {
+            outline: 2px solid var(--color-accent-1);
+            animation: highlight-fade 2s ease forwards;
+        }
+
+        @keyframes highlight-fade {
+            0%   { outline-color: var(--color-accent-1); box-shadow: 0 0 16px rgba(232, 254, 197, 0.5); }
+            100% { outline-color: transparent; box-shadow: none; }
+        }
+
+        /* Show close button only when card is expanded */
+        .hero-art-card:not(.expanded) .tui-close-btn {
+            display: none;
+        }
+
+        /* Title and shortcut right-aligned in collapsed cards only */
+        .hero-art-card:not(.expanded) .tui-top-left {
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        .tui-content {
+            flex: 1;
+            padding: 6px 10px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 0;
+        }
+
+        .tui-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .tui-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .tui-content::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 0;
+        }
+
+        .tui-content::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent-1);
+        }
+
+        .tui-bottom-bar {
+            font-family: monospace;
+            font-size: 0.85em;
+            color: var(--color-border);
+            padding: 6px 10px;
+            white-space: nowrap;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tui-scroll-indicator {
+            font-size: 0.85em;
+            color: var(--color-text-primary);
+            opacity: 1;
+        }
+
+        .hero-art-card:hover {
+            background-color: rgba(232, 254, 197, 0.03);
+        }
+
+        .hero-art-card:hover .tui-frame {
+            border-color: var(--color-accent-1);
+        }
+
+        .hero-art-card:hover .tui-top-bar {
+            border-color: var(--color-accent-1);
+            color: var(--color-accent-1);
+        }
+
+        .hero-art-card:hover .tui-top-bar::before,
+        .hero-art-card:hover .tui-top-bar::after,
+        .hero-art-card:hover .tui-divider,
+        .hero-art-card:hover .tui-number::before,
+        .hero-art-card:hover .tui-number::after {
+            color: var(--color-accent-1);
+        }
+
+        .hero-art-card:hover .tui-bottom-bar {
+            border-color: var(--color-accent-1);
+            color: var(--color-accent-1);
+        }
+
+        .hero-art-card.expanded {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            z-index: 10000;
+            background-color: var(--color-background);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* expanded 이미지 카드: 이미지 container에 패딩 */
+        .hero-art-card.expanded .tui-content > div {
+            padding: 16px;
+        }
+
+        /* expanded 시 이미지 overlay 숨김 */
+        .hero-art-card.expanded .tui-content > div > div[style*="position:absolute"],
+        .hero-art-card.expanded .tui-content > div > div[style*="position: absolute"] {
+            opacity: 0 !important;
+        }
+
+        /* 이미지 카드 collapsed: 텍스트 숨기고 이미지만 */
+        .hero-art-card:not(.expanded) .tui-content > p {
+            display: none;
+        }
+        .hero-art-card:not(.expanded) .tui-content > div {
+            height: 100%;
+        }
+
+        .hero-art-card-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(6, 107, 195, 0.8);
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        .hero-art-card-overlay.active {
+            display: block;
+        }
+
+        .placeholder-content {
+            font-size: 0.8em;
+            color: var(--color-text-secondary);
+            line-height: 2;
+            opacity: 0.6;
+        }
+
+        .placeholder-line {
+            display: block;
+            height: 12px;
+            background: linear-gradient(90deg, var(--color-border) 0%, transparent 100%);
+            margin: 8px 0;
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+
+        .hac-label {
+            display: none;
+        }
+
+        .hac-body {
+            display: none;
+        }
+        
+        .hac-body.ascii-art {
+            white-space: pre;
+            font-family: var(--font-family-body);
+            line-height: 1;
+        }
+
+        .hero-content {
+            padding: clamp(var(--spacing-md), 4vh, var(--spacing-lg)) clamp(var(--spacing-md), 4vw, var(--spacing-xl));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: clamp(var(--spacing-sm), 2vh, var(--spacing-md));
+            overflow-y: auto;
+        }
+
+        .hero-subtitle {
+            font-size: 1em;
+            color: var(--color-accent-1);
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 600;
+            margin-bottom: 0;
+            opacity: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(1.6em, 3.5vw + 0.5vh, 2.5em);
+            line-height: 1.1;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        .cursor {
+            display: inline-block;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .status-dot {
+            display: inline-block;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .hero-description {
+            font-size: clamp(0.8em, 1.2vw, 1em);
+            line-height: 1.8;
+            max-width: 38ch;
+            color: var(--color-text-secondary);
+            border-left: 2px solid var(--color-border);
+            padding-left: var(--spacing-sm);
+        }
+
+        .hero-roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+
+        .role-tag {
+            border: 1px solid var(--color-border);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+        .role-tag:hover {
+            border-color: var(--color-accent-1);
+            color: var(--color-accent-1);
+            box-shadow: 0 0 10px rgba(232, 254, 197, 0.2);
+        }
+
+        .hero-cta {
+            font-size: 0.9em;
+            color: var(--color-accent-1);
+            width: fit-content;
+            padding: 8px 12px;           /* hit area 확장 */
+            margin: -6px -8px;           /* 레이아웃 보정 */
+            transition: opacity 0.15s ease;
+        }
+        .hero-cta:hover {
+            opacity: 0;                  /* 흡수 효과 */
+        }
+
+        .hero-strip {
+            grid-column: 1 / -1;
+            border-top: 1px solid var(--color-border);
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: var(--spacing-lg);
+            font-family: monospace;
+            font-size: 0.8em;
+            color: var(--color-text-secondary);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .strip-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        .strip-item::before {
+            content: "[" attr(data-index) "]";
+            color: var(--color-accent-1);
+            font-weight: bold;
+        }
+        .strip-item::after {
+            content: " ░";
+            color: var(--color-border);
+            opacity: 0.5;
+        }
+
+        /* ── WORKS SECTION ── */
+        /* ── SECTION HEADER — TUI style ── */
+        .section-header {
+            background-color: rgba(0, 0, 0, 0.15);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            padding: 0 var(--spacing-md);
+            height: 44px;
+            font-family: monospace;
+            font-size: 0.85em;
+        }
+
+        .section-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            height: 100%;
+        }
+
+        .section-title {
+            font-size: 1em;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 0;
+        }
+
+        .section-sep {
+            color: var(--color-border);
+            line-height: 1;
+            user-select: none;
+        }
+
+        .section-count {
+            font-size: 0.85em;
+            color: var(--color-text-primary);
+            opacity: 0.45;
+            line-height: 1;
+        }
+
+        .section-status {
+            margin-left: auto;
+            font-size: 0.8em;
+            color: var(--color-text-primary);
+            opacity: 0.3;
+            letter-spacing: 0.08em;
+            user-select: none;
+        }
+
+        /* ── SHORTCUT TAB BAR ── */
+
+        /* Desktop: sits inside section-header, pushed to right */
+        .shortcut-tab-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: auto;
+        }
+
+        .shortcut-btn {
+            font-family: var(--font-family-body);
+            font-size: 0.8em;
+            letter-spacing: 0.06em;
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            padding: 8px 14px;           /* hit area 확장 */
+            transition: opacity 0.15s ease, background-color 0.15s ease;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .shortcut-btn:hover {
+            opacity: 0;                  /* 흡수 효과 */
+        }
+
+        .shortcut-btn.active {
+            color: var(--color-accent-1);
+            background-color: rgba(232, 254, 197, 0.1);
+            outline: 1px solid rgba(232, 254, 197, 0.35);
+            outline-offset: -1px;
+        }
+
+        .shortcut-btn .shortcut-key {
+            color: var(--color-accent-1);
+            font-weight: bold;
+            margin-right: 3px;
+        }
+
+        /* ── WORKS HINT TOAST — desktop only ── */
+        .works-hint-toast {
+            display: none; /* shown via JS */
+            text-align: center;
+            font-size: 0.75em;
+            font-family: monospace;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.08em;
+            padding: 7px var(--spacing-md);
+            border-bottom: 1px solid var(--color-border);
+            background: rgba(0, 0, 0, 0.12);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .works-hint-toast kbd {
+            font-family: var(--font-family-body);
+            color: var(--color-accent-1);
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        .works-hint-toast.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        .works-hint-toast.hiding {
+            opacity: 0;
+        }
+
+        /* ── TAG HINT — mobile only ── */
+        .tag-hint {
+            display: none; /* shown only in mobile media query */
+            font-size: 0.75em;
+            color: var(--color-text-primary);
+            opacity: 0.35;
+            font-style: italic;
+            letter-spacing: 0.04em;
+            padding: 0 var(--spacing-sm);
+            align-self: center;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            user-select: none;
+        }
+
+        .tag-bar {
+            padding: 0 var(--spacing-md);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: stretch;
+            background-color: var(--color-background);
+            min-height: 36px;
+        }
+
+        /* /all — always left, pinned */
+        .tag-all {
+            margin-right: auto;
+            border-right: 1px solid var(--color-border) !important;
+        }
+
+        /* tag groups — hidden by default, slide in from right */
+        .tag-group {
+            display: flex;
+            align-items: stretch;
+            overflow: hidden;
+            max-width: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: max-width 0.3s ease, opacity 0.25s ease;
+        }
+
+        .tag-group.visible {
+            max-width: 600px;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .tag-btn {
+            font-family: var(--font-family-body);
+            font-size: 0.8em;
+            letter-spacing: 0.08em;
+            padding: 8px 14px;           /* hit area 확장 */
+            background: none;
+            border: none;
+            border-left: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            text-transform: lowercase;
+            transition: opacity 0.15s ease, background-color 0.15s ease;
+            white-space: nowrap;
+        }
+        .tag-btn:first-child { border-left: none; }
+        .tag-btn:hover, .tag-btn:focus {
+            color: var(--color-accent-1);
+            outline: none;
+        }
+        /* /all 버튼은 항상 보여야 함 */
+        .tag-btn.tag-all {
+            opacity: 1 !important;
+        }
+        .tag-btn.active {
+            color: var(--color-accent-1);
+            background-color: rgba(232, 254, 197, 0.08);
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background-color: var(--color-border); /* Grid lines */
+        }
+
+        .works-expand-row {
+            display: none;   /* JS에서 제어 */
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .works-expand-btn {
+            font-family: var(--font-family-body);
+            font-size: 0.8em;
+            letter-spacing: 0.06em;
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            padding: 8px 14px;
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+        }
+        .works-expand-btn:hover {
+            color: var(--color-accent-1);
+        }
+
+        /* expand 애니메이션 */
+        @keyframes card-expand-in {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .work-card.expanding {
+            animation: card-expand-in 0.3s ease-out forwards;
+        }
+
+        .work-card {
+            background-color: var(--color-background);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: var(--spacing-md);
+            overflow: hidden;
+            min-height: clamp(280px, 35vw, 480px);
+        }
+        .work-card:hover .card-thumb {
+            transform: scale(1.02);
+            border-color: var(--color-accent-1);
+        }
+        .work-card:focus-within { outline: 2px solid var(--color-accent-1); outline-offset: -2px; }
+
+        .card-thumb {
+            flex: 1;
+            min-height: clamp(160px, 22vw, 320px);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(var(--color-accent-2), 0.1);
+            font-size: 0.9em;
+            color: var(--color-text-secondary);
+            border: 1px dashed var(--color-border);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card-meta { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+        .card-num  { font-size: 0.8em; color: var(--color-text-secondary); }
+        .card-title { font-size: 1.1em; font-weight: bold; }
+        .card-type  { font-size: 0.8em; color: var(--color-text-secondary); text-transform: uppercase; }
+        .card-tags  { display: flex; gap: var(--spacing-xs); flex-wrap: wrap; }
+        .card-tag   { border: 1px solid var(--color-border); font-size: 0.7em; padding: 2px 6px; color: var(--color-text-secondary); }
+        .card-arrow {
+            position: absolute;
+            bottom: var(--spacing-md);
+            right: var(--spacing-md);
+            font-size: 1.2em;
+            color: var(--color-text-secondary);
+            transition: transform 0.2s;
+        }
+        .work-card:hover .card-arrow { transform: translateX(5px); color: var(--color-accent-1); }
+
+
+
+        /* ── ABOUT SECTION ── */
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+        }
+
+        .about-section > .section-header {
+            grid-column: 1 / -1;
+        }
+
+            .about-left {
+                padding: var(--spacing-xl) var(--spacing-md);
+                border-right: 1px solid var(--color-border);
+                display: flex;
+                flex-direction: column;
+                gap: var(--spacing-md);
+                position: relative;
+                overflow: hidden; /* Ensure squares don't overflow */
+            }
+
+            #ascii-canvas {
+                position: absolute;
+                inset: 0;
+                pointer-events: none; /* Allow mouse events to pass through to .about-left */
+                z-index: 0;
+            }
+
+            .ascii-square {
+                position: absolute;
+                font-family: var(--font-family-body);
+                font-size: 0.9em; /* Adjust size as needed */
+                color: var(--color-accent-1); /* Ink-like color */
+                opacity: 0;
+                transition: opacity 3s ease-out, transform 3s ease-out; /* Fade out and slight movement */
+                user-select: none;
+                pointer-events: none; /* Ensure it doesn't interfere with future interactions */
+            }
+
+        .about-right {
+            padding: var(--spacing-xl) var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .about-label {
+            font-size: 0.9em;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .about-tagline {
+            font-size: 2em;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .about-tui-art {
+            font-size: 0.7em;
+            color: var(--color-accent-2); /* Using accent for this TUI art */
+            white-space: pre;
+            line-height: 1.2;
+            margin-top: var(--spacing-md);
+            align-self: flex-start;
+            border: 1px dashed var(--color-border);
+            padding: var(--spacing-sm);
+        }
+        
+        /* East Asian vertical text accent */
+        .vertical-text-accent {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: 'Noto Sans KR', sans-serif; /* Placeholder for Korean font */
+            font-size: 1.2em;
+            color: var(--color-text-secondary);
+            opacity: 0.2;
+            user-select: none;
+            pointer-events: none;
+        }
+
+
+        .about-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .about-body {
+            font-size: 1em;
+            line-height: 1.9;
+            color: var(--color-text-secondary);
+            max-width: 52ch;
+        }
+
+        .about-skills {
+            display: flex;
+            gap: 0;
+            flex-wrap: wrap;
+            border: 1px solid var(--color-border);
+            width: fit-content;
+        }
+
+        .skill-item {
+            font-size: 0.85em;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-right: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: all 0.2s ease;
+        }
+        .skill-item:hover {
+            color: var(--color-accent-1);
+            background-color: rgba(232, 254, 197, 0.1);
+        }
+        .skill-item:last-child { border-right: none; }
+
+        /* ── FOOTER ── */
+        .footer-main {
+            border-top: 1px solid var(--color-border);
+            padding: var(--spacing-lg) var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85em;
+            color: var(--color-text-secondary);
+        }
+
+        /* ── TOUCH DEVICES — restore cursor, hide custom cursor ── */
+        @media (pointer: coarse) {
+            *, *::before, *::after { cursor: auto !important; }
+            a, button { cursor: pointer !important; }
+            #custom-cursor { display: none !important; }
+        }
+
+        /* ── MOBILE RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .header-main {
+                padding: var(--spacing-xs) var(--spacing-sm);
+            }
+            .nav-list {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: var(--header-h);
+                left: 0;
+                right: 0;
+                background-color: var(--color-background);
+                border-bottom: 1px solid var(--color-border);
+                padding: var(--spacing-md) var(--spacing-sm);
+                gap: var(--spacing-sm);
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            }
+            .nav-list.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .nav-toggle-btn {
+                display: block; /* Show hamburger button */
+            }
+            .nav-status {
+                display: none; /* Hide status on mobile nav */
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr auto; /* Visuals, then content, then strip */
+            }
+            .hero-visuals {
+                border-right: none;
+                border-bottom: 1px solid var(--color-border);
+                min-height: 40svh;
+                padding: var(--spacing-md);
+            }
+            .hero-content {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+            .hero-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+            .strip-item + .strip-item { border-left: none; }
+
+
+            .works-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+            .about-left {
+                border-right: none;
+                border-bottom: 1px solid var(--color-border);
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+            .about-right {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+            .vertical-text-accent {
+                display: none; /* Hide vertical text on small screens */
+            }
+            
+            /* Expanded card: centered, fits viewport — position/z-index inherited from base */
+            .hero-art-card.expanded {
+                width: 95vw;
+                height: 70vh;
+            }
+
+            /* ── section-header: wrap so shortcut-tab-bar drops to next row ── */
+            .section-header {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 0;
+            }
+
+            .section-title-wrap {
+                height: 44px;
+                padding: 0 var(--spacing-md);
+                width: 100%;
+                flex-shrink: 0;
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            /* ── shortcut-tab-bar: full-width tab row on mobile ── */
+            .shortcut-tab-bar {
+                width: 100%;
+                margin-left: 0;
+                gap: 0;
+                background: rgba(0, 0, 0, 0.1);
+            }
+
+            .shortcut-btn {
+                flex: 1;
+                padding: 11px 4px;
+                text-align: center;
+                border: none;
+                border-right: 1px solid var(--color-border);
+                border-bottom: 1px solid var(--color-border);
+                border-radius: 0;
+                font-size: 0.75em;
+            }
+
+            .shortcut-btn:last-child {
+                border-right: none;
+            }
+
+            /* active tab: top accent line */
+            .shortcut-btn.active {
+                border-top: 2px solid var(--color-accent-1);
+                background-color: rgba(232, 254, 197, 0.07);
+            }
+
+            /* hide ▸ arrow on mobile */
+            .shortcut-btn::before { display: none; }
+
+            /* hide toast on mobile */
+            .works-hint-toast { display: none !important; }
+
+            /* show tag-hint on mobile only */
+            .tag-hint { display: inline; }
+        }
+
+        @media (max-width: 480px) {
+            /* Expanded card: edge-to-edge fullscreen, overrides centered position from base */
+            .hero-art-card.expanded {
+                width: 100vw;
+                height: 80vh;
+                top: 0;
+                left: 0;
+                transform: none;
+                border-radius: 0;
+            }
+            
+            .works-grid {
+                grid-template-columns: 1fr; /* Single column for very small screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="sr-only">Skip to main content</a>
+
+    <!-- Custom ASCII Cursor -->
+    <span id="custom-cursor">▸</span>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="header-main">
+        <div class="header-logo">
+            <img class="header-logo-symbol" src="Logo.png" alt="Jade Cho logo">
+            <span> Jade 예진 Cho</span>
+        </div>
+        <button class="nav-toggle-btn" aria-expanded="false" aria-controls="main-navigation" aria-label="Toggle navigation">☰</button>
+        <nav id="main-navigation" class="nav-main">
+            <ul class="nav-list">
+                <li><a href="#works" class="nav-link">Projects</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+        <span class="nav-status"><span class="status-dot">●</span> Available for projects</span>
+    </header>
+
+    <main id="main-content">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-visuals">
+                <!-- Overlay for expanded card -->
+                <div class="hero-art-card-overlay" id="cardOverlay"></div>
+                
+                <!-- Card 1: Design / TUI -->
+                <div class="hero-art-card" data-index="a">
+                    <div class="tui-frame">
+                        <div class="tui-top-bar">
+                            <div class="tui-top-left">
+                                <span class="tui-number">a</span>
+                                <span class="tui-divider">-</span>
+                                <span class="tui-title">Design / TUI</span>
+                            </div>
+                            <button class="tui-close-btn" aria-label="Close">[esc]</button>
+                        </div>
+                        <div class="tui-content">
+<pre class="tui-ascii" style="font-size:0.72em;line-height:1.25;color:var(--color-text-secondary);white-space:pre;">╭────────────────╮
+│ ░ file  edit   │
+├────────────────┤
+│ ▸ project.json │
+│   src/         │
+│   components/  │
+│   index.ts     │
+├────────────────┤
+│ STATUS  ● live │
+╰────────────────╯</pre>
+                            <p style="font-size:0.75em;color:var(--color-text-secondary);margin-top:8px;line-height:1.5;">Terminal-native UX.<br>Interfaces that feel<br>like tools, not toys.</p>
+                        </div>
+                        <div class="tui-bottom-bar"><span style="color:var(--color-text-secondary);font-size:0.8em;">TUI · UX · Systems</span></div>
+                    </div>
+                </div>
+                
+                <!-- Card 2: Illustration -->
+                <div class="hero-art-card" data-index="s" data-work-id="002">
+                    <div class="tui-frame">
+                        <div class="tui-top-bar">
+                            <div class="tui-top-left">
+                                <span class="tui-number">s</span>
+                                <span class="tui-divider">-</span>
+                                <span class="tui-title">Illustration</span>
+                            </div>
+                            <button class="tui-open-btn" aria-label="Open in Projects"><span class="tui-btn-bracket">[</span><span class="tui-btn-key">o</span><span class="tui-btn-bracket">]</span> open</button>
+                            <button class="tui-close-btn" aria-label="Close"><span class="tui-btn-bracket">[</span><span class="tui-btn-key">esc</span><span class="tui-btn-bracket">]</span></button>
+                        </div>
+                        <div class="tui-content">
+                            <div style="position:relative; width:100%; flex:1; min-height:0; overflow:hidden;">
+                                <img src="work_illustration/crash.jpg" style="width:100%; height:100%; object-fit:cover; display:block;">
+                                <div style="position:absolute; inset:0; background:var(--color-background); opacity:0.35; pointer-events:none;"></div>
+                            </div>
+                            <p style="font-size:0.75em;color:var(--color-text-secondary);margin-top:8px;line-height:1.5;">Editorial &amp; concept.<br>Ink logic applied to<br>digital surfaces.</p>
+                        </div>
+                        <div class="tui-bottom-bar"><span style="color:var(--color-text-secondary);font-size:0.8em;">Editorial · Concept · Ink</span></div>
+                    </div>
+                </div>
+                
+                <!-- Card 3: Korean / Print -->
+                <div class="hero-art-card" data-index="d">
+                    <div class="tui-frame">
+                        <div class="tui-top-bar">
+                            <div class="tui-top-left">
+                                <span class="tui-number">d</span>
+                                <span class="tui-divider">-</span>
+                                <span class="tui-title">Korean / Print</span>
+                            </div>
+                            <button class="tui-close-btn" aria-label="Close">[esc]</button>
+                        </div>
+                        <div class="tui-content">
+                            <div style="position:relative; width:100%; flex:1; min-height:0; overflow:hidden;">
+                                <img src="work_illustration/tree.png" style="width:100%; height:100%; object-fit:cover; display:block;">
+                                <div style="position:absolute; inset:0; background:var(--color-background); opacity:0.35; pointer-events:none;"></div>
+                            </div>
+                            <p style="font-size:0.75em;color:var(--color-text-secondary);margin-top:8px;line-height:1.5;">Rooted in Seoul.<br>Print &amp; type systems<br>with Korean rhythm.</p>
+                        </div>
+                        <div class="tui-bottom-bar"><span style="color:var(--color-text-secondary);font-size:0.8em;">Print · Typography · Heritage</span></div>
+                    </div>
+                </div>
+                
+                <!-- Card 4: Misc / Process (Scrollable) -->
+                <div class="hero-art-card" data-index="f">
+                    <div class="tui-frame">
+                        <div class="tui-top-bar">
+                            <div class="tui-top-left">
+                                <span class="tui-number">f</span>
+                                <span class="tui-divider">-</span>
+                                <span class="tui-title">Process / Misc</span>
+                            </div>
+                            <button class="tui-close-btn" aria-label="Close">[esc]</button>
+                        </div>
+                        <div class="tui-content">
+                            <p style="font-size:0.75em;color:var(--color-text-secondary);line-height:1.6;">— Sketchbooks &amp; ideation<br>— Motion &amp; micro-interaction<br>— Research &amp; systems maps<br>— Type experiments<br>— Color studies<br>— Mood boards<br>— Brand identity fragments<br>— Zine layouts<br>— Poster drafts<br>— Typographic posters<br>— Residue &amp; process work</p>
+<pre class="tui-ascii" style="font-size:0.72em;line-height:1.25;color:var(--color-border);white-space:pre;margin-top:10px;">░░░░░░░░░░░░░░░░
+░ ▓▓▓ · ▓▓ · ░░
+░ ▓ · ▓▓▓ · ▓ ░
+░░░░░░░░░░░░░░░░</pre>
+                        </div>
+                        <div class="tui-bottom-bar">
+                            <span style="color:var(--color-text-secondary);font-size:0.8em;">Misc · Process</span>
+                            <span class="tui-scroll-indicator">↑↓ scroll</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-content">
+                <p class="hero-subtitle">Illustrator & UX Designer</p>
+                <h1 class="hero-title">
+                     Designing at the<br>
+                    edge of terminal<br>
+                    and canvas.<span class="cursor">_</span>
+                </h1>
+                <p class="hero-description">
+                     Hello! My name is Jade, I am a UX designer with background in
+                    illustration and graphic design. Now, I design terminal interfaces
+                    like I used to paint on canvases. Every line intentional, nothing
+                    wasted, personality intact.
+                </p>
+                <div class="hero-roles">
+                    <span class="role-tag">TUI / UX</span>
+                    <span class="role-tag">Illustration</span>
+                    <span class="role-tag">Graphic Design</span>
+                </div>
+                <a href="#works" class="hero-cta"> View works ↓</a>
+            </div>
+
+        </section>
+
+        <!--
+        REMOVED: hero-strip
+        If you want to restore it, paste before </section> above:
+
+        <div class="hero-strip">
+            <div class="strip-item" data-index="1">Designs</div>
+            <div class="strip-item" data-index="2">Illustrations</div>
+            <div class="strip-item" data-index="3">Miscellaneous</div>
+        </div>
+        -->
+
+        <!-- WORKS SECTION -->
+        <section id="works">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2 class="section-title">Projects</h2>
+                    <span class="section-sep">·</span>
+                    <span class="section-count">6 works</span>
+                </div>
+                <!-- shortcut tab bar — inside header on desktop, pulled out below on mobile via CSS -->
+                <div class="shortcut-tab-bar">
+                    <button class="shortcut-btn" data-filter="Design"><span class="shortcut-key">[1]</span> Designs</button>
+                    <button class="shortcut-btn" data-filter="Illustration"><span class="shortcut-key">[2]</span> Illustrations</button>
+                    <button class="shortcut-btn" data-filter="Misc"><span class="shortcut-key">[3]</span> Others</button>
+                </div>
+            </div>
+
+            <!-- hint toast — desktop only, shown once via IntersectionObserver -->
+            <div class="works-hint-toast" id="worksHintToast">
+                ── press <kbd>[1]</kbd> <kbd>[2]</kbd> <kbd>[3]</kbd> to filter &nbsp;·&nbsp; /all to reset ──
+            </div>
+
+            <div class="tag-bar">
+                <button class="tag-btn tag-all active" data-tag="all">/all</button>
+                <span class="tag-hint">← tap to filter</span>
+                <div class="tag-group" data-group="design">
+                    <button class="tag-btn" data-tag="tui">/tui</button>
+                    <button class="tag-btn" data-tag="ux">/ux</button>
+                    <button class="tag-btn" data-tag="graphic">/graphic</button>
+                </div>
+                <div class="tag-group" data-group="illustration">
+                    <button class="tag-btn" data-tag="conceptart">/conceptart</button>
+                    <button class="tag-btn" data-tag="animation">/animation</button>
+                </div>
+                <div class="tag-group" data-group="misc">
+                    <button class="tag-btn" data-tag="casestudy">/casestudy</button>
+                    <button class="tag-btn" data-tag="research">/research</button>
+                    <button class="tag-btn" data-tag="misc.">/misc.</button>
+                </div>
+            </div>
+
+            <div class="works-grid">
+                <!-- Card 1 -->
+                <article class="work-card" tabindex="0" data-tags="design tui casestudy">
+                    <div class="card-thumb">Thumbnail / Illustration</div>
+                    <div class="card-meta">
+                        <span class="card-num">001</span>
+                        <h3 class="card-title">Design Work #1</h3>
+                        <span class="card-type">Design</span>
+                        <div class="card-tags">
+                            <span class="card-tag">/tui</span>
+                            <span class="card-tag">/casestudy</span>
+                        </div>
+                        <span class="card-arrow" aria-hidden="true">→</span>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="work-card" id="work-002" tabindex="0" data-tags="illustration conceptart">
+                    <div class="card-thumb" style="padding:0; overflow:hidden;">
+                        <img src="work_illustration/crash.jpg" style="width:100%; height:100%; object-fit:cover; display:block;">
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-num">002</span>
+                        <h3 class="card-title">Illustration Work #1</h3>
+                        <span class="card-type">Illustration</span>
+                        <div class="card-tags">
+                            <span class="card-tag">/conceptart</span>
+                        </div>
+                        <span class="card-arrow" aria-hidden="true">→</span>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="work-card" tabindex="0" data-tags="design graphic research">
+                    <div class="card-thumb">Thumbnail / Illustration</div>
+                    <div class="card-meta">
+                        <span class="card-num">003</span>
+                        <h3 class="card-title">Design Work #2</h3>
+                        <span class="card-type">Design</span>
+                        <div class="card-tags">
+                            <span class="card-tag">/graphic</span>
+                            <span class="card-tag">/research</span>
+                        </div>
+                        <span class="card-arrow" aria-hidden="true">→</span>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="work-card" tabindex="0" data-tags="design tui ux">
+                    <div class="card-thumb">Thumbnail / Illustration</div>
+                    <div class="card-meta">
+                        <span class="card-num">004</span>
+                        <h3 class="card-title">Design Work #3</h3>
+                        <span class="card-type">Design</span>
+                        <div class="card-tags">
+                            <span class="card-tag">/tui</span>
+                            <span class="card-tag">/ux</span>
+                        </div>
+                        <span class="card-arrow" aria-hidden="true">→</span>
+                    </div>
+                </article>
+
+                <!-- Card 5 -->
+                <article class="work-card" tabindex="0" data-tags="illustration conceptart graphic">
+                    <div class="card-thumb">Thumbnail / Illustration</div>
+                    <div class="card-meta">
+                        <span class="card-num">005</span>
+                        <h3 class="card-title">Illustration Work #2</h3>
+                        <span class="card-type">Illustration</span>
+                        <div class="card-tags">
+                            <span class="card-tag">/conceptart</span>
+                            <span class="card-tag">/graphic</span>
+                        </div>
+                        <span class="card-arrow" aria-hidden="true">→</span>
+                    </div>
+                </article>
+
+                <!-- Card 6 -->
+                <article class="work-card" tabindex="0" data-tags="illustration animation misc.">
+                    <div class="card-thumb">Thumbnail / Illustration</div>
+                    <div class="card-meta">
+                        <span class="card-num">006</span>
+                        <h3 class="card-title">Illustration Work #3</h3>
+                        <span class="card-type">Illustration</span>
+                        <div class="card-tags">
+                            <span class="card-tag">/animation</span>
+                            <span class="card-tag">/misc.</span>
+                        </div>
+                        <span class="card-arrow" aria-hidden="true">→</span>
+                    </div>
+                </article>
+
+
+            </div>
+
+            <!-- [e] expand row — shown when visible cards > 3 -->
+            <div class="works-expand-row" id="worksExpandRow">
+                <button class="works-expand-btn" id="worksExpandBtn"><span class="tui-btn-bracket">[</span><span class="tui-btn-key">e</span><span class="tui-btn-bracket">]</span> expand</button>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="about-section">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2 class="section-title">About</h2>
+                </div>
+                <span class="section-status">── Montréal · Seoul ──</span>
+            </div>
+            <div class="about-left">
+                <div id="ascii-canvas"></div>
+
+
+
+            </div>
+
+            <div class="about-right">
+                <h3 class="about-title"> Where the terminal<br>meets the brush.</h3>
+                <p class="about-body">
+                     Based in Montréal, rooted in Seoul. I design terminal interfaces and
+                    illustration systems that carry the clarity of Korean craft —
+                    purposeful, minimal, with meaning in every element.
+                </p>
+                <div class="about-skills">
+                    <span class="skill-item"> TUI / Terminal UI Design</span>
+                    <span class="skill-item"> Editorial Illustration</span>
+                    <span class="skill-item"> UX Research</span>
+                    <span class="skill-item"> Animation</span>
+                    <span class="skill-item"> Design-to-Code Prototyping</span>
+                </div>
+                <p class="about-label"> Available for freelance · contact@email.com</p>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2 class="section-title">Contact</h2>
+                </div>
+                <span class="section-status">── open to work ──</span>
+            </div>
+            <div class="container" style="padding: var(--spacing-xl) var(--spacing-md);">
+                <p> Feel free to reach out for collaborations or inquiries:</p>
+                <p>Email: <a href="mailto:contact@email.com">contact@email.com</a></p>
+                <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile">yourprofile</a></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-main">
+        <span> © 2026 — All works reserved</span>
+        <span> ● ● ● ● ●</span> <!-- Obangsaek dots -->
+        <a href="#main-content">↑  Back to top</a>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile nav if open
+                if (navMenu.classList.contains('open')) {
+                    navMenu.classList.remove('open');
+                    navToggleBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // Mobile navigation toggle
+        const navToggleBtn = document.querySelector('.nav-toggle-btn');
+        const navMenu = document.querySelector('.nav-list');
+
+        navToggleBtn.addEventListener('click', () => {
+            const isExpanded = navToggleBtn.getAttribute('aria-expanded') === 'true';
+            navToggleBtn.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('open');
+        });
+
+        // Optional: Dark mode toggle (example, not fully implemented with UI)
+        // const darkModeToggle = document.createElement('button');
+        // darkModeToggle.textContent = 'Toggle Dark Mode';
+        // darkModeToggle.addEventListener('click', () => {
+        //     document.body.classList.toggle('dark-mode');
+        // });
+        // document.querySelector('.header-main').appendChild(darkModeToggle);
+
+        // ASCII Canvas Interaction
+        const aboutLeft = document.querySelector('.about-left');
+        const asciiCanvas = document.getElementById('ascii-canvas');
+        let isDrawing = false;
+
+        aboutLeft.addEventListener('mouseenter', () => {
+            isDrawing = true;
+        });
+
+        aboutLeft.addEventListener('mouseleave', () => {
+            isDrawing = false;
+        });
+
+        aboutLeft.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+
+            const rect = asciiCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left; // X position within the element.
+            const y = e.clientY - rect.top;  // Y position within the element.
+
+            const square = document.createElement('span');
+            square.classList.add('ascii-square');
+            square.innerHTML = '█'; // Initial solid square character
+            square.style.left = `${x}px`;
+            square.style.top = `${y}px`;
+
+            asciiCanvas.appendChild(square);
+
+            // Trigger fade-in (opacity 0 to 1)
+            requestAnimationFrame(() => {
+                square.style.opacity = '1';
+                square.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`; // Slight random movement
+            });
+
+            // Fade out and remove after 10 seconds with character changes
+            setTimeout(() => {
+                square.innerHTML = '▓'; // Change to shaded block
+            }, 5000); // After 5 seconds
+
+            setTimeout(() => {
+                square.innerHTML = '░'; // Change to lighter shaded block
+            }, 7500); // After 7.5 seconds
+
+            setTimeout(() => {
+                square.style.opacity = '0'; // Start fading out opacity
+                // Remove element after transition completes
+                square.addEventListener('transitionend', () => square.remove(), { once: true });
+            }, 10000); // After 10 seconds, remove completely
+        });
+
+        // ── Device / breakpoint helpers (single source of truth) ──
+        const isTouch       = window.matchMedia('(pointer: coarse)').matches;
+        const isMobile      = () => window.matchMedia('(max-width: 768px)').matches;
+        // Cards on touch OR narrow screens skip JS animation — CSS @media handles layout
+        const isMobileExpand = () => isTouch || window.innerWidth <= 480;
+
+        // Custom ASCII Cursor — desktop (mouse) only
+        if (!isTouch) {
+            const customCursor = document.getElementById('custom-cursor');
+            let cursorX = 0, cursorY = 0;
+            let targetX = 0, targetY = 0;
+
+            // Fade in cursor after page load
+            setTimeout(() => {
+                customCursor.classList.add('visible');
+            }, 500);
+
+            document.addEventListener('mousemove', (e) => {
+                targetX = e.clientX;
+                targetY = e.clientY;
+            });
+
+            // Smooth cursor following
+            function updateCursor() {
+                const factor = customCursor.classList.contains('show-esc') ? 0.5 : 0.2;
+                cursorX += (targetX - cursorX) * factor;
+                cursorY += (targetY - cursorY) * factor;
+                customCursor.style.left = `${cursorX}px`;
+                customCursor.style.top = `${cursorY}px`;
+                requestAnimationFrame(updateCursor);
+            }
+            updateCursor();
+
+            // Cursor ASCII Trail Effect
+            const cursorChars = ['·', '✦', '░', '╮', '◈', '○', '◉', '◇'];
+            const cursorColors = ['#ff69b4', '#00ffff', '#ccff00', '#ffd700', '#ff1493', '#00ffaa'];
+
+            document.addEventListener('mousemove', (e) => {
+                if (customCursor.classList.contains('show-esc')) return;  // hover 중엔 trail 생성 안 함
+
+                const char = cursorChars[Math.floor(Math.random() * cursorChars.length)];
+                const color = cursorColors[Math.floor(Math.random() * cursorColors.length)];
+                
+                const trail = document.createElement('span');
+                trail.classList.add('cursor-trail');
+                trail.textContent = char;
+                trail.style.left = `${e.clientX}px`;
+                trail.style.top = `${e.clientY + 20}px`;
+                trail.style.color = color;
+                trail.style.position = 'fixed';
+                trail.style.pointerEvents = 'none';
+                trail.style.zIndex = '10001';
+                trail.style.fontSize = `${Math.random() * 8 + 16}px`;
+                trail.style.fontFamily = 'monospace';
+                trail.style.textShadow = `0 0 8px ${color}, 0 0 16px ${color}`;
+                trail.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 180 - 90}deg)`;
+                trail.style.transition = 'opacity 1.5s ease-out, transform 1.5s ease-out';
+                trail.style.opacity = '0.9';
+                trail.style.willChange = 'opacity, transform';
+                
+                document.body.appendChild(trail);
+                trail.offsetHeight; // Force reflow
+
+                setTimeout(() => {
+                    trail.style.opacity = '0';
+                    trail.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 180 - 90}deg) scale(0.3)`;
+                }, 30);
+
+                setTimeout(() => {
+                    if (trail.parentNode) trail.remove();
+                }, 1530);
+            });
+
+            // 흡수 효과: hover 시 커서가 버튼 텍스트가 됨
+            let hoveredInteractive = null;
+
+            function activateInteractive(el) {
+                if (hoveredInteractive === el) return;
+                customCursor.classList.add('show-esc');
+                customCursor.textContent = el.textContent.trim();
+                hoveredInteractive = el;
+                document.querySelectorAll('.cursor-trail').forEach(t => t.style.opacity = '0');
+            }
+
+            function deactivateInteractive(el) {
+                if (hoveredInteractive !== el) return;
+                customCursor.classList.remove('show-esc');
+                customCursor.textContent = '▸';
+                hoveredInteractive = null;
+            }
+
+            // mouseenter/leave 방식 — [esc] 제외한 나머지
+            const interactiveSelectors = ['.hero-cta', '.shortcut-btn', '.tag-btn.tag-all'];
+            interactiveSelectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => {
+                    el.addEventListener('mouseenter', () => activateInteractive(el));
+                    el.addEventListener('mouseleave', () => deactivateInteractive(el));
+                });
+            });
+
+            // [esc] + [o] — proximity 방식 (부모 overflow:hidden 무관)
+            const ESC_BUFFER = 32;
+            document.addEventListener('mousemove', (e) => {
+                ['.tui-close-btn', '.tui-open-btn'].forEach(selector => {
+                    document.querySelectorAll(selector).forEach(btn => {
+                        if (!btn.closest('.hero-art-card.expanded')) {
+                            btn.classList.remove('in-zone');
+                            deactivateInteractive(btn);
+                            return;
+                        }
+                        const rect = btn.getBoundingClientRect();
+                        const inZone =
+                            e.clientX >= rect.left   - ESC_BUFFER &&
+                            e.clientX <= rect.right  + ESC_BUFFER &&
+                            e.clientY >= rect.top    - ESC_BUFFER &&
+                            e.clientY <= rect.bottom + ESC_BUFFER;
+
+                        if (inZone) {
+                            btn.classList.add('in-zone');
+                            activateInteractive(btn);
+                        } else {
+                            btn.classList.remove('in-zone');
+                            deactivateInteractive(btn);
+                        }
+                    });
+                });
+            });
+
+            // 커서 클릭 시 hoveredInteractive 동작 forward
+            let forwardingClick = false;
+            document.addEventListener('click', (e) => {
+                if (forwardingClick) return;
+                if (hoveredInteractive && !hoveredInteractive.contains(e.target)) {
+                    forwardingClick = true;
+                    hoveredInteractive.click();
+                    forwardingClick = false;
+                }
+            });
+        } // end if (!isTouch)
+
+        // [o] open 버튼 클릭 동작
+        function openWorkCard(btn) {
+            const card = btn.closest('.hero-art-card');
+            const workId = card?.dataset.workId;
+            const workCard = workId ? document.getElementById(`work-${workId}`) : null;
+            if (!workCard) return;
+
+            // 1. hero modal 닫기
+            heroArtCards.forEach(c => { c.classList.remove('expanded'); resetCardSize(c); });
+            cardOverlay.classList.remove('active');
+
+            // 2. Projects 섹션으로 스크롤
+            workCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // 3. highlight 효과
+            workCard.classList.remove('highlight');
+            workCard.offsetHeight; // reflow
+            workCard.classList.add('highlight');
+            workCard.addEventListener('animationend', () => {
+                workCard.classList.remove('highlight');
+            }, { once: true });
+        }
+
+        document.querySelectorAll('.tui-open-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openWorkCard(btn);
+            });
+        });
+
+        // ── Works Section — Tag Filter ──
+        const shortcutBtns = document.querySelectorAll('.shortcut-btn');
+        const tagBtns     = document.querySelectorAll('.tag-btn');
+        const tagGroups   = document.querySelectorAll('.tag-group');
+        const workCards   = document.querySelectorAll('.work-card');
+
+        // group map: shortcut data-filter → tag-group data-group
+        const groupMap = {
+            'design':       'design',
+            'illustration': 'illustration',
+            'misc':         'misc'
+        };
+
+        let activeGroup   = null;   // currently shown group name (or null = no group)
+        let activeTag    = 'all';  // currently active tag filter
+        let worksExpanded = false;  // [e] expand 상태
+
+        const expandRow = document.getElementById('worksExpandRow');
+        const expandBtn = document.getElementById('worksExpandBtn');
+
+        // Show a group and reset tag filter to /all
+        function activateGroup(groupName) {
+            // If same group clicked again → collapse back to /all only
+            if (activeGroup === groupName) {
+                closeGroups();
+                return;
+            }
+            activeGroup = groupName;
+            worksExpanded = false;  // 그룹 변경 시 expand 리셋
+
+            tagGroups.forEach(g => {
+                g.classList.toggle('visible', g.dataset.group === groupName);
+            });
+
+            // Sync shortcut active state
+            shortcutBtns.forEach(s => {
+                s.classList.toggle('active', groupMap[s.dataset.filter.toLowerCase()] === groupName);
+            });
+
+            // Reset tag to /all when switching group
+            applyTagFilter('all');
+        }
+
+        function closeGroups() {
+            activeGroup = null;
+            worksExpanded = false;
+            tagGroups.forEach(g => g.classList.remove('visible'));
+            shortcutBtns.forEach(s => s.classList.remove('active'));
+            applyTagFilter('all');
+        }
+
+        function updateExpandBtn() {
+            expandBtn.innerHTML = worksExpanded
+                ? '<span class="tui-btn-bracket">[</span><span class="tui-btn-key">e</span><span class="tui-btn-bracket">]</span> collapse ↑'
+                : '<span class="tui-btn-bracket">[</span><span class="tui-btn-key">e</span><span class="tui-btn-bracket">]</span> expand ↓';
+        }
+
+        // Filter cards by tag; 'all' shows all cards in the active category group
+        function applyTagFilter(tag) {
+            activeTag = tag;
+
+            // Update tag button active state
+            tagBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.tag === tag));
+
+            // 필터에 맞는 카드 목록 계산
+            const visibleCards = [];
+            workCards.forEach(card => {
+                const cardTags = (card.dataset.tags || '').split(' ');
+                let matches;
+                if (tag === 'all') {
+                    matches = !activeGroup ||
+                        cardTags.includes(activeGroup) ||
+                        (activeGroup === 'misc' && cardTags.includes('misc.'));
+                } else {
+                    matches = cardTags.includes(tag);
+                }
+                if (matches) visibleCards.push(card);
+            });
+
+            // 카드 display 적용 (expand 상태 반영)
+            let staggerIndex = 0;
+            workCards.forEach(card => {
+                const idx = visibleCards.indexOf(card);
+                const wasHidden = card.style.display === 'none';
+
+                if (idx === -1) {
+                    card.style.display = 'none';
+                    card.classList.remove('expanding');
+                } else if (!worksExpanded && idx >= 3) {
+                    card.style.display = 'none';
+                    card.classList.remove('expanding');
+                } else {
+                    // 새로 나타나는 카드에만 애니메이션 적용
+                    if (wasHidden && worksExpanded && idx >= 3) {
+                        card.style.display = '';
+                        card.classList.remove('expanding');
+                        card.offsetHeight; // reflow
+                        const delay = staggerIndex * 60;
+                        card.style.animationDelay = delay + 'ms';
+                        card.classList.add('expanding');
+                        card.addEventListener('animationend', () => {
+                            card.classList.remove('expanding');
+                            card.style.animationDelay = '';
+                        }, { once: true });
+                        staggerIndex++;
+                    } else {
+                        card.style.display = '';
+                    }
+                }
+            });
+
+            // [e] expand 버튼 표시 여부
+            if (visibleCards.length >= 4) {
+                expandRow.style.display = 'block';
+                updateExpandBtn();
+            } else {
+                expandRow.style.display = 'none';
+            }
+        }
+
+        // [e] expand/collapse 버튼
+        expandBtn.addEventListener('click', () => {
+            worksExpanded = !worksExpanded;
+            applyTagFilter(activeTag);
+        });
+
+        // Tag button clicks
+        tagBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.dataset.tag === 'all') {
+                    closeGroups();
+                } else {
+                    worksExpanded = false;  // 태그 변경 시 expand 리셋
+                    applyTagFilter(btn.dataset.tag);
+                }
+            });
+        });
+
+        // 페이지 초기 로드 시 첫 3개만 표시
+        applyTagFilter('all');
+
+        // Shortcut button clicks — open group
+        shortcutBtns.forEach(shortcut => {
+            shortcut.addEventListener('click', () => {
+                const group = groupMap[shortcut.dataset.filter.toLowerCase()];
+                if (group) activateGroup(group);
+                document.getElementById('works').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '1') activateGroup('design');
+            if (e.key === '2') activateGroup('illustration');
+            if (e.key === '3') activateGroup('misc');
+        });
+
+        // ── Works hint toast — desktop only, shown once ──
+        const HINT_KEY  = 'works-hint-seen';
+        const hintToast = document.getElementById('worksHintToast');
+
+        if (hintToast && !isMobile() && !localStorage.getItem(HINT_KEY)) {
+            const hintObserver = new IntersectionObserver((entries) => {
+                if (!entries[0].isIntersecting) return;
+                hintObserver.disconnect();
+
+                // Show
+                hintToast.style.display = 'block';
+                // Force reflow before adding class so transition fires
+                hintToast.offsetHeight;
+                hintToast.classList.add('visible');
+
+                // After 4s start fade out
+                setTimeout(() => {
+                    hintToast.classList.add('hiding');
+                    hintToast.classList.remove('visible');
+                    setTimeout(() => {
+                        hintToast.style.display = 'none';
+                        localStorage.setItem(HINT_KEY, '1');
+                    }, 450);
+                }, 4000);
+            }, { threshold: 0.3 });
+
+            hintObserver.observe(document.getElementById('works'));
+        }
+
+        // ── Mobile tag-hint — shown once, hidden on first shortcut click ──
+        const TAG_HINT_KEY = 'tag-hint-seen';
+        const tagHintEl    = document.querySelector('.tag-hint');
+
+        if (tagHintEl) {
+            // Already seen → remove immediately
+            if (localStorage.getItem(TAG_HINT_KEY)) {
+                tagHintEl.remove();
+            } else {
+                // Hide on first shortcut interaction
+                shortcutBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        if (!tagHintEl.parentNode) return;
+                        tagHintEl.style.opacity = '0';
+                        setTimeout(() => {
+                            tagHintEl.remove();
+                            localStorage.setItem(TAG_HINT_KEY, '1');
+                        }, 300);
+                    }, { once: true });
+                });
+            }
+        }
+
+        // TUI Card Expand/Collapse Functionality
+        const heroArtCards = document.querySelectorAll('.hero-art-card');
+        const cardOverlay = document.getElementById('cardOverlay');
+
+        // 이미지 비율에 맞게 expanded 카드 height 조정
+        function fitCardToImage(card) {
+            const img = card.querySelector('img');
+            if (!img) return;  // 이미지 없는 카드는 CSS default (80vh) 유지
+
+            const applySize = () => {
+                const topBar    = card.querySelector('.tui-top-bar');
+                const bottomBar = card.querySelector('.tui-bottom-bar');
+                const topH    = topBar    ? topBar.offsetHeight    : 0;
+                const bottomH = bottomBar ? bottomBar.offsetHeight : 0;
+                const contentPadding = 16 * 2;  // tui-content > div padding (위아래)
+
+                const maxW    = window.innerWidth  * 0.75;
+                const maxImgH = window.innerHeight * 0.90 - topH - bottomH - contentPadding;
+
+                const ratio  = img.naturalHeight / img.naturalWidth;
+                const idealH = maxW * ratio;
+                const imgH   = Math.min(idealH, maxImgH);
+                const imgW   = Math.min(maxW, maxImgH / ratio);
+
+                card.style.width  = imgW + 'px';
+                card.style.height = (imgH + topH + bottomH + contentPadding) + 'px';
+            };
+
+            if (img.naturalWidth) {
+                applySize();  // 이미 로드된 경우
+            } else {
+                img.addEventListener('load', applySize, { once: true });
+            }
+        }
+
+        function resetCardSize(card) {
+            card.style.width     = '';
+            card.style.height    = '';
+            card.style.left      = '';
+            card.style.top       = '';
+            card.style.transform = '';
+            card.style.position  = '';
+            card.style.zIndex    = '';
+            card.classList.remove('animating');
+        }
+
+        function expandCard(card) {
+            // 모바일: JS 애니메이션 없이 CSS @media 에 위임
+            if (isMobileExpand()) {
+                card.classList.add('expanded');
+                cardOverlay.classList.add('active');
+                return;
+            }
+
+            // 1. 카드의 현재 화면 위치 저장
+            const from = card.getBoundingClientRect();
+
+            // 2. expanded 클래스 추가 (display/visibility 변경용)
+            card.classList.add('expanded');
+            cardOverlay.classList.add('active');
+
+            // 3. 카드를 현재 위치에 fixed로 고정 (시작 상태, transition 없이)
+            card.style.position  = 'fixed';
+            card.style.left      = from.left + 'px';
+            card.style.top       = from.top  + 'px';
+            card.style.width     = from.width  + 'px';
+            card.style.height    = from.height + 'px';
+            card.style.transform = 'none';
+            card.style.zIndex    = '10000';
+
+            // 4. fitCardToImage로 최종 사이즈 계산
+            const img = card.querySelector('img');
+            const computeFinalSize = () => {
+                const topBar    = card.querySelector('.tui-top-bar');
+                const bottomBar = card.querySelector('.tui-bottom-bar');
+                const topH      = topBar    ? topBar.offsetHeight    : 0;
+                const bottomH   = bottomBar ? bottomBar.offsetHeight : 0;
+                const contentPadding = 32;
+
+                const maxW    = window.innerWidth  * 0.75;
+                const maxImgH = window.innerHeight * 0.90 - topH - bottomH - contentPadding;
+
+                let finalW, finalH;
+                if (img && img.naturalWidth) {
+                    const ratio  = img.naturalHeight / img.naturalWidth;
+                    const imgH   = Math.min(maxW * ratio, maxImgH);
+                    const imgW   = Math.min(maxW, maxImgH / ratio);
+                    finalW = imgW;
+                    finalH = imgH + topH + bottomH + contentPadding;
+                } else {
+                    finalW = window.innerWidth  * 0.80;
+                    finalH = window.innerHeight * 0.80;
+                }
+
+                const finalLeft = (window.innerWidth  - finalW) / 2;
+                const finalTop  = (window.innerHeight - finalH) / 2;
+
+                // 5. 다음 프레임에서 transition 시작
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        card.classList.add('animating');
+                        card.style.left   = finalLeft + 'px';
+                        card.style.top    = finalTop  + 'px';
+                        card.style.width  = finalW + 'px';
+                        card.style.height = finalH + 'px';
+                    });
+                });
+            };
+
+            if (img && !img.naturalWidth) {
+                img.addEventListener('load', computeFinalSize, { once: true });
+            } else {
+                computeFinalSize();
+            }
+        }
+
+        function collapseCard(card) {
+            // 모바일: inline style 없이 바로 클래스만 제거 (CSS @media가 처리)
+            if (isMobileExpand()) {
+                card.classList.remove('expanded');
+                resetCardSize(card);
+                cardOverlay.classList.remove('active');
+                return;
+            }
+
+            // 데스크탑: opacity + scale fade-out 후 cleanup
+            card.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
+            card.style.opacity    = '0';
+            card.style.transform  = 'scale(0.9)';
+
+            setTimeout(() => {
+                card.style.opacity   = '';
+                card.style.transform = '';
+                card.style.transition = '';
+                card.classList.remove('expanded');
+                resetCardSize(card);
+                cardOverlay.classList.remove('active');
+            }, 220);
+        }
+
+        heroArtCards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (card.classList.contains('expanded')) return;
+                // 다른 expanded 카드 닫기
+                heroArtCards.forEach(c => {
+                    if (c.classList.contains('expanded')) collapseCard(c);
+                });
+                expandCard(card);
+            });
+        });
+
+        // Close button functionality for each card
+        const closeButtons = document.querySelectorAll('.tui-close-btn');
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                heroArtCards.forEach(c => {
+                    if (c.classList.contains('expanded')) collapseCard(c);
+                });
+            });
+        });
+
+        // Close expanded card when clicking overlay
+        if (cardOverlay) {
+            cardOverlay.addEventListener('click', () => {
+                heroArtCards.forEach(c => {
+                    if (c.classList.contains('expanded')) collapseCard(c);
+                });
+            });
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                heroArtCards.forEach(c => {
+                    if (c.classList.contains('expanded')) collapseCard(c);
+                });
+            }
+
+            // [e] — expand/collapse works
+            if (e.key === 'e' && expandRow.style.display !== 'none') {
+                worksExpanded = !worksExpanded;
+                applyTagFilter(activeTag);
+            }
+
+            // [o] — open in Projects
+            if (e.key === 'o') {
+                const expandedCard = document.querySelector('.hero-art-card.expanded');
+                if (expandedCard) {
+                    const openBtn = expandedCard.querySelector('.tui-open-btn');
+                    if (openBtn) openWorkCard(openBtn);
+                }
+            }
+
+            // a, s, d, f — open cards
+            const keyMap = { 'a': 'a', 's': 's', 'd': 'd', 'f': 'f' };
+            if (keyMap[e.key]) {
+                const targetCard = document.querySelector(`.hero-art-card[data-index="${keyMap[e.key]}"]`);
+                if (targetCard && !targetCard.classList.contains('expanded')) {
+                    heroArtCards.forEach(c => {
+                        if (c.classList.contains('expanded')) collapseCard(c);
+                    });
+                    expandCard(targetCard);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

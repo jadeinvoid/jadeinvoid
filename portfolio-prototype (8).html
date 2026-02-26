@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — UX & Illustration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Serif+KR:wght@300;400;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  /* ── TOKENS ──────────────────────────────────────────── */
+  :root {
+    --ink:      #1c1a18;
+    --paper:    #f4ede0;
+    --paper-2:  #ede3d0;
+    --cheong:   #2a5070;
+    --jeok:     #b83232;
+    --hwang:    #c9922a;
+    --baek:     #f9f5ee;
+    --mono:     'DM Mono', monospace;
+    --serif-kr: 'Noto Serif KR', serif;
+    --serif:    'DM Serif Display', serif;
+    --gap:      1px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    cursor: crosshair;
+  }
+
+  /* ── NOISE OVERLAY ───────────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ─────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 32px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--ink);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+  .nav-seal { display: flex; align-items: center; gap: 10px; }
+  .seal {
+    width: 28px; height: 28px;
+    background: var(--jeok);
+    color: var(--baek);
+    display: grid; place-items: center;
+    font-family: var(--serif-kr);
+    font-size: 11px; font-weight: 700; letter-spacing: -1px;
+    flex-shrink: 0;
+    transform: rotate(-2deg);
+    transition: transform 0.2s;
+  }
+  .seal:hover { transform: rotate(2deg); }
+  .nav-name { font-size: 12px; letter-spacing: 0.1em; opacity: 0.6; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a {
+    color: var(--ink); text-decoration: none;
+    font-size: 11px; letter-spacing: 0.08em;
+    opacity: 0.6; transition: opacity 0.15s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-status { font-size: 11px; opacity: 0.5; }
+  .nav-status::before {
+    content: '●  '; color: var(--hwang);
+    animation: blink 2.4s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ── HERO ─────────────────────────────────────────────── */
+  .hero {
+    min-height: 100svh;
+    padding: 96px 32px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    gap: 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .hero-visual {
+    border-right: 1px solid var(--ink);
+    padding: 40px;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    position: relative; overflow: hidden;
+  }
+
+  /* ── COMPONENT 03: BotanicWash ──
+     Monochrome ink wash, z:0, opacity 0.08 max.
+     Top-right: peony branch. Bottom-left: lotus cluster. */
+  .botanic-wash {
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 0;
+    opacity: 0.08;
+  }
+
+  .ascii-frame {
+    font-family: var(--mono);
+    font-size: 11px; line-height: 1.4;
+    white-space: pre; color: var(--ink);
+    opacity: 0.3;
+    position: absolute; inset: 32px;
+    pointer-events: none; letter-spacing: 0; z-index: 1;
+  }
+
+  /* ── Individual floating artwork cards in hero ── */
+  .hero-art-card {
+    position: absolute;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 2px 3px 0 rgba(28,26,24,0.12);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    cursor: default;
+  }
+  .hero-art-card:hover {
+    box-shadow: 4px 6px 0 rgba(28,26,24,0.18);
+    z-index: 10 !important;
+  }
+  .hero-art-card svg { display: block; width: 100%; height: auto; }
+  .hac-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    padding: 5px 8px 3px;
+    border-bottom: 1px solid rgba(28,26,24,0.12);
+  }
+
+  /* ── COMPONENT 04: BotanicCorner (hero) ──
+     Appear on hero-visual hover, z:3 */
+  .botanic-corners {
+    position: absolute; inset: 24px;
+    pointer-events: none; z-index: 3;
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  .hero-visual:hover .botanic-corners { opacity: 1; }
+
+  .hero-caption {
+    position: absolute; bottom: 48px; right: 48px;
+    font-size: 10px; opacity: 0.4;
+    writing-mode: vertical-rl; letter-spacing: 0.15em; z-index: 4;
+  }
+
+  /* RIGHT text */
+  .hero-text {
+    padding: 40px 48px;
+    display: flex; flex-direction: column;
+    justify-content: center; gap: 32px;
+  }
+  .hero-label {
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; opacity: 0.45;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-label::before { content: '┌──'; color: var(--cheong); opacity: 1; }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.05; font-weight: 400; letter-spacing: -0.01em;
+  }
+  .hero-title em { font-style: italic; color: var(--cheong); }
+  .hero-desc {
+    font-size: 12px; line-height: 1.8; max-width: 38ch;
+    opacity: 0.7; border-left: 2px solid var(--hwang); padding-left: 16px;
+  }
+  .hero-roles { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* ── COMPONENT 05: BotanicTag (role tags) ── */
+  .role-tag {
+    font-size: 10px; letter-spacing: 0.12em;
+    border: 1px solid currentColor; padding: 4px 10px;
+    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .role-tag .b-glyph { display: inline-flex; align-items: center; opacity: 0.7; flex-shrink: 0; }
+  .role-tag.tui   { color: var(--cheong); }
+  .role-tag.illus { color: var(--jeok); }
+  .role-tag.ux    { color: var(--hwang); }
+
+  .hero-cta {
+    display: flex; gap: 4px; align-items: center;
+    font-size: 11px; letter-spacing: 0.1em;
+    text-decoration: none; color: var(--ink);
+    opacity: 0.55; transition: opacity 0.15s; width: fit-content;
+  }
+  .hero-cta:hover { opacity: 1; }
+  .hero-cta::after { content: ' ↓'; color: var(--cheong); }
+
+  /* BOTTOM STRIP */
+  .hero-strip {
+    grid-column: 1 / -1; border-top: 1px solid var(--ink);
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    font-size: 10px; letter-spacing: 0.08em;
+  }
+  .strip-item {
+    padding: 10px 20px; opacity: 0.45;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .strip-item + .strip-item { border-left: 1px solid var(--ink); }
+  .strip-item .strip-num { color: var(--jeok); opacity: 1; }
+  .strip-item .s-icon { opacity: 0.55; display: inline-flex; }
+
+  /* ── SECTION HEADER ─────────────────────────────────── */
+  .section-header {
+    padding: 40px 32px 24px; border-bottom: 1px solid var(--ink);
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+  .section-title { font-size: 11px; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; }
+  .section-count { font-size: 10px; opacity: 0.35; }
+
+  /* ── COMPONENT 02: BotanicDivider ──
+     Full-width rule with botanical nodes sitting on the line */
+  .botanic-divider {
+    width: 100%; height: 20px;
+    position: relative; display: flex; align-items: center;
+    border-bottom: 1px solid var(--ink);
+  }
+  .botanic-divider .divider-nodes {
+    position: absolute; inset: 0;
+    display: flex; align-items: center;
+    justify-content: space-around; padding: 0 15%;
+    pointer-events: none;
+  }
+  .divider-node {
+    background: var(--paper); padding: 0 6px;
+    opacity: 0.45; display: flex; align-items: center;
+  }
+
+  /* ── TAG FILTER ─────────────────────────────────────── */
+  .tag-bar {
+    padding: 16px 32px; border-bottom: 1px solid var(--ink);
+    display: flex; gap: 0; flex-wrap: wrap;
+    background: var(--paper-2);
+  }
+  .tag-btn {
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.1em;
+    padding: 6px 14px; background: none; border: none;
+    border-right: 1px solid rgba(28,26,24,0.2);
+    color: var(--ink); cursor: pointer; opacity: 0.5;
+    transition: all 0.15s; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .tag-btn .b-glyph { opacity: 0.6; display: inline-flex; align-items: center; }
+  .tag-btn:first-child { border-left: 1px solid rgba(28,26,24,0.2); }
+  .tag-btn:hover { opacity: 1; background: var(--paper); }
+  .tag-btn.active { opacity: 1; background: var(--ink); color: var(--paper); }
+  .tag-btn.active.design { background: var(--cheong); }
+  .tag-btn.active.illus  { background: var(--jeok); }
+  .tag-btn.active.misc   { background: var(--hwang); color: var(--ink); }
+
+  .works-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap); background: var(--paper-2);
+    border-top: var(--gap) solid var(--ink);
+  }
+  /* empty placeholder cell — same bg as cards, ASCII art only */
+  .card-placeholder {
+    background: var(--paper);
+    aspect-ratio: 3/4;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .card-placeholder pre {
+    font-family: var(--mono);
+    font-size: 9px; line-height: 1.4;
+    white-space: pre; letter-spacing: 0;
+    color: var(--ink); opacity: 0.1;
+    user-select: none;
+  }
+  .work-card {
+    background: var(--paper); aspect-ratio: 3/4;
+    position: relative; overflow: hidden; cursor: pointer;
+  }
+  .work-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--ink); opacity: 0;
+    transition: opacity 0.2s; z-index: 4;
+  }
+  .work-card:hover::before { opacity: 0.04; }
+
+  /* ASCII texture z:0 */
+  .card-bg {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    font-family: var(--mono); font-size: 9px; line-height: 1.3;
+    white-space: pre; color: var(--ink); opacity: 0.08;
+    padding: 16px; overflow: hidden; letter-spacing: 0; z-index: 0;
+  }
+
+  /* SVG illustration fills card — z:1, behind icons and body text */
+  .card-illustration {
+    position: absolute; inset: 0;
+    z-index: 1; overflow: hidden;
+  }
+  .card-illustration svg {
+    width: 100%; height: 100%;
+    display: block;
+  }
+
+  /* ── COMPONENT 01: BotanicIcon ──
+     Replaces 3px accent bar. Top-left corner, z:3, category color. */
+  .card-botanic-icon {
+    position: absolute; top: 14px; left: 14px;
+    z-index: 3; opacity: 0.65; transition: opacity 0.15s;
+  }
+  .work-card:hover .card-botanic-icon { opacity: 1; }
+
+  .card-type {
+    position: absolute; top: 14px; right: 14px;
+    font-size: 9px; letter-spacing: 0.15em;
+    text-transform: uppercase; opacity: 0.35; z-index: 3;
+  }
+  .card-body {
+    position: absolute; inset: 0; padding: 24px 20px 20px;
+    display: flex; flex-direction: column; justify-content: flex-end; z-index: 3;
+  }
+  .card-num { font-size: 10px; opacity: 0.25; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .card-title {
+    font-family: var(--serif); font-size: 16px;
+    line-height: 1.2; font-weight: 400; margin-bottom: 8px;
+  }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+
+  /* ── COMPONENT 05: BotanicTag on cards ── */
+  .card-tag {
+    font-size: 9px; letter-spacing: 0.1em;
+    padding: 2px 7px; border: 1px solid var(--ink);
+    opacity: 0.4; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .card-tag .b-glyph { opacity: 0.8; display: inline-flex; align-items: center; }
+
+  .card-arrow { font-size: 11px; opacity: 0.25; transition: opacity 0.15s, transform 0.15s; }
+  .work-card:hover .card-arrow { opacity: 0.8; transform: translateX(4px); }
+
+  /* gradient scrim on illustrated cards — bottom text legibility */
+  .card-illustration::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 45%,
+      rgba(244, 237, 224, 0.6) 65%,
+      rgba(244, 237, 224, 0.92) 100%
+    );
+    pointer-events: none;
+  }
+     CSS-based corners — immune to aspect-ratio distortion.
+     Four pseudo-corner divs, each 18×18px, absolutely placed. */
+  .card-corners {
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 2;
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .work-card:hover .card-corners { opacity: 1; }
+
+  .cc { position: absolute; width: 18px; height: 18px; }
+  .cc::before, .cc::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+    border-radius: 1px;
+  }
+  /* horizontal arm */
+  .cc::before { height: 1.5px; width: 100%; top: 0; left: 0; }
+  /* vertical arm */
+  .cc::after  { width: 1.5px; height: 100%; top: 0; left: 0; }
+
+  .cc-tl { top: 10px;  left: 10px; }
+  .cc-tr { top: 10px;  right: 10px; transform: scaleX(-1); }
+  .cc-bl { bottom: 10px; left: 10px;  transform: scaleY(-1); }
+  .cc-br { bottom: 10px; right: 10px; transform: scale(-1,-1); }
+
+  /* plum node at corner elbow */
+  .cc-dot {
+    position: absolute; top: -2px; left: -2px;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: currentColor; opacity: 0.55;
+  }
+
+  .work-card.hidden { display: none; }
+
+  /* ── ABOUT SECTION ──────────────────────────────────── */
+  .about-section {
+    border-top: 1px solid var(--ink);
+    display: grid; grid-template-columns: 1fr 2fr;
+  }
+  .about-left {
+    padding: 48px 32px; border-right: 1px solid var(--ink);
+    display: flex; flex-direction: column; gap: 24px;
+    position: relative; overflow: hidden;
+  }
+  .about-corner-accent {
+    position: absolute; top: 20px; left: 20px;
+    opacity: 0.2; pointer-events: none;
+  }
+  .about-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; }
+  .about-display {
+    font-family: var(--serif); font-size: 36px;
+    font-weight: 400; font-style: italic;
+    line-height: 1.1; color: var(--cheong);
+  }
+  .about-tui-block {
+    font-size: 10px; line-height: 1.5;
+    white-space: pre; opacity: 0.35; letter-spacing: 0;
+  }
+  .about-right {
+    padding: 48px 40px;
+    display: flex; flex-direction: column; justify-content: center; gap: 20px;
+  }
+  .about-title { font-family: var(--serif); font-size: 28px; font-weight: 400; font-style: italic; line-height: 1.2; }
+  .about-body { font-size: 12px; line-height: 1.9; max-width: 52ch; opacity: 0.65; }
+  .about-skills {
+    display: flex; gap: 0;
+    border: 1px solid var(--ink); width: fit-content; margin-top: 8px;
+  }
+  .skill-item { font-size: 10px; letter-spacing: 0.1em; padding: 6px 14px; text-transform: uppercase; opacity: 0.5; }
+  .skill-item + .skill-item { border-left: 1px solid var(--ink); }
+
+  /* ── FOOTER ─────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--ink); padding: 20px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 10px; opacity: 0.4; letter-spacing: 0.08em;
+  }
+  footer a { color: inherit; text-decoration: none; }
+  footer a:hover { opacity: 1; color: var(--cheong); }
+  .footer-obangsaek { display: flex; gap: 4px; align-items: center; }
+  .ob-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .ob-1 { background: #1c1a18; }
+  .ob-2 { background: #f4ede0; border: 1px solid #1c1a18; }
+  .ob-3 { background: var(--cheong); }
+  .ob-4 { background: var(--jeok); }
+  .ob-5 { background: var(--hwang); }
+
+  /* ── SCROLL ANIMATION ───────────────────────────────── */
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ─────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { border-right: none; border-bottom: 1px solid var(--ink); min-height: 40svh; }
+    .works-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-section { grid-template-columns: 1fr; }
+    .about-left { border-right: none; border-bottom: 1px solid var(--ink); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     SVG SYMBOL LIBRARY — all botanical glyphs defined once.
+     Uses currentColor so each instance can be tinted freely.
+     ═══════════════════════════════════════════════════════ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <defs>
+
+    <!-- BAMBOO 대나무 — Design/TUI — 16×20 -->
+    <symbol id="b-bamboo" viewBox="0 0 16 20">
+      <rect x="4"  y="0" width="2" height="20" rx="1" fill="currentColor"/>
+      <rect x="10" y="0" width="2" height="20" rx="1" fill="currentColor"/>
+      <rect x="3"  y="6"  width="4" height="1.5" rx="0.5" fill="currentColor"/>
+      <rect x="3"  y="12" width="4" height="1.5" rx="0.5" fill="currentColor"/>
+      <rect x="9"  y="9"  width="4" height="1.5" rx="0.5" fill="currentColor"/>
+      <rect x="9"  y="15" width="4" height="1.5" rx="0.5" fill="currentColor"/>
+      <path d="M6 5  Q11 3 13 6  Q8  7 6  5Z"  fill="currentColor"/>
+      <path d="M6 11 Q1  9 0  12 Q4 13 6 11Z"  fill="currentColor"/>
+    </symbol>
+
+    <!-- PEONY 모란 — Illustration — 20×20 -->
+    <symbol id="b-peony" viewBox="0 0 20 20">
+      <ellipse cx="10" cy="4" rx="3" ry="4.5" fill="currentColor"/>
+      <ellipse cx="10" cy="4" rx="3" ry="4.5" fill="currentColor" transform="rotate(72  10 10)"/>
+      <ellipse cx="10" cy="4" rx="3" ry="4.5" fill="currentColor" transform="rotate(144 10 10)"/>
+      <ellipse cx="10" cy="4" rx="3" ry="4.5" fill="currentColor" transform="rotate(216 10 10)"/>
+      <ellipse cx="10" cy="4" rx="3" ry="4.5" fill="currentColor" transform="rotate(288 10 10)"/>
+      <circle cx="10" cy="10" r="2.5" fill="currentColor"/>
+    </symbol>
+
+    <!-- LOTUS 연꽃 — Research — 20×20 -->
+    <symbol id="b-lotus" viewBox="0 0 20 20">
+      <rect x="2" y="17" width="16" height="1.5" rx="0.75" fill="currentColor"/>
+      <rect x="9" y="12" width="2"  height="6"   rx="1"    fill="currentColor"/>
+      <path d="M10 3 Q13 8 12 13 Q10 14 8 13 Q7 8 10 3Z"         fill="currentColor"/>
+      <path d="M5  7 Q7 11 7 14  Q5 14 4 11  Q3 8 5 7Z"          fill="currentColor"/>
+      <path d="M15 7 Q13 11 13 14 Q15 14 16 11 Q17 8 15 7Z"      fill="currentColor"/>
+      <path d="M2  10 Q4 13 5 14  Q3 15 2 13  Q1 11 2 10Z"       fill="currentColor"/>
+      <path d="M18 10 Q16 13 15 14 Q17 15 18 13 Q19 11 18 10Z"   fill="currentColor"/>
+    </symbol>
+
+    <!-- PLUM BLOSSOM 매화 — Misc — 20×20 -->
+    <symbol id="b-plum" viewBox="0 0 20 20">
+      <circle cx="10" cy="5" r="3.2" fill="currentColor"/>
+      <circle cx="10" cy="5" r="3.2" fill="currentColor" transform="rotate(72  10 10)"/>
+      <circle cx="10" cy="5" r="3.2" fill="currentColor" transform="rotate(144 10 10)"/>
+      <circle cx="10" cy="5" r="3.2" fill="currentColor" transform="rotate(216 10 10)"/>
+      <circle cx="10" cy="5" r="3.2" fill="currentColor" transform="rotate(288 10 10)"/>
+      <circle cx="10" cy="10" r="2" fill="currentColor"/>
+      <circle cx="10" cy="7.5" r="0.8" fill="var(--paper)"/>
+      <circle cx="10" cy="7.5" r="0.8" fill="var(--paper)" transform="rotate(72  10 10)"/>
+      <circle cx="10" cy="7.5" r="0.8" fill="var(--paper)" transform="rotate(144 10 10)"/>
+      <circle cx="10" cy="7.5" r="0.8" fill="var(--paper)" transform="rotate(216 10 10)"/>
+      <circle cx="10" cy="7.5" r="0.8" fill="var(--paper)" transform="rotate(288 10 10)"/>
+    </symbol>
+
+    <!-- CORNER BRACKET with plum node — 24×24, top-left orientation -->
+    <symbol id="b-corner-tl" viewBox="0 0 24 24">
+      <line x1="2" y1="22" x2="2"  y2="4"  stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+      <line x1="2" y1="4"  x2="22" y2="4"  stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+      <circle cx="2" cy="4" r="2.5" fill="currentColor" opacity="0.6"/>
+      <circle cx="2" cy="4" r="1"   fill="var(--paper)"/>
+    </symbol>
+
+  </defs>
+</svg>
+
+
+<!-- NAV -->
+<nav>
+  <div class="nav-seal">
+    <div class="seal">印</div>
+    <span class="nav-name">UX Designer · Illustrator</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#works">Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-status">Available for projects</div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-visual">
+
+    <!-- COMPONENT 03 — BotanicWash: monochrome ink, z:0, opacity 0.08 -->
+    <svg class="botanic-wash" viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Top-right: peony branch bleeding off corner -->
+      <g fill="#1c1a18">
+        <path d="M370 0 Q410 45 435 90 Q455 130 448 162" stroke="#1c1a18" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M415 58 Q445 52 465 68 Q475 80 470 96"  stroke="#1c1a18" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M385 18 Q400 12 405 24 Q395 28 385 18Z"/>
+        <path d="M403 42 Q420 35 424 49 Q412 52 403 42Z"/>
+        <path d="M424 72 Q442 65 444 79 Q432 82 424 72Z"/>
+        <path d="M416 58 Q434 54 436 66 Q426 68 416 58Z"/>
+        <path d="M440 88 Q455 83 455 95 Q445 97 440 88Z"/>
+        <!-- peony head -->
+        <ellipse cx="443" cy="170" rx="9"  ry="12" transform="rotate(-15 443 170)"/>
+        <ellipse cx="443" cy="170" rx="9"  ry="12" transform="rotate(57  443 170)"/>
+        <ellipse cx="443" cy="170" rx="9"  ry="12" transform="rotate(129 443 170)"/>
+        <ellipse cx="443" cy="170" rx="9"  ry="12" transform="rotate(201 443 170)"/>
+        <ellipse cx="443" cy="170" rx="9"  ry="12" transform="rotate(273 443 170)"/>
+        <circle  cx="443" cy="170" r="6.5"/>
+        <!-- secondary bud -->
+        <ellipse cx="469" cy="95" rx="5.5" ry="8" transform="rotate(-20 469 95)"/>
+        <ellipse cx="469" cy="95" rx="5.5" ry="8" transform="rotate(52  469 95)"/>
+        <ellipse cx="469" cy="95" rx="5.5" ry="8" transform="rotate(124 469 95)"/>
+        <ellipse cx="469" cy="95" rx="5.5" ry="8" transform="rotate(196 469 95)"/>
+        <ellipse cx="469" cy="95" rx="5.5" ry="8" transform="rotate(268 469 95)"/>
+        <circle  cx="469" cy="95" r="4"/>
+      </g>
+      <!-- Bottom-left: lotus cluster bleeding off corner -->
+      <g fill="#1c1a18">
+        <path d="M0 600 Q22 548 32 498 Q42 458 36 428" stroke="#1c1a18" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M0 578 Q32 526 48 486 Q58 458 52 438" stroke="#1c1a18" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M0 556 Q16 516 22 476 Q27 448 22 418" stroke="#1c1a18" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- lotus 1 -->
+        <path d="M36 418 Q41 406 36 398 Q29 406 36 418Z"/>
+        <path d="M36 418 Q31 405 23 400 Q22 410 36 418Z"/>
+        <path d="M36 418 Q45 406 49 400 Q43 410 36 418Z"/>
+        <path d="M36 418 Q27 412 18 414 Q22 422 36 418Z"/>
+        <path d="M36 418 Q47 414 53 416 Q49 424 36 418Z"/>
+        <!-- lotus 2 -->
+        <path d="M52 430 Q57 418 52 410 Q45 418 52 430Z"/>
+        <path d="M52 430 Q47 417 39 412 Q38 422 52 430Z"/>
+        <path d="M52 430 Q61 418 65 412 Q59 422 52 430Z"/>
+        <!-- lotus 3 (bud) -->
+        <path d="M21 412 Q24 404 21 398 Q17 404 21 412Z"/>
+        <path d="M21 412 Q17 404 13 400 Q12 407 21 412Z"/>
+        <path d="M21 412 Q27 405 30 401 Q26 407 21 412Z"/>
+        <!-- lily pads -->
+        <ellipse cx="10"  cy="554" rx="30" ry="13" transform="rotate(-20 10 554)"  opacity="0.5"/>
+        <ellipse cx="38"  cy="538" rx="25" ry="11" transform="rotate(-10 38 538)"  opacity="0.5"/>
+      </g>
+    </svg>
+
+    <!-- 4 individual artwork cards, each absolutely positioned and slightly rotated -->
+
+    <!-- CARD A — TUI terminal window, top-left -->
+    <div class="hero-art-card" style="top:48px; left:32px; width:200px; transform:rotate(-2.5deg); z-index:3;">
+      <div class="hac-label">Design / TUI</div>
+      <svg viewBox="0 0 200 138" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="138" fill="#f4ede0" rx="2"/>
+        <!-- monitor body -->
+        <rect x="4" y="4" width="192" height="122" rx="2" fill="#1c1a18"/>
+        <!-- title bar cheong -->
+        <rect x="4" y="4" width="192" height="16" rx="2" fill="#2a5070" opacity="0.9"/>
+        <rect x="4" y="16" width="192" height="4" fill="#2a5070" opacity="0.9"/>
+        <!-- traffic lights -->
+        <circle cx="14" cy="12" r="3.5" fill="#b83232" opacity="0.85"/>
+        <circle cx="24" cy="12" r="3.5" fill="#c9922a" opacity="0.85"/>
+        <circle cx="34" cy="12" r="3.5" fill="#2a8a4a" opacity="0.85"/>
+        <text x="104" y="14" font-family="'DM Mono',monospace" font-size="5.5" fill="#f4ede0" text-anchor="middle" opacity="0.5" letter-spacing="1">portfolio.tui — v1.0</text>
+        <!-- screen -->
+        <rect x="4" y="20" width="192" height="106" fill="#0a1520"/>
+        <!-- left nav panel -->
+        <rect x="4" y="20" width="52" height="106" fill="#0d1f2d"/>
+        <text x="10" y="32" font-family="'DM Mono',monospace" font-size="5" fill="#2a5070" opacity="0.8">┌─ nav ─┐</text>
+        <text x="10" y="43" font-family="'DM Mono',monospace" font-size="5" fill="#c9922a" opacity="0.9">▶ works</text>
+        <text x="10" y="53" font-family="'DM Mono',monospace" font-size="5" fill="#f4ede0" opacity="0.4">  about</text>
+        <text x="10" y="63" font-family="'DM Mono',monospace" font-size="5" fill="#f4ede0" opacity="0.4">  contact</text>
+        <line x1="4" y1="70" x2="56" y2="70" stroke="#2a5070" stroke-width="0.5" opacity="0.4"/>
+        <text x="10" y="80" font-family="'DM Mono',monospace" font-size="4.5" fill="#b83232" opacity="0.7">illus</text>
+        <text x="10" y="90" font-family="'DM Mono',monospace" font-size="4.5" fill="#2a5070" opacity="0.7">tui</text>
+        <text x="10" y="100" font-family="'DM Mono',monospace" font-size="4.5" fill="#c9922a" opacity="0.7">research</text>
+        <!-- right content panel -->
+        <text x="60" y="32" font-family="'DM Mono',monospace" font-size="5" fill="#2a5070" opacity="0.6">┌────────────────────────┐</text>
+        <text x="60" y="42" font-family="'DM Mono',monospace" font-size="5" fill="#f4ede0" opacity="0.4">│ 001  Terminal UI       │</text>
+        <text x="60" y="52" font-family="'DM Mono',monospace" font-size="5" fill="#f4ede0" opacity="0.4">│ 002  Obangsaek         │</text>
+        <text x="60" y="62" font-family="'DM Mono',monospace" font-size="5" fill="#c9922a" opacity="0.95">│▶003  Research ──       │</text>
+        <text x="60" y="72" font-family="'DM Mono',monospace" font-size="5" fill="#f4ede0" opacity="0.25">│ 004  Colour Zine       │</text>
+        <text x="60" y="82" font-family="'DM Mono',monospace" font-size="5" fill="#f4ede0" opacity="0.25">│ 005  CLI Generator     │</text>
+        <text x="60" y="92" font-family="'DM Mono',monospace" font-size="5" fill="#2a5070" opacity="0.55">└────────────────────────┘</text>
+        <!-- cursor blink -->
+        <rect x="60" y="98" width="5" height="8" rx="0.5" fill="#c9922a" opacity="0.7"/>
+        <!-- status bar -->
+        <rect x="56" y="116" width="140" height="10" fill="#2a5070" opacity="0.35"/>
+        <text x="60" y="123" font-family="'DM Mono',monospace" font-size="4" fill="#f4ede0" opacity="0.55" letter-spacing="0.3">NORMAL  3/6  ──────────────  100%</text>
+        <!-- border glow line -->
+        <rect x="4" y="20" width="192" height="1" fill="#2a5070" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <!-- CARD B — Hanbok character, center, slight positive tilt -->
+    <div class="hero-art-card" style="top:100px; left:168px; width:140px; transform:rotate(2deg); z-index:4;">
+      <div class="hac-label">Illustration</div>
+      <svg viewBox="0 0 140 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="140" height="190" fill="#ede3d0" rx="2"/>
+        <rect x="0" y="0"   width="140" height="2.5" fill="#b83232" opacity="0.5"/>
+        <rect x="0" y="187" width="140" height="2.5" fill="#b83232" opacity="0.5"/>
+        <!-- head -->
+        <circle cx="70" cy="50" r="24" fill="#f4ede0" stroke="#1c1a18" stroke-width="1.2"/>
+        <path d="M46 44 Q46 24 70 22 Q94 24 94 44" fill="#1c1a18"/>
+        <ellipse cx="70" cy="22" rx="8" ry="5" fill="#1c1a18"/>
+        <!-- hairpin hwang -->
+        <line x1="63" y1="22" x2="77" y2="22" stroke="#c9922a" stroke-width="1.3" stroke-linecap="round"/>
+        <circle cx="77" cy="22" r="2" fill="#c9922a"/>
+        <!-- eyes -->
+        <line x1="59" y1="48" x2="64" y2="48" stroke="#1c1a18" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="76" y1="48" x2="81" y2="48" stroke="#1c1a18" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M62 56 Q70 60 78 56" stroke="#1c1a18" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+        <!-- neck -->
+        <rect x="63" y="72" width="14" height="12" rx="2" fill="#f4ede0" stroke="#1c1a18" stroke-width="0.9"/>
+        <!-- jeogori cheong -->
+        <path d="M38 108 Q34 96 40 86 Q48 78 70 76 Q92 78 100 86 Q106 96 102 108Z" fill="#2a5070" stroke="#1c1a18" stroke-width="1"/>
+        <path d="M54 82 L70 95 L86 82" stroke="#f9f5ee" stroke-width="1.2" fill="none"/>
+        <!-- sleeves -->
+        <path d="M38 108 Q22 104 17 116 Q14 126 24 129 Q33 131 38 118Z" fill="#2a5070" stroke="#1c1a18" stroke-width="1"/>
+        <path d="M102 108 Q118 104 123 116 Q126 126 116 129 Q107 131 102 118Z" fill="#2a5070" stroke="#1c1a18" stroke-width="1"/>
+        <path d="M17 116 Q14 126 24 129" stroke="#b83232" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M123 116 Q126 126 116 129" stroke="#b83232" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- chima hwang -->
+        <path d="M34 122 Q28 140 30 165 L110 165 Q112 140 106 122Z" fill="#c9922a" stroke="#1c1a18" stroke-width="1"/>
+        <line x1="35" y1="138" x2="105" y2="138" stroke="#f4ede0" stroke-width="0.5" opacity="0.45"/>
+        <line x1="33" y1="152" x2="107" y2="152" stroke="#f4ede0" stroke-width="0.5" opacity="0.45"/>
+        <!-- feet -->
+        <ellipse cx="52" cy="167" rx="11" ry="4.5" fill="#1c1a18" opacity="0.65"/>
+        <ellipse cx="88" cy="167" rx="11" ry="4.5" fill="#1c1a18" opacity="0.65"/>
+        <!-- obangsaek dots top-right -->
+        <circle cx="112" cy="16" r="4" fill="#1c1a18"/>
+        <circle cx="122" cy="16" r="4" fill="#f4ede0" stroke="#1c1a18" stroke-width="0.8"/>
+        <circle cx="112" cy="27" r="4" fill="#b83232"/>
+        <circle cx="122" cy="27" r="4" fill="#c9922a"/>
+        <!-- seal bottom right -->
+        <rect x="102" y="170" width="28" height="14" rx="1" fill="#b83232" opacity="0.85"/>
+        <text x="116" y="180" font-family="serif" font-size="9" fill="#f4ede0" text-anchor="middle" font-weight="700">印</text>
+        <!-- corner brackets -->
+        <path d="M6 6 L6 14 M6 6 L14 6" stroke="#1c1a18" stroke-width="1" opacity="0.2"/>
+        <path d="M134 6 L134 14 M134 6 L126 6" stroke="#1c1a18" stroke-width="1" opacity="0.2"/>
+      </svg>
+    </div>
+
+    <!-- CARD C — Obangsaek zine spread, bottom-left -->
+    <div class="hero-art-card" style="bottom:72px; left:28px; width:148px; transform:rotate(-1.5deg); z-index:2;">
+      <div class="hac-label">Korean / Print</div>
+      <svg viewBox="0 0 148 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="148" height="108" fill="#1c1a18" rx="2"/>
+        <!-- header -->
+        <rect x="0" y="0" width="148" height="18" rx="2" fill="#2a5070" opacity="0.8"/>
+        <rect x="0" y="14" width="148" height="4" fill="#2a5070" opacity="0.8"/>
+        <text x="74" y="12" font-family="'DM Mono',monospace" font-size="5.5" fill="#f4ede0" text-anchor="middle" opacity="0.7" letter-spacing="2">COLOUR + MEANING</text>
+        <!-- colour strips -->
+        <rect x="0" y="18" width="148" height="16" fill="#1c1a18"/>
+        <text x="10" y="30" font-family="serif" font-size="12" fill="#f4ede0" opacity="0.8">黑</text>
+        <text x="30" y="30" font-family="'DM Mono',monospace" font-size="4" fill="#f4ede0" opacity="0.35" letter-spacing="0.5">NORTH · WATER · WINTER</text>
+
+        <rect x="0" y="34" width="148" height="16" fill="#e8dfc8"/>
+        <text x="10" y="46" font-family="serif" font-size="12" fill="#1c1a18" opacity="0.8">白</text>
+        <text x="30" y="46" font-family="'DM Mono',monospace" font-size="4" fill="#1c1a18" opacity="0.35" letter-spacing="0.5">WEST · METAL · AUTUMN</text>
+
+        <rect x="0" y="50" width="148" height="16" fill="#2a5070"/>
+        <text x="10" y="62" font-family="serif" font-size="12" fill="#f4ede0" opacity="0.85">靑</text>
+        <text x="30" y="62" font-family="'DM Mono',monospace" font-size="4" fill="#f4ede0" opacity="0.45" letter-spacing="0.5">EAST · WOOD · SPRING</text>
+
+        <rect x="0" y="66" width="148" height="16" fill="#b83232"/>
+        <text x="10" y="78" font-family="serif" font-size="12" fill="#f4ede0" opacity="0.85">赤</text>
+        <text x="30" y="78" font-family="'DM Mono',monospace" font-size="4" fill="#f4ede0" opacity="0.45" letter-spacing="0.5">SOUTH · FIRE · SUMMER</text>
+
+        <rect x="0" y="82" width="148" height="16" fill="#c9922a"/>
+        <text x="10" y="94" font-family="serif" font-size="12" fill="#f4ede0" opacity="0.85">黃</text>
+        <text x="30" y="94" font-family="'DM Mono',monospace" font-size="4" fill="#f4ede0" opacity="0.45" letter-spacing="0.5">CENTRE · EARTH</text>
+
+        <line x1="0" y1="98" x2="148" y2="98" stroke="#f4ede0" stroke-width="0.4" opacity="0.15"/>
+        <text x="74" y="106" font-family="'DM Mono',monospace" font-size="4" fill="#f4ede0" text-anchor="middle" opacity="0.2" letter-spacing="2">p. 01</text>
+      </svg>
+    </div>
+
+    <!-- CARD D — Manhwa panel grid, bottom-right -->
+    <div class="hero-art-card" style="bottom:52px; left:186px; width:142px; transform:rotate(2.5deg); z-index:3;">
+      <div class="hac-label">Illustration / Layout</div>
+      <svg viewBox="0 0 142 118" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="142" height="118" fill="#f4ede0" rx="2"/>
+        <!-- top wide panel -->
+        <rect x="4" y="4" width="134" height="46" fill="#ede3d0" stroke="#1c1a18" stroke-width="1"/>
+        <!-- sky wash -->
+        <rect x="4" y="4" width="134" height="22" fill="#2a5070" opacity="0.1"/>
+        <!-- mountains -->
+        <path d="M4 36 Q24 20 44 30 Q64 18 86 26 Q106 14 124 22 Q134 17 138 22 L138 50 L4 50Z" fill="#1c1a18" opacity="0.07"/>
+        <!-- walking figure -->
+        <circle cx="76" cy="26" r="4.5" fill="#1c1a18" opacity="0.5"/>
+        <rect x="73" y="30" width="6" height="9" rx="1" fill="#2a5070" opacity="0.55"/>
+        <line x1="73" y1="32" x2="69" y2="39" stroke="#1c1a18" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+        <line x1="79" y1="32" x2="83" y2="39" stroke="#1c1a18" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+        <!-- panel caption -->
+        <rect x="6" y="42" width="52" height="7" fill="#1c1a18" opacity="0.7"/>
+        <text x="10" y="47.5" font-family="'DM Mono',monospace" font-size="4" fill="#f4ede0" letter-spacing="0.5">도시의 아침</text>
+
+        <!-- bottom-left panel — portrait closeup -->
+        <rect x="4" y="52" width="66" height="62" fill="#f9f5ee" stroke="#1c1a18" stroke-width="1"/>
+        <circle cx="37" cy="76" r="18" fill="#f4ede0" stroke="#1c1a18" stroke-width="0.9"/>
+        <path d="M19 70 Q19 56 37 54 Q55 56 55 70" fill="#1c1a18"/>
+        <ellipse cx="30" cy="74" rx="5" ry="4" fill="white" stroke="#1c1a18" stroke-width="0.6"/>
+        <circle cx="31" cy="74" r="3" fill="#1c1a18"/>
+        <circle cx="32" cy="73" r="1" fill="white"/>
+        <ellipse cx="44" cy="74" rx="5" ry="4" fill="white" stroke="#1c1a18" stroke-width="0.6"/>
+        <circle cx="45" cy="74" r="3" fill="#1c1a18"/>
+        <circle cx="46" cy="73" r="1" fill="white"/>
+        <path d="M32 82 Q37 85 42 82" stroke="#1c1a18" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+        <ellipse cx="22" cy="79" rx="5" ry="3" fill="#b83232" opacity="0.1"/>
+        <ellipse cx="52" cy="79" rx="5" ry="3" fill="#b83232" opacity="0.1"/>
+        <!-- speech bubble -->
+        <rect x="6" y="102" width="56" height="9" rx="2" fill="white" stroke="#1c1a18" stroke-width="0.6"/>
+        <path d="M22 111 L18 116 L28 111Z" fill="white" stroke="#1c1a18" stroke-width="0.5"/>
+        <text x="34" y="108.5" font-family="serif" font-size="5.5" fill="#1c1a18" text-anchor="middle">봄이 왔어...</text>
+
+        <!-- bottom-right panel — action dark -->
+        <rect x="72" y="52" width="66" height="62" fill="#1c1a18" stroke="#1c1a18" stroke-width="1"/>
+        <!-- speed lines -->
+        <g stroke="#f4ede0" stroke-width="0.5" opacity="0.1">
+          <line x1="105" y1="83" x2="72"  y2="52"/>
+          <line x1="105" y1="83" x2="88"  y2="52"/>
+          <line x1="105" y1="83" x2="105" y2="52"/>
+          <line x1="105" y1="83" x2="122" y2="52"/>
+          <line x1="105" y1="83" x2="138" y2="52"/>
+          <line x1="105" y1="83" x2="138" y2="68"/>
+          <line x1="105" y1="83" x2="138" y2="83"/>
+          <line x1="105" y1="83" x2="138" y2="98"/>
+          <line x1="105" y1="83" x2="138" y2="114"/>
+          <line x1="105" y1="83" x2="122" y2="114"/>
+          <line x1="105" y1="83" x2="105" y2="114"/>
+          <line x1="105" y1="83" x2="88"  y2="114"/>
+          <line x1="105" y1="83" x2="72"  y2="114"/>
+          <line x1="105" y1="83" x2="72"  y2="98"/>
+          <line x1="105" y1="83" x2="72"  y2="68"/>
+        </g>
+        <!-- action figure -->
+        <circle cx="105" cy="70" r="7" fill="#f4ede0" opacity="0.85"/>
+        <path d="M105 77 L100 91 L110 91Z" fill="#b83232" opacity="0.85"/>
+        <line x1="100" y1="80" x2="92"  y2="73" stroke="#b83232" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+        <line x1="110" y1="80" x2="118" y2="73" stroke="#b83232" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+        <!-- onomatopoeia hwang -->
+        <text x="105" y="108" font-family="serif" font-size="11" fill="#c9922a" text-anchor="middle" font-weight="700" opacity="0.9">쾅!</text>
+      </svg>
+    </div>
+      <svg viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Base -->
+        <rect width="260" height="320" fill="#ede3d0" rx="2"/>
+        <rect x="0" y="0"   width="260" height="3" fill="#2a5070" opacity="0.45"/>
+        <rect x="0" y="317" width="260" height="3" fill="#2a5070" opacity="0.45"/>
+
+        <!-- ── ARTWORK 1 — TUI terminal window, top-left, slight rotation ── -->
+        <g transform="rotate(-3, 70, 90)">
+          <rect x="14" y="28" width="114" height="88" rx="2" fill="#1c1a18" stroke="#1c1a18" stroke-width="1"/>
+          <!-- title bar -->
+          <rect x="14" y="28" width="114" height="12" rx="2" fill="#2a5070" opacity="0.85"/>
+          <rect x="14" y="36" width="114" height="4" fill="#2a5070" opacity="0.85"/>
+          <!-- traffic lights -->
+          <circle cx="22" cy="34" r="2.5" fill="#b83232" opacity="0.8"/>
+          <circle cx="30" cy="34" r="2.5" fill="#c9922a" opacity="0.8"/>
+          <circle cx="38" cy="34" r="2.5" fill="#2a8a4a" opacity="0.8"/>
+          <text x="80" y="37" font-family="'DM Mono',monospace" font-size="4" fill="#f4ede0" text-anchor="middle" opacity="0.5" letter-spacing="0.5">portfolio.tui</text>
+          <!-- screen content — left nav + right panel -->
+          <rect x="14" y="40" width="30" height="76" fill="#0d1f2d" opacity="0.9"/>
+          <text x="18" y="50" font-family="'DM Mono',monospace" font-size="3.5" fill="#2a5070" opacity="0.8">┌─ nav</text>
+          <text x="18" y="59" font-family="'DM Mono',monospace" font-size="3.5" fill="#c9922a" opacity="0.9">▶ works</text>
+          <text x="18" y="67" font-family="'DM Mono',monospace" font-size="3.5" fill="#f4ede0" opacity="0.4">  about</text>
+          <text x="18" y="75" font-family="'DM Mono',monospace" font-size="3.5" fill="#f4ede0" opacity="0.4">  contact</text>
+          <line x1="14" y1="82" x2="44" y2="82" stroke="#2a5070" stroke-width="0.5" opacity="0.4"/>
+          <text x="18" y="90" font-family="'DM Mono',monospace" font-size="3" fill="#b83232" opacity="0.6">illus</text>
+          <text x="18" y="97" font-family="'DM Mono',monospace" font-size="3" fill="#2a5070" opacity="0.6">tui</text>
+          <text x="18" y="104" font-family="'DM Mono',monospace" font-size="3" fill="#c9922a" opacity="0.6">research</text>
+          <!-- right content panel -->
+          <rect x="44" y="40" width="84" height="76" fill="#0a1520" opacity="0.7"/>
+          <text x="48" y="51" font-family="'DM Mono',monospace" font-size="3.8" fill="#2a5070" opacity="0.7">┌────────────────────┐</text>
+          <text x="48" y="59" font-family="'DM Mono',monospace" font-size="3.8" fill="#f4ede0" opacity="0.45">│ 001  Terminal UI   │</text>
+          <text x="48" y="67" font-family="'DM Mono',monospace" font-size="3.8" fill="#f4ede0" opacity="0.45">│ 002  Obangsaek     │</text>
+          <text x="48" y="75" font-family="'DM Mono',monospace" font-size="3.8" fill="#c9922a" opacity="0.9">│▶003  Research ──   │</text>
+          <text x="48" y="83" font-family="'DM Mono',monospace" font-size="3.8" fill="#f4ede0" opacity="0.3">│ 004  Zine          │</text>
+          <text x="48" y="91" font-family="'DM Mono',monospace" font-size="3.8" fill="#f4ede0" opacity="0.3">│ 005  CLI tool      │</text>
+          <text x="48" y="99" font-family="'DM Mono',monospace" font-size="3.8" fill="#2a5070" opacity="0.6">└────────────────────┘</text>
+          <!-- status bar -->
+          <rect x="44" y="108" width="84" height="8" fill="#2a5070" opacity="0.35"/>
+          <text x="48" y="114" font-family="'DM Mono',monospace" font-size="3" fill="#f4ede0" opacity="0.55" letter-spacing="0.3">NORMAL  3/6  100%</text>
+          <!-- corner brackets on window -->
+          <path d="M16 30 L16 36 M16 30 L22 30" stroke="#2a5070" stroke-width="0.8" opacity="0.5"/>
+          <path d="M126 30 L126 36 M126 30 L120 30" stroke="#2a5070" stroke-width="0.8" opacity="0.5"/>
+        </g>
+
+        <!-- ── ARTWORK 2 — hanbok character, center-right, slight tilt ── -->
+        <g transform="rotate(2, 168, 150)">
+          <rect x="130" y="62" width="80" height="116" rx="2" fill="#f4ede0" stroke="#1c1a18" stroke-width="1"/>
+          <!-- cheong top/bottom bars -->
+          <rect x="130" y="62"  width="80" height="2.5" fill="#2a5070" opacity="0.55"/>
+          <rect x="130" y="175" width="80" height="2.5" fill="#2a5070" opacity="0.55"/>
+          <!-- figure -->
+          <!-- head -->
+          <circle cx="170" cy="92" r="16" fill="#f4ede0" stroke="#1c1a18" stroke-width="1"/>
+          <path d="M154 86 Q154 72 170 70 Q186 72 186 86" fill="#1c1a18"/>
+          <ellipse cx="170" cy="70" rx="6" ry="4" fill="#1c1a18"/>
+          <!-- hairpin hwang -->
+          <line x1="165" y1="70" x2="175" y2="70" stroke="#c9922a" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="175" cy="70" r="1.5" fill="#c9922a"/>
+          <!-- eyes -->
+          <line x1="163" y1="90" x2="166" y2="90" stroke="#1c1a18" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="174" y1="90" x2="177" y2="90" stroke="#1c1a18" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M165 96 Q170 99 175 96" stroke="#1c1a18" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+          <!-- neck -->
+          <rect x="165" y="106" width="10" height="10" rx="1.5" fill="#f4ede0" stroke="#1c1a18" stroke-width="0.8"/>
+          <!-- jeogori jeok -->
+          <path d="M155 132 Q152 122 157 114 Q163 108 170 107 Q177 108 183 114 Q188 122 185 132Z" fill="#b83232" stroke="#1c1a18" stroke-width="0.8"/>
+          <path d="M163 112 L170 121 L177 112" stroke="#f9f5ee" stroke-width="1" fill="none"/>
+          <!-- sleeves -->
+          <path d="M155 132 Q144 129 140 138 Q138 146 146 148 Q153 150 156 141Z" fill="#b83232" stroke="#1c1a18" stroke-width="0.8"/>
+          <path d="M185 132 Q196 129 200 138 Q202 146 194 148 Q187 150 184 141Z" fill="#b83232" stroke="#1c1a18" stroke-width="0.8"/>
+          <path d="M140 138 Q138 146 146 148" stroke="#2a5070" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M200 138 Q202 146 194 148" stroke="#2a5070" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- chima hwang -->
+          <path d="M152 146 Q147 157 149 172 L191 172 Q193 157 188 146Z" fill="#c9922a" stroke="#1c1a18" stroke-width="0.8"/>
+          <line x1="152" y1="156" x2="188" y2="156" stroke="#f4ede0" stroke-width="0.4" opacity="0.5"/>
+          <line x1="151" y1="164" x2="189" y2="164" stroke="#f4ede0" stroke-width="0.4" opacity="0.5"/>
+          <!-- feet -->
+          <ellipse cx="161" cy="173" rx="8" ry="3.5" fill="#1c1a18" opacity="0.6"/>
+          <ellipse cx="179" cy="173" rx="8" ry="3.5" fill="#1c1a18" opacity="0.6"/>
+          <!-- small obangsaek dots top-right of card -->
+          <circle cx="196" cy="70" r="3" fill="#1c1a18"/>
+          <circle cx="204" cy="70" r="3" fill="#f4ede0" stroke="#1c1a18" stroke-width="0.8"/>
+          <circle cx="196" cy="79" r="3" fill="#b83232"/>
+          <circle cx="204" cy="79" r="3" fill="#c9922a"/>
+        </g>
+
+        <!-- ── ARTWORK 3 — obangsaek colour study mini, bottom-left ── -->
+        <g transform="rotate(-2, 62, 240)">
+          <rect x="14" y="192" width="92" height="114" rx="2" fill="#1c1a18" stroke="#1c1a18" stroke-width="1"/>
+          <!-- title bar cheong -->
+          <rect x="14" y="192" width="92" height="14" fill="#2a5070" opacity="0.8"/>
+          <text x="60" y="202" font-family="'DM Mono',monospace" font-size="4.5" fill="#f4ede0" text-anchor="middle" opacity="0.7" letter-spacing="1">오방색</text>
+          <!-- colour strips -->
+          <rect x="14" y="206" width="92" height="18" fill="#1c1a18"/>
+          <text x="22" y="218" font-family="serif" font-size="10" fill="#f4ede0" opacity="0.75">黑</text>
+          <text x="38" y="218" font-family="'DM Mono',monospace" font-size="3.5" fill="#f4ede0" opacity="0.35" letter-spacing="0.5">NORTH · WATER</text>
+
+          <rect x="14" y="224" width="92" height="18" fill="#e8dfc8"/>
+          <text x="22" y="236" font-family="serif" font-size="10" fill="#1c1a18" opacity="0.75">白</text>
+          <text x="38" y="236" font-family="'DM Mono',monospace" font-size="3.5" fill="#1c1a18" opacity="0.35" letter-spacing="0.5">WEST · METAL</text>
+
+          <rect x="14" y="242" width="92" height="18" fill="#2a5070"/>
+          <text x="22" y="254" font-family="serif" font-size="10" fill="#f4ede0" opacity="0.8">靑</text>
+          <text x="38" y="254" font-family="'DM Mono',monospace" font-size="3.5" fill="#f4ede0" opacity="0.45" letter-spacing="0.5">EAST · WOOD</text>
+
+          <rect x="14" y="260" width="92" height="18" fill="#b83232"/>
+          <text x="22" y="272" font-family="serif" font-size="10" fill="#f4ede0" opacity="0.8">赤</text>
+          <text x="38" y="272" font-family="'DM Mono',monospace" font-size="3.5" fill="#f4ede0" opacity="0.45" letter-spacing="0.5">SOUTH · FIRE</text>
+
+          <rect x="14" y="278" width="92" height="18" fill="#c9922a"/>
+          <text x="22" y="290" font-family="serif" font-size="10" fill="#f4ede0" opacity="0.8">黃</text>
+          <text x="38" y="290" font-family="'DM Mono',monospace" font-size="3.5" fill="#f4ede0" opacity="0.45" letter-spacing="0.5">CENTRE · EARTH</text>
+
+          <!-- page num -->
+          <line x1="14" y1="296" x2="106" y2="296" stroke="#f4ede0" stroke-width="0.4" opacity="0.2"/>
+          <text x="60" y="304" font-family="'DM Mono',monospace" font-size="3.5" fill="#f4ede0" text-anchor="middle" opacity="0.25" letter-spacing="1">p. 01</text>
+        </g>
+
+        <!-- ── ARTWORK 4 — manhwa panel grid mini, bottom-right ── -->
+        <g transform="rotate(3, 195, 250)">
+          <rect x="144" y="196" width="104" height="110" rx="2" fill="#f4ede0" stroke="#1c1a18" stroke-width="1"/>
+          <!-- top wide panel -->
+          <rect x="146" y="198" width="100" height="44" fill="#ede3d0" stroke="#1c1a18" stroke-width="0.8"/>
+          <!-- distant hills in panel 1 -->
+          <path d="M146 228 Q165 212 185 222 Q205 210 226 218 Q238 212 246 218 L246 242 L146 242Z" fill="#1c1a18" opacity="0.08"/>
+          <!-- tiny walking figure -->
+          <circle cx="196" cy="222" r="4" fill="#1c1a18" opacity="0.45"/>
+          <rect x="193" y="226" width="6" height="9" rx="1" fill="#2a5070" opacity="0.5"/>
+          <!-- bottom-left panel — portrait -->
+          <rect x="146" y="244" width="50" height="60" fill="#f9f5ee" stroke="#1c1a18" stroke-width="0.8"/>
+          <!-- big face in portrait panel -->
+          <circle cx="171" cy="268" r="18" fill="#f4ede0" stroke="#1c1a18" stroke-width="0.8"/>
+          <path d="M153 262 Q153 248 171 246 Q189 248 189 262" fill="#1c1a18"/>
+          <ellipse cx="165" cy="266" rx="4.5" ry="3.5" fill="white" stroke="#1c1a18" stroke-width="0.6"/>
+          <circle cx="166" cy="266" r="2.5" fill="#1c1a18"/>
+          <circle cx="167" cy="265" r="0.8" fill="white"/>
+          <ellipse cx="177" cy="266" rx="4.5" ry="3.5" fill="white" stroke="#1c1a18" stroke-width="0.6"/>
+          <circle cx="178" cy="266" r="2.5" fill="#1c1a18"/>
+          <circle cx="179" cy="265" r="0.8" fill="white"/>
+          <path d="M167 274 Q171 277 175 274" stroke="#1c1a18" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+          <!-- blush jeok -->
+          <ellipse cx="158" cy="271" rx="5" ry="3" fill="#b83232" opacity="0.1"/>
+          <ellipse cx="184" cy="271" rx="5" ry="3" fill="#b83232" opacity="0.1"/>
+          <!-- speech bubble -->
+          <rect x="148" y="296" width="44" height="8" rx="2" fill="white" stroke="#1c1a18" stroke-width="0.5"/>
+          <text x="170" y="302" font-family="serif" font-size="4.5" fill="#1c1a18" text-anchor="middle">봄이 왔어</text>
+          <!-- bottom-right panel — action, dark -->
+          <rect x="198" y="244" width="48" height="60" fill="#1c1a18" stroke="#1c1a18" stroke-width="0.8"/>
+          <!-- speed lines -->
+          <g stroke="#f4ede0" stroke-width="0.4" opacity="0.12">
+            <line x1="222" y1="274" x2="198" y2="244"/>
+            <line x1="222" y1="274" x2="210" y2="244"/>
+            <line x1="222" y1="274" x2="222" y2="244"/>
+            <line x1="222" y1="274" x2="234" y2="244"/>
+            <line x1="222" y1="274" x2="246" y2="244"/>
+            <line x1="222" y1="274" x2="246" y2="258"/>
+            <line x1="222" y1="274" x2="246" y2="274"/>
+            <line x1="222" y1="274" x2="246" y2="290"/>
+            <line x1="222" y1="274" x2="246" y2="304"/>
+            <line x1="222" y1="274" x2="234" y2="304"/>
+            <line x1="222" y1="274" x2="222" y2="304"/>
+            <line x1="222" y1="274" x2="210" y2="304"/>
+            <line x1="222" y1="274" x2="198" y2="304"/>
+            <line x1="222" y1="274" x2="198" y2="290"/>
+          </g>
+          <!-- action figure jeok -->
+          <circle cx="222" cy="261" r="6" fill="#f4ede0" opacity="0.8"/>
+          <path d="M222 267 L218 280 L226 280Z" fill="#b83232" opacity="0.8"/>
+          <line x1="218" y1="270" x2="212" y2="264" stroke="#b83232" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+          <line x1="226" y1="270" x2="232" y2="264" stroke="#b83232" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+          <!-- hwang onomatopoeia -->
+          <text x="222" y="298" font-family="serif" font-size="8" fill="#c9922a" text-anchor="middle" font-weight="700" opacity="0.9">쾅!</text>
+        </g>
+
+        <!-- ── MINHWA WASH — subtle botanical, top-right ── -->
+        <g opacity="0.11" fill="#1c1a18">
+          <path d="M226 0 Q238 22 244 46 Q250 68 244 84" stroke="#1c1a18" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M230 18 Q241 12 245 22 Q236 25 230 18Z"/>
+          <path d="M235 36 Q246 30 248 42 Q239 44 235 36Z"/>
+          <path d="M240 56 Q250 52 250 63 Q242 64 240 56Z"/>
+          <!-- peony at tip -->
+          <ellipse cx="243" cy="86" rx="6" ry="8" transform="rotate(-10 243 86)"/>
+          <ellipse cx="243" cy="86" rx="6" ry="8" transform="rotate(62 243 86)"/>
+          <ellipse cx="243" cy="86" rx="6" ry="8" transform="rotate(134 243 86)"/>
+          <ellipse cx="243" cy="86" rx="6" ry="8" transform="rotate(206 243 86)"/>
+          <ellipse cx="243" cy="86" rx="6" ry="8" transform="rotate(278 243 86)"/>
+          <circle cx="243" cy="86" r="4"/>
+        </g>
+
+        <!-- ── OBANGSAEK DOTS — scattered, like paint drops ── -->
+        <circle cx="124" cy="188" r="4"   fill="#1c1a18" opacity="0.5"/>
+        <circle cx="134" cy="183" r="3.5" fill="#2a5070" opacity="0.6"/>
+        <circle cx="143" cy="190" r="3"   fill="#b83232" opacity="0.55"/>
+        <circle cx="129" cy="196" r="2.5" fill="#c9922a" opacity="0.55"/>
+
+        <!-- ── SEAL — bottom center ── -->
+        <rect x="114" y="284" width="32" height="28" rx="1" fill="#b83232" opacity="0.85"/>
+        <text x="130" y="301" font-family="serif" font-size="12" fill="#f4ede0" text-anchor="middle" font-weight="700">印</text>
+
+        <!-- Overall corner brackets -->
+        <path d="M8 8 L8 20 M8 8 L20 8"       stroke="#1c1a18" stroke-width="1.2" opacity="0.2"/>
+        <path d="M252 8 L252 20 M252 8 L240 8"   stroke="#1c1a18" stroke-width="1.2" opacity="0.2"/>
+        <path d="M8 312 L8 300 M8 312 L20 312"   stroke="#1c1a18" stroke-width="1.2" opacity="0.2"/>
+        <path d="M252 312 L252 300 M252 312 L240 312" stroke="#1c1a18" stroke-width="1.2" opacity="0.2"/>
+      </svg>
+    </div>
+    </div>
+
+    <!-- COMPONENT 04 — BotanicCorner: appear on hero hover, z:3 -->
+    <div class="botanic-corners" style="color:var(--ink)">
+      <div class="cc cc-tl"><div class="cc-dot"></div></div>
+      <div class="cc cc-tr"><div class="cc-dot"></div></div>
+      <div class="cc cc-bl"><div class="cc-dot"></div></div>
+      <div class="cc cc-br"><div class="cc-dot"></div></div>
+    </div>
+
+    <div class="hero-caption">TUI · Illustration · 2024</div>
+  </div>
+
+  <!-- RIGHT: text -->
+  <div class="hero-text">
+    <div class="hero-label">UX Designer & Illustrator</div>
+
+    <h1 class="hero-title">
+      Designing at the<br>
+      edge of <em>terminal</em><br>
+      and canvas.
+    </h1>
+
+    <p class="hero-desc">
+      I work at the intersection of TUI systems,
+      editorial illustration, and Korean visual heritage —
+      building lean, expressive tools for specialized
+      audiences that scale outward.
+    </p>
+
+    <!-- COMPONENT 05 — BotanicTag: botanical glyph prefix per category -->
+    <div class="hero-roles">
+      <span class="role-tag tui">
+        <span class="b-glyph"><svg width="10" height="13" viewBox="0 0 16 20"><use href="#b-bamboo" color="currentColor"/></svg></span>
+        TUI / UX
+      </span>
+      <span class="role-tag illus">
+        <span class="b-glyph"><svg width="11" height="11" viewBox="0 0 20 20"><use href="#b-peony" color="currentColor"/></svg></span>
+        Illustration
+      </span>
+      <span class="role-tag ux">
+        <span class="b-glyph"><svg width="11" height="11" viewBox="0 0 20 20"><use href="#b-lotus" color="currentColor"/></svg></span>
+        Research
+      </span>
+    </div>
+
+    <a href="#works" class="hero-cta">View works</a>
+  </div>
+
+  <!-- BOTTOM STRIP -->
+  <div class="hero-strip">
+    <div class="strip-item">
+      <span class="strip-num">01</span>
+      <span class="s-icon"><svg width="10" height="13" viewBox="0 0 16 20" color="var(--cheong)"><use href="#b-bamboo" color="currentColor"/></svg></span>
+      Designs
+    </div>
+    <div class="strip-item">
+      <span class="strip-num">02</span>
+      <span class="s-icon"><svg width="11" height="11" viewBox="0 0 20 20" color="var(--jeok)"><use href="#b-peony" color="currentColor"/></svg></span>
+      Illustrations
+    </div>
+    <div class="strip-item">
+      <span class="strip-num">03</span>
+      <span class="s-icon"><svg width="11" height="11" viewBox="0 0 20 20" color="var(--hwang)"><use href="#b-plum" color="currentColor"/></svg></span>
+      Miscellaneous
+    </div>
+  </div>
+
+</section>
+
+
+<!-- WORKS SECTION -->
+<section id="works">
+  <div class="section-header fade-in">
+    <div class="section-title">Works</div>
+    <div class="section-count" id="work-count">6 works</div>
+  </div>
+
+  <!-- TAG FILTER — botanical glyph on category-specific buttons -->
+  <div class="tag-bar fade-in">
+    <button class="tag-btn active" data-filter="all">All</button>
+    <button class="tag-btn design" data-filter="design">
+      <span class="b-glyph"><svg width="9" height="11" viewBox="0 0 16 20"><use href="#b-bamboo" color="currentColor"/></svg></span>Design
+    </button>
+    <button class="tag-btn illus" data-filter="illus">
+      <span class="b-glyph"><svg width="10" height="10" viewBox="0 0 20 20"><use href="#b-peony" color="currentColor"/></svg></span>Illustration
+    </button>
+    <button class="tag-btn misc" data-filter="misc">
+      <span class="b-glyph"><svg width="10" height="10" viewBox="0 0 20 20"><use href="#b-plum" color="currentColor"/></svg></span>Misc
+    </button>
+    <button class="tag-btn" data-filter="tui">TUI</button>
+    <button class="tag-btn" data-filter="research">
+      <span class="b-glyph"><svg width="10" height="10" viewBox="0 0 20 20"><use href="#b-lotus" color="currentColor"/></svg></span>Research
+    </button>
+    <button class="tag-btn" data-filter="korean">Korean</button>
+  </div>
+
+  <!-- MANHWA GRID -->
+  <div class="works-grid" id="works-grid">
+
+    <!-- Card 1 — Design/TUI -->
+    <div class="work-card fade-in" data-tags="design tui research">
+      <div class="card-bg">┌──────────────────┐
+│ ████████░░░░░░░ │
+│ ████████████░░ │
+│ ██████░░░░░░░░ │
+│ ────────────── │
+│ [nav]  [panel] │
+│ ▓▓▓▓▓  ░░░░░░ │
+│ ▓▓▓▓▓  ░░░░░░ │
+└──────────────────┘</div>
+      <!-- COMPONENT 01 — BotanicIcon -->
+      <div class="card-botanic-icon" style="color:var(--cheong)">
+        <svg width="16" height="20" viewBox="0 0 16 20"><use href="#b-bamboo" color="currentColor"/></svg>
+      </div>
+      <div class="card-corners" style="color:var(--cheong)">
+        <div class="cc cc-tl"><div class="cc-dot"></div></div>
+        <div class="cc cc-tr"><div class="cc-dot"></div></div>
+        <div class="cc cc-bl"><div class="cc-dot"></div></div>
+        <div class="cc cc-br"><div class="cc-dot"></div></div>
+      </div>
+      <div class="card-type">Design</div>
+      <div class="card-body">
+        <div class="card-num">001</div>
+        <div class="card-title">Terminal Dashboard UI</div>
+        <div class="card-tags">
+          <span class="card-tag"><span class="b-glyph"><svg width="7" height="9" viewBox="0 0 16 20"><use href="#b-bamboo" color="var(--ink)"/></svg></span>TUI</span>
+          <span class="card-tag"><span class="b-glyph"><svg width="8" height="8" viewBox="0 0 20 20"><use href="#b-lotus" color="var(--ink)"/></svg></span>Research</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </div>
+
+    <!-- Card 2 — Illustration -->
+    <div class="work-card fade-in" data-tags="illus korean">
+      <!-- SVG illustration: two hanbok figures + minhwa peony, obangsaek palette -->
+      <div class="card-illustration">
+        <svg viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <!-- Paper background -->
+          <rect width="300" height="400" fill="#ede3d0"/>
+
+          <!-- Minhwa peony branch — top left, ink wash style -->
+          <g opacity="0.18" fill="#1c1a18">
+            <path d="M0 60 Q40 30 70 50 Q100 70 110 100" stroke="#1c1a18" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M40 35 Q55 20 65 32 Q52 38 40 35Z"/>
+            <path d="M62 45 Q80 30 88 44 Q74 49 62 45Z"/>
+            <path d="M80 62 Q98 50 102 65 Q88 68 80 62Z"/>
+            <!-- peony head -->
+            <ellipse cx="112" cy="102" rx="10" ry="13" transform="rotate(-10 112 102)"/>
+            <ellipse cx="112" cy="102" rx="10" ry="13" transform="rotate(62 112 102)"/>
+            <ellipse cx="112" cy="102" rx="10" ry="13" transform="rotate(134 112 102)"/>
+            <ellipse cx="112" cy="102" rx="10" ry="13" transform="rotate(206 112 102)"/>
+            <ellipse cx="112" cy="102" rx="10" ry="13" transform="rotate(278 112 102)"/>
+            <circle cx="112" cy="102" r="7"/>
+          </g>
+
+          <!-- FIGURE 1 — left, 청 blue jeogori -->
+          <g transform="translate(52, 60)">
+            <!-- Head -->
+            <circle cx="44" cy="38" r="22" fill="#f4ede0" stroke="#1c1a18" stroke-width="1.2"/>
+            <!-- Hair -->
+            <path d="M22 32 Q22 12 44 10 Q66 12 66 32" fill="#1c1a18"/>
+            <!-- Hair bun -->
+            <ellipse cx="44" cy="10" rx="8" ry="5" fill="#1c1a18"/>
+            <rect x="41" y="6" width="6" height="8" rx="1" fill="#1c1a18"/>
+            <!-- Hairpin — hwang -->
+            <line x1="38" y1="7" x2="50" y2="7" stroke="#c9922a" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="50" cy="7" r="2" fill="#c9922a"/>
+            <!-- Eyes -->
+            <line x1="34" y1="35" x2="38" y2="35" stroke="#1c1a18" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="50" y1="35" x2="54" y2="35" stroke="#1c1a18" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M38 43 Q44 47 50 43" stroke="#1c1a18" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <!-- Neck -->
+            <rect x="37" y="58" width="14" height="14" rx="2" fill="#f4ede0" stroke="#1c1a18" stroke-width="1"/>
+            <!-- Jeogori — cheong blue -->
+            <path d="M20 100 Q15 80 24 68 Q33 58 44 56 Q55 58 64 68 Q73 80 68 100Z" fill="#2a5070" stroke="#1c1a18" stroke-width="1"/>
+            <!-- Collar V -->
+            <path d="M34 68 L44 82 L54 68" stroke="#f9f5ee" stroke-width="1.5" fill="none"/>
+            <!-- Sleeves -->
+            <path d="M20 100 Q0 95 -5 112 Q-8 126 6 130 Q16 133 22 118Z" fill="#2a5070" stroke="#1c1a18" stroke-width="1"/>
+            <path d="M68 100 Q88 95 93 112 Q96 126 82 130 Q72 133 66 118Z" fill="#2a5070" stroke="#1c1a18" stroke-width="1"/>
+            <!-- Cuffs — jeok red -->
+            <path d="M-5 112 Q-8 126 6 130" stroke="#b83232" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M93 112 Q96 126 82 130" stroke="#b83232" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Chima skirt — hwang yellow -->
+            <path d="M15 115 Q5 155 8 205 L80 205 Q83 155 73 115Z" fill="#c9922a" stroke="#1c1a18" stroke-width="1"/>
+            <!-- Skirt texture lines -->
+            <line x1="16" y1="135" x2="72" y2="135" stroke="#f4ede0" stroke-width="0.5" opacity="0.4"/>
+            <line x1="14" y1="155" x2="74" y2="155" stroke="#f4ede0" stroke-width="0.5" opacity="0.4"/>
+            <line x1="12" y1="175" x2="76" y2="175" stroke="#f4ede0" stroke-width="0.5" opacity="0.4"/>
+            <line x1="10" y1="195" x2="78" y2="195" stroke="#f4ede0" stroke-width="0.5" opacity="0.4"/>
+            <!-- Feet -->
+            <ellipse cx="28" cy="207" rx="12" ry="5" fill="#1c1a18" opacity="0.6"/>
+            <ellipse cx="58" cy="207" rx="12" ry="5" fill="#1c1a18" opacity="0.6"/>
+          </g>
+
+          <!-- FIGURE 2 — right, 적 red jeogori -->
+          <g transform="translate(162, 80)">
+            <!-- Head -->
+            <circle cx="44" cy="38" r="22" fill="#f4ede0" stroke="#1c1a18" stroke-width="1.2"/>
+            <!-- Hair -->
+            <path d="M22 32 Q22 12 44 10 Q66 12 66 32" fill="#1c1a18"/>
+            <ellipse cx="44" cy="10" rx="8" ry="5" fill="#1c1a18"/>
+            <rect x="41" y="6" width="6" height="8" rx="1" fill="#1c1a18"/>
+            <!-- Hairpin — cheong blue -->
+            <line x1="38" y1="7" x2="50" y2="7" stroke="#2a5070" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="38" cy="7" r="2" fill="#2a5070"/>
+            <!-- Eyes -->
+            <line x1="34" y1="35" x2="38" y2="35" stroke="#1c1a18" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="50" y1="35" x2="54" y2="35" stroke="#1c1a18" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M38 43 Q44 47 50 43" stroke="#1c1a18" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <!-- Neck -->
+            <rect x="37" y="58" width="14" height="14" rx="2" fill="#f4ede0" stroke="#1c1a18" stroke-width="1"/>
+            <!-- Jeogori — jeok red -->
+            <path d="M20 100 Q15 80 24 68 Q33 58 44 56 Q55 58 64 68 Q73 80 68 100Z" fill="#b83232" stroke="#1c1a18" stroke-width="1"/>
+            <!-- Collar V -->
+            <path d="M34 68 L44 82 L54 68" stroke="#f9f5ee" stroke-width="1.5" fill="none"/>
+            <!-- Sleeves -->
+            <path d="M20 100 Q0 95 -5 112 Q-8 126 6 130 Q16 133 22 118Z" fill="#b83232" stroke="#1c1a18" stroke-width="1"/>
+            <path d="M68 100 Q88 95 93 112 Q96 126 82 130 Q72 133 66 118Z" fill="#b83232" stroke="#1c1a18" stroke-width="1"/>
+            <!-- Cuffs — cheong -->
+            <path d="M-5 112 Q-8 126 6 130" stroke="#2a5070" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M93 112 Q96 126 82 130" stroke="#2a5070" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Chima skirt — cheong -->
+            <path d="M15 115 Q5 155 8 195 L80 195 Q83 155 73 115Z" fill="#2a5070" stroke="#1c1a18" stroke-width="1"/>
+            <line x1="16" y1="135" x2="72" y2="135" stroke="#f4ede0" stroke-width="0.5" opacity="0.4"/>
+            <line x1="14" y1="155" x2="74" y2="155" stroke="#f4ede0" stroke-width="0.5" opacity="0.4"/>
+            <line x1="12" y1="175" x2="76" y2="175" stroke="#f4ede0" stroke-width="0.5" opacity="0.4"/>
+            <!-- Feet -->
+            <ellipse cx="28" cy="197" rx="12" ry="5" fill="#1c1a18" opacity="0.6"/>
+            <ellipse cx="58" cy="197" rx="12" ry="5" fill="#1c1a18" opacity="0.6"/>
+          </g>
+
+          <!-- Ground shadow line -->
+          <line x1="30" y1="332" x2="270" y2="332" stroke="#1c1a18" stroke-width="0.5" opacity="0.2"/>
+
+          <!-- Obangsaek dot row — decorative bottom -->
+          <circle cx="108" cy="352" r="5" fill="#1c1a18"/>
+          <circle cx="124" cy="352" r="5" fill="#f9f5ee" stroke="#1c1a18" stroke-width="1"/>
+          <circle cx="140" cy="352" r="5" fill="#2a5070"/>
+          <circle cx="156" cy="352" r="5" fill="#b83232"/>
+          <circle cx="172" cy="352" r="5" fill="#c9922a"/>
+
+          <!-- Bottom seal -->
+          <rect x="128" y="368" width="44" height="24" rx="1" fill="#b83232" opacity="0.85"/>
+          <text x="150" y="384" font-family="serif" font-size="11" fill="#f9f5ee" text-anchor="middle" font-weight="700" letter-spacing="2">系列</text>
+
+          <!-- Corner brackets -->
+          <path d="M10 10 L10 26 M10 10 L26 10" stroke="#1c1a18" stroke-width="1.2" opacity="0.25"/>
+          <path d="M290 10 L290 26 M290 10 L274 10" stroke="#1c1a18" stroke-width="1.2" opacity="0.25"/>
+          <path d="M10 390 L10 374 M10 390 L26 390" stroke="#1c1a18" stroke-width="1.2" opacity="0.25"/>
+          <path d="M290 390 L290 374 M290 390 L274 390" stroke="#1c1a18" stroke-width="1.2" opacity="0.25"/>
+        </svg>
+      </div>
+      <div class="card-botanic-icon" style="color:var(--jeok)">
+        <svg width="20" height="20" viewBox="0 0 20 20"><use href="#b-peony" color="currentColor"/></svg>
+      </div>
+      <div class="card-corners" style="color:var(--jeok)">
+        <div class="cc cc-tl"><div class="cc-dot"></div></div>
+        <div class="cc cc-tr"><div class="cc-dot"></div></div>
+        <div class="cc cc-bl"><div class="cc-dot"></div></div>
+        <div class="cc cc-br"><div class="cc-dot"></div></div>
+      </div>
+      <div class="card-type">Illustration</div>
+      <div class="card-body">
+        <div class="card-num">002</div>
+        <div class="card-title">Obangsaek Character Series</div>
+        <div class="card-tags">
+          <span class="card-tag"><span class="b-glyph"><svg width="8" height="8" viewBox="0 0 20 20"><use href="#b-peony" color="var(--ink)"/></svg></span>Korean</span>
+          <span class="card-tag">Series</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </div>
+
+    <!-- Card 3 — Research -->
+    <div class="work-card fade-in" data-tags="design research">
+      <div class="card-bg">USER JOURNEY MAP
+━━━━━━━━━━━━━━━
+Phase 1 → 2 → 3
+  ─    ─    ─
+Pain: ████░░░
+Oppo: ░░░████</div>
+      <div class="card-botanic-icon" style="color:var(--hwang)">
+        <svg width="20" height="20" viewBox="0 0 20 20"><use href="#b-lotus" color="currentColor"/></svg>
+      </div>
+      <div class="card-corners" style="color:var(--hwang)">
+        <div class="cc cc-tl"><div class="cc-dot"></div></div>
+        <div class="cc cc-tr"><div class="cc-dot"></div></div>
+        <div class="cc cc-bl"><div class="cc-dot"></div></div>
+        <div class="cc cc-br"><div class="cc-dot"></div></div>
+      </div>
+      <div class="card-type">Design</div>
+      <div class="card-body">
+        <div class="card-num">003</div>
+        <div class="card-title">UX Research Toolkit</div>
+        <div class="card-tags">
+          <span class="card-tag"><span class="b-glyph"><svg width="8" height="8" viewBox="0 0 20 20"><use href="#b-lotus" color="var(--ink)"/></svg></span>Research</span>
+          <span class="card-tag"><span class="b-glyph"><svg width="7" height="9" viewBox="0 0 16 20"><use href="#b-bamboo" color="var(--ink)"/></svg></span>TUI</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </div>
+
+    <!-- Card 4 — Illustration/Misc -->
+    <div class="work-card fade-in" data-tags="illus korean misc">
+      <!-- SVG: obangsaek colour study spread — zine-style flat layout -->
+      <div class="card-illustration">
+        <svg viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="300" height="400" fill="#f4ede0"/>
+
+          <!-- Title area top -->
+          <rect x="0" y="0" width="300" height="48" fill="#1c1a18"/>
+          <text x="150" y="20" font-family="'DM Mono', monospace" font-size="8" fill="#f4ede0" text-anchor="middle" letter-spacing="3" opacity="0.7">COLOUR + MEANING</text>
+          <text x="150" y="38" font-family="serif" font-size="14" fill="#f4ede0" text-anchor="middle" letter-spacing="1" font-weight="400">오방색 研究</text>
+
+          <!-- 5 colour blocks — full-width strips -->
+          <!-- 흑 Black -->
+          <rect x="20" y="64" width="260" height="52" fill="#1c1a18"/>
+          <text x="36" y="86" font-family="serif" font-size="22" fill="#f4ede0" opacity="0.9">黑</text>
+          <text x="36" y="104" font-family="'DM Mono', monospace" font-size="7" fill="#f4ede0" opacity="0.5" letter-spacing="2">HEUK — NORTH — WATER — WINTER</text>
+          <rect x="240" y="72" width="28" height="28" fill="#f4ede0" opacity="0.08"/>
+
+          <!-- 백 White -->
+          <rect x="20" y="124" width="260" height="52" fill="#e8dfc8" stroke="#1c1a18" stroke-width="0.5"/>
+          <text x="36" y="146" font-family="serif" font-size="22" fill="#1c1a18" opacity="0.85">白</text>
+          <text x="36" y="164" font-family="'DM Mono', monospace" font-size="7" fill="#1c1a18" opacity="0.45" letter-spacing="2">BAEK — WEST — METAL — AUTUMN</text>
+          <rect x="240" y="132" width="28" height="28" fill="#1c1a18" opacity="0.07"/>
+
+          <!-- 청 Blue -->
+          <rect x="20" y="184" width="260" height="52" fill="#2a5070"/>
+          <text x="36" y="206" font-family="serif" font-size="22" fill="#f4ede0" opacity="0.9">靑</text>
+          <text x="36" y="224" font-family="'DM Mono', monospace" font-size="7" fill="#f4ede0" opacity="0.55" letter-spacing="2">CHEONG — EAST — WOOD — SPRING</text>
+          <rect x="240" y="192" width="28" height="28" fill="#f4ede0" opacity="0.1"/>
+
+          <!-- 적 Red -->
+          <rect x="20" y="244" width="260" height="52" fill="#b83232"/>
+          <text x="36" y="266" font-family="serif" font-size="22" fill="#f4ede0" opacity="0.9">赤</text>
+          <text x="36" y="284" font-family="'DM Mono', monospace" font-size="7" fill="#f4ede0" opacity="0.55" letter-spacing="2">JEOK — SOUTH — FIRE — SUMMER</text>
+          <rect x="240" y="252" width="28" height="28" fill="#f4ede0" opacity="0.1"/>
+
+          <!-- 황 Yellow -->
+          <rect x="20" y="304" width="260" height="52" fill="#c9922a"/>
+          <text x="36" y="326" font-family="serif" font-size="22" fill="#f4ede0" opacity="0.9">黃</text>
+          <text x="36" y="344" font-family="'DM Mono', monospace" font-size="7" fill="#f4ede0" opacity="0.55" letter-spacing="2">HWANG — CENTRE — EARTH</text>
+          <rect x="240" y="312" width="28" height="28" fill="#f4ede0" opacity="0.1"/>
+
+          <!-- Bottom rule + page number -->
+          <line x1="20" y1="370" x2="280" y2="370" stroke="#1c1a18" stroke-width="0.5" opacity="0.3"/>
+          <text x="150" y="386" font-family="'DM Mono', monospace" font-size="8" fill="#1c1a18" text-anchor="middle" opacity="0.3" letter-spacing="2">p. 01</text>
+
+          <!-- Corner brackets -->
+          <path d="M8 8 L8 22 M8 8 L22 8"     stroke="#1c1a18" stroke-width="1.2" opacity="0.2"/>
+          <path d="M292 8 L292 22 M292 8 L278 8" stroke="#1c1a18" stroke-width="1.2" opacity="0.2"/>
+          <path d="M8 392 L8 378 M8 392 L22 392"     stroke="#1c1a18" stroke-width="1.2" opacity="0.2"/>
+          <path d="M292 392 L292 378 M292 392 L278 392" stroke="#1c1a18" stroke-width="1.2" opacity="0.2"/>
+        </svg>
+      </div>
+      <div class="card-botanic-icon" style="color:var(--jeok)">
+        <svg width="20" height="20" viewBox="0 0 20 20"><use href="#b-peony" color="currentColor"/></svg>
+      </div>
+      <div class="card-corners" style="color:var(--jeok)">
+        <div class="cc cc-tl"><div class="cc-dot"></div></div>
+        <div class="cc cc-tr"><div class="cc-dot"></div></div>
+        <div class="cc cc-bl"><div class="cc-dot"></div></div>
+        <div class="cc cc-br"><div class="cc-dot"></div></div>
+      </div>
+      <div class="card-type">Illustration</div>
+      <div class="card-body">
+        <div class="card-num">004</div>
+        <div class="card-title">Colour & Meaning Zine</div>
+        <div class="card-tags">
+          <span class="card-tag"><span class="b-glyph"><svg width="8" height="8" viewBox="0 0 20 20"><use href="#b-peony" color="var(--ink)"/></svg></span>Korean</span>
+          <span class="card-tag">Print</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </div>
+
+    <!-- Card 5 — Misc -->
+    <div class="work-card fade-in" data-tags="misc tui">
+      <div class="card-bg">$ portfolio --list
+> scanning files...
+  [■■■■■■░░] 73%
+  found: 24 items
+  sorted: by-date
+  output: grid view
+> done ✓</div>
+      <div class="card-botanic-icon" style="color:var(--hwang)">
+        <svg width="20" height="20" viewBox="0 0 20 20"><use href="#b-plum" color="currentColor"/></svg>
+      </div>
+      <div class="card-corners" style="color:var(--hwang)">
+        <div class="cc cc-tl"><div class="cc-dot"></div></div>
+        <div class="cc cc-tr"><div class="cc-dot"></div></div>
+        <div class="cc cc-bl"><div class="cc-dot"></div></div>
+        <div class="cc cc-br"><div class="cc-dot"></div></div>
+      </div>
+      <div class="card-type">Misc</div>
+      <div class="card-body">
+        <div class="card-num">005</div>
+        <div class="card-title">CLI Portfolio Generator</div>
+        <div class="card-tags">
+          <span class="card-tag"><span class="b-glyph"><svg width="7" height="9" viewBox="0 0 16 20"><use href="#b-bamboo" color="var(--ink)"/></svg></span>TUI</span>
+          <span class="card-tag"><span class="b-glyph"><svg width="8" height="8" viewBox="0 0 20 20"><use href="#b-plum" color="var(--ink)"/></svg></span>Tool</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </div>
+
+    <!-- Card 6 — Illustration/Design -->
+    <div class="work-card fade-in" data-tags="illus design korean">
+      <!-- SVG: manhwa page layout — 3-panel composition with figures and action -->
+      <div class="card-illustration">
+        <svg viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="300" height="400" fill="#f4ede0"/>
+
+          <!-- Panel borders (manhwa gutter = 3px) -->
+
+          <!-- PANEL 1 — top full width: wide establishing shot -->
+          <rect x="8" y="8" width="284" height="130" fill="#ede3d0" stroke="#1c1a18" stroke-width="1.5"/>
+          <!-- Sky gradient suggestion — cheong wash -->
+          <rect x="8" y="8" width="284" height="60" fill="#2a5070" opacity="0.12"/>
+          <!-- Ground line -->
+          <line x1="8" y1="110" x2="292" y2="110" stroke="#1c1a18" stroke-width="0.8" opacity="0.3"/>
+          <!-- Distant mountains — silhouette -->
+          <path d="M8 90 Q50 55 90 78 Q130 55 170 72 Q210 48 250 68 Q270 58 292 72 L292 110 L8 110Z" fill="#1c1a18" opacity="0.08"/>
+          <!-- Small figure walking — panel 1 -->
+          <g transform="translate(130, 68)" opacity="0.7">
+            <circle cx="10" cy="8" r="6" fill="#1c1a18" opacity="0.6"/>
+            <rect x="6" y="14" width="8" height="14" rx="2" fill="#2a5070" opacity="0.7"/>
+            <line x1="6" y1="16" x2="2" y2="26" stroke="#1c1a18" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+            <line x1="14" y1="16" x2="18" y2="24" stroke="#1c1a18" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+            <line x1="8" y1="28" x2="5" y2="40" stroke="#1c1a18" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+            <line x1="12" y1="28" x2="15" y2="40" stroke="#1c1a18" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+          </g>
+          <!-- Panel 1 caption box -->
+          <rect x="14" y="118" width="80" height="13" fill="#1c1a18" opacity="0.75"/>
+          <text x="20" y="128" font-family="'DM Mono', monospace" font-size="7" fill="#f4ede0" letter-spacing="1">도시의 아침</text>
+
+          <!-- PANEL 2 — bottom-left: portrait, close-up face -->
+          <rect x="8" y="149" width="152" height="243" fill="#f4ede0" stroke="#1c1a18" stroke-width="1.5"/>
+          <!-- Face — close-up, takes up most of panel -->
+          <g transform="translate(22, 162)">
+            <!-- Head large -->
+            <circle cx="62" cy="62" r="52" fill="#f4ede0" stroke="#1c1a18" stroke-width="1.2"/>
+            <!-- Hair -->
+            <path d="M10 52 Q10 8 62 4 Q114 8 114 52" fill="#1c1a18"/>
+            <!-- Hair wisps -->
+            <path d="M10 52 Q5 42 8 34" stroke="#1c1a18" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <path d="M114 52 Q119 42 116 34" stroke="#1c1a18" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <!-- Eyes — expressive, wider -->
+            <ellipse cx="44" cy="56" rx="9" ry="7" fill="white" stroke="#1c1a18" stroke-width="1"/>
+            <circle cx="46" cy="56" r="5" fill="#1c1a18"/>
+            <circle cx="48" cy="54" r="1.5" fill="white"/>
+            <ellipse cx="80" cy="56" rx="9" ry="7" fill="white" stroke="#1c1a18" stroke-width="1"/>
+            <circle cx="82" cy="56" r="5" fill="#1c1a18"/>
+            <circle cx="84" cy="54" r="1.5" fill="white"/>
+            <!-- Brows -->
+            <path d="M36 46 Q44 43 52 46" stroke="#1c1a18" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M72 46 Q80 43 88 46" stroke="#1c1a18" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Nose -->
+            <path d="M60 62 Q58 72 54 75 Q62 78 70 75 Q66 72 64 62" stroke="#1c1a18" stroke-width="0.8" fill="none"/>
+            <!-- Mouth -->
+            <path d="M50 88 Q62 96 74 88" stroke="#1c1a18" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <!-- Blush — jeok -->
+            <ellipse cx="32" cy="72" rx="10" ry="6" fill="#b83232" opacity="0.12"/>
+            <ellipse cx="92" cy="72" rx="10" ry="6" fill="#b83232" opacity="0.12"/>
+            <!-- Jeogori collar peek -->
+            <path d="M20 112 Q40 105 62 110 Q84 105 104 112" stroke="#2a5070" stroke-width="2" fill="none"/>
+            <path d="M44 108 L62 120 L80 108" stroke="#f4ede0" stroke-width="1.2" fill="none"/>
+          </g>
+          <!-- Speech bubble -->
+          <rect x="16" y="330" width="110" height="28" rx="4" fill="white" stroke="#1c1a18" stroke-width="1"/>
+          <path d="M50 358 L44 370 L60 358Z" fill="white" stroke="#1c1a18" stroke-width="1"/>
+          <text x="71" y="348" font-family="serif" font-size="10" fill="#1c1a18" text-anchor="middle">봄이 왔어...</text>
+          <text x="71" y="362" font-family="'DM Mono', monospace" font-size="7" fill="#1c1a18" text-anchor="middle" opacity="0.5">spring has come</text>
+
+          <!-- PANEL 3 — bottom-right: action panel, diagonal energy lines -->
+          <rect x="168" y="149" width="124" height="243" fill="#1c1a18" stroke="#1c1a18" stroke-width="1.5"/>
+          <!-- Speed/action lines radiating from center -->
+          <g stroke="#f4ede0" stroke-width="0.6" opacity="0.15">
+            <line x1="230" y1="270" x2="168" y2="149"/>
+            <line x1="230" y1="270" x2="200" y2="149"/>
+            <line x1="230" y1="270" x2="230" y2="149"/>
+            <line x1="230" y1="270" x2="260" y2="149"/>
+            <line x1="230" y1="270" x2="292" y2="149"/>
+            <line x1="230" y1="270" x2="292" y2="180"/>
+            <line x1="230" y1="270" x2="292" y2="220"/>
+            <line x1="230" y1="270" x2="292" y2="270"/>
+            <line x1="230" y1="270" x2="292" y2="320"/>
+            <line x1="230" y1="270" x2="292" y2="370"/>
+            <line x1="230" y1="270" x2="292" y2="392"/>
+            <line x1="230" y1="270" x2="260" y2="392"/>
+            <line x1="230" y1="270" x2="230" y2="392"/>
+            <line x1="230" y1="270" x2="200" y2="392"/>
+            <line x1="230" y1="270" x2="168" y2="392"/>
+            <line x1="230" y1="270" x2="168" y2="360"/>
+            <line x1="230" y1="270" x2="168" y2="310"/>
+            <line x1="230" y1="270" x2="168" y2="210"/>
+          </g>
+          <!-- Central figure — dynamic pose, jeok -->
+          <g transform="translate(196, 198)">
+            <circle cx="34" cy="14" r="14" fill="#f4ede0" stroke="#1c1a18" stroke-width="1"/>
+            <path d="M20 10 Q20 2 34 0 Q48 2 48 10" fill="#1c1a18"/>
+            <line x1="28" y1="12" x2="32" y2="12" stroke="#1c1a18" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="36" y1="12" x2="40" y2="12" stroke="#1c1a18" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Body — jeok -->
+            <path d="M20 40 Q18 28 24 22 Q30 18 34 18 Q38 18 44 22 Q50 28 48 40Z" fill="#b83232"/>
+            <!-- Arms dynamic — raised -->
+            <path d="M20 40 Q8 32 4 20 Q2 12 8 10 Q14 8 18 18Z" fill="#b83232"/>
+            <path d="M48 40 Q60 30 66 18 Q68 10 62 8 Q56 7 52 18Z" fill="#b83232"/>
+            <!-- Legs apart -->
+            <path d="M22 52 Q16 68 14 85" stroke="#1c1a18" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <path d="M46 52 Q52 68 54 85" stroke="#1c1a18" stroke-width="6" stroke-linecap="round" fill="none"/>
+          </g>
+          <!-- Hwang onomatopoeia -->
+          <text x="230" y="362" font-family="serif" font-size="20" fill="#c9922a" text-anchor="middle" font-weight="700" opacity="0.9">쾅!</text>
+          <text x="230" y="380" font-family="'DM Mono', monospace" font-size="7" fill="#f4ede0" text-anchor="middle" opacity="0.4" letter-spacing="1">BOOM</text>
+
+          <!-- Corner brackets -->
+          <path d="M8 8 L8 22 M8 8 L22 8"     stroke="#1c1a18" stroke-width="1.2" opacity="0.3"/>
+          <path d="M292 8 L292 22 M292 8 L278 8" stroke="#1c1a18" stroke-width="1.2" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="card-botanic-icon" style="color:var(--jeok)">
+        <svg width="20" height="20" viewBox="0 0 20 20"><use href="#b-peony" color="currentColor"/></svg>
+      </div>
+      <div class="card-corners" style="color:var(--jeok)">
+        <div class="cc cc-tl"><div class="cc-dot"></div></div>
+        <div class="cc cc-tr"><div class="cc-dot"></div></div>
+        <div class="cc cc-bl"><div class="cc-dot"></div></div>
+        <div class="cc cc-br"><div class="cc-dot"></div></div>
+      </div>
+      <div class="card-type">Illustration</div>
+      <div class="card-body">
+        <div class="card-num">006</div>
+        <div class="card-title">Manhwa Grid System</div>
+        <div class="card-tags">
+          <span class="card-tag"><span class="b-glyph"><svg width="8" height="8" viewBox="0 0 20 20"><use href="#b-peony" color="var(--ink)"/></svg></span>Korean</span>
+          <span class="card-tag">Design</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </div>
+
+    <!-- Placeholder — same bg as cards, ASCII only -->
+    <div class="card-placeholder">
+      <pre>
+  . . . . . . . . . . .
+  .                   .
+  .   ┌─────────────┐ .
+  .   │             │ .
+  .   │  c o m i n g│ .
+  .   │             │ .
+  .   │    s o o n  │ .
+  .   │             │ .
+  .   │    ░░░░░    │ .
+  .   │   ░     ░   │ .
+  .   │  ░  [ ] ░   │ .
+  .   │   ░     ░   │ .
+  .   │    ░░░░░    │ .
+  .   │             │ .
+  .   └─────────────┘ .
+  .                   .
+  . . . . . . . . . . .</pre>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- COMPONENT 02 — BotanicDivider: plum nodes on section boundary -->
+<div class="botanic-divider" role="separator" aria-hidden="true">
+  <div class="divider-nodes">
+    <div class="divider-node"><svg width="12" height="12" viewBox="0 0 20 20" color="var(--ink)"><use href="#b-plum" color="currentColor"/></svg></div>
+    <div class="divider-node"><svg width="12" height="12" viewBox="0 0 20 20" color="var(--ink)"><use href="#b-plum" color="currentColor"/></svg></div>
+    <div class="divider-node"><svg width="12" height="12" viewBox="0 0 20 20" color="var(--ink)"><use href="#b-plum" color="currentColor"/></svg></div>
+  </div>
+</div>
+
+
+<!-- ABOUT SECTION -->
+<section id="about" class="about-section fade-in">
+  <div class="about-left">
+    <!-- COMPONENT 04 — BotanicCorner: static accent on about panel -->
+    <svg class="about-corner-accent" width="32" height="32" viewBox="0 0 24 24" color="var(--cheong)">
+      <use href="#b-corner-tl" color="currentColor"/>
+    </svg>
+    <div class="about-label">About</div>
+    <div class="about-display">Lean tools,<br>expressive<br>craft.</div>
+    <pre class="about-tui-block">┌─ identity ──┐
+│ Seoul → CA  │
+│ TUI focus   │
+│ Ink + code  │
+└─────────────┘</pre>
+  </div>
+  <div class="about-right">
+    <div class="about-title">Where the terminal<br>meets the brush.</div>
+    <p class="about-body">
+      Based in Canada, rooted in Seoul. I design terminal interfaces and
+      illustration systems that carry the clarity of Korean craft —
+      purposeful, minimal, with meaning in every element.<br><br>
+      My work applies TUI philosophy beyond the terminal: strict grid,
+      deliberate whitespace, nothing superfluous. The obangsaek palette
+      grounds everything I make in a colour language older than screens.
+    </p>
+    <div class="about-skills">
+      <span class="skill-item">Figma</span>
+      <span class="skill-item">TUI Design</span>
+      <span class="skill-item">Illustration</span>
+      <span class="skill-item">UX Research</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2024 — All works reserved</div>
+  <div class="footer-obangsaek" title="오방색">
+    <div class="ob-dot ob-1"></div>
+    <div class="ob-dot ob-2"></div>
+    <div class="ob-dot ob-3"></div>
+    <div class="ob-dot ob-4"></div>
+    <div class="ob-dot ob-5"></div>
+  </div>
+  <div><a href="#">↑ Back to top</a></div>
+</footer>
+
+
+<script>
+  // ── Tag filter ──────────────────────────────────────────
+  const btns    = document.querySelectorAll('.tag-btn');
+  const cards   = document.querySelectorAll('.work-card');
+  const countEl = document.getElementById('work-count');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      let visible = 0;
+      cards.forEach(card => {
+        const show = filter === 'all' || card.dataset.tags.split(' ').includes(filter);
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      countEl.textContent = `${visible} work${visible !== 1 ? 's' : ''}`;
+    });
+  });
+
+  // ── Scroll fade-in ──────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        if (e.target.classList.contains('work-card')) {
+          const vis = [...document.querySelectorAll('.work-card:not(.hidden)')];
+          e.target.style.transitionDelay = `${vis.indexOf(e.target) * 0.06}s`;
+        }
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── Hero parallax — each card shifts slightly on mousemove ──────────
+  const heroVisual = document.querySelector('.hero-visual');
+  const artCards   = document.querySelectorAll('.hero-art-card');
+  const depths     = [0.8, 1.4, 0.6, 1.0]; // parallax depth per card
+
+  heroVisual.addEventListener('mousemove', e => {
+    const r  = heroVisual.getBoundingClientRect();
+    const mx = (e.clientX - r.left) / r.width  - 0.5;
+    const my = (e.clientY - r.top)  / r.height - 0.5;
+    artCards.forEach((card, i) => {
+      const d = depths[i] || 1;
+      const base = card.style.transform.replace(/translate\([^)]+\)\s*/g, '').trim();
+      card.style.transform = `${base} translate(${mx * 6 * d}px, ${my * 5 * d}px)`;
+    });
+  });
+  heroVisual.addEventListener('mouseleave', () => {
+    artCards.forEach((card, i) => {
+      // restore only the rotation, strip translate
+      const rot = card.style.transform.match(/rotate\([^)]+\)/);
+      card.style.transform = rot ? rot[0] : '';
+    });
+  });
+</script>
+</body>
+</html>
