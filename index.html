@@ -260,7 +260,7 @@
             margin-top: var(--header-h);
             height: calc(100svh - var(--header-h));
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 60fr 40fr;
             grid-template-rows: 1fr;
             border-bottom: 1px solid var(--color-border);
         }
@@ -268,11 +268,18 @@
         .hero-visuals {
             border-right: 1px solid var(--color-border);
             padding: clamp(var(--spacing-sm), 3vh, var(--spacing-lg));
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            overflow-y: auto;
+        }
+        .hero-visuals-inner {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
             gap: clamp(6px, 1vh, var(--spacing-sm));
-            overflow-y: auto;
+            width: min(100%, 800px);
+            flex: 1;
         }
 
         .hero-art-card {
@@ -285,6 +292,7 @@
             padding: 8px;
             min-height: 0;
             overflow: hidden;
+            will-change: transform;
         }
 
         /* expand/collapse 애니메이션 — JS가 transition을 직접 제어 */
@@ -574,7 +582,7 @@
         }
 
         .hero-content {
-            padding: clamp(var(--spacing-md), 4vh, var(--spacing-lg)) clamp(var(--spacing-md), 4vw, var(--spacing-xl));
+            padding: clamp(var(--spacing-md), 4vh, var(--spacing-lg)) clamp(var(--spacing-md), 4vw, var(--spacing-xl)) clamp(var(--spacing-md), 4vh, var(--spacing-lg)) clamp(var(--spacing-sm), 2vw, var(--spacing-md));
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -1387,11 +1395,11 @@
 
         /* Micro-pass: slightly prioritize image column for balance */
         .work-detail-modal .modal-body > .carousel-section {
-            flex: 52;
+            flex: 70;
         }
 
         .work-detail-modal .modal-body > .info-section {
-            flex: 48;
+            flex: 30;
         }
 
         .work-detail-modal .carousel-section,
@@ -1429,6 +1437,64 @@
             align-items: center;
             justify-content: center;
             min-height: 0;
+            position: relative;
+        }
+
+        /* TUI arrows beside thumbnail carousel */
+        .work-detail-modal .carousel-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 0 0 auto;
+            max-height: 90px;
+            padding: 0;
+            border: 1px solid var(--color-border);
+            border-top: none;
+        }
+
+        .work-detail-modal .carousel-nav-btn {
+            font-family: var(--font-family-body);
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            background: none;
+            border: none;
+            padding: 8px 10px;
+            cursor: pointer;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .work-detail-modal .carousel-nav-btn:hover {
+            color: var(--color-accent-2);
+        }
+
+        .work-detail-modal .carousel-key-hint {
+            font-family: var(--font-family-body);
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            background: none;
+            border: none;
+            padding: 2px 8px;
+            margin-left: auto;
+            margin-right: 0;
+            opacity: 0.9;
+            white-space: nowrap;
+            transition: opacity 0.15s ease;
+        }
+        .work-detail-modal .carousel-key-hint .tui-btn-key {
+            color: var(--color-accent-1);
+            font-weight: bold;
+        }
+        .work-detail-modal .carousel-key-hint .hint-nav {
+            color: var(--color-text-secondary);
+            font-weight: 400;
+            font-size: 0.9em;
+        }
+        .work-detail-modal .carousel-key-hint.in-zone {
+            opacity: 0;
         }
 
         .carousel-main img {
@@ -1459,7 +1525,7 @@
 
         .work-detail-modal .carousel-thumbs {
             padding: 0;
-            flex: 0 0 auto;
+            flex: 0 1 auto;
             max-height: 90px;
             overflow-y: hidden;
             justify-content: center;
@@ -1605,6 +1671,7 @@
                 <div class="hero-art-card-overlay" id="cardOverlay"></div>
                 
                 <!-- Card 1: Design / TUI -->
+                <div class="hero-visuals-inner">
                 <div class="hero-art-card" data-index="a">
                     <div class="tui-frame">
                         <div class="tui-top-bar">
@@ -1700,6 +1767,7 @@
                             <span class="tui-scroll-indicator">↑↓ scroll</span>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
 
@@ -2361,10 +2429,11 @@
             const ESC_BUFFER = 32;
             const PROJECT_ESC_BUFFER = 56;
             document.addEventListener('mousemove', (e) => {
-                ['.tui-close-btn', '.tui-open-btn'].forEach(selector => {
+                ['.tui-close-btn', '.tui-open-btn', '.carousel-key-hint'].forEach(selector => {
                     document.querySelectorAll(selector).forEach(btn => {
                         const inHeroExpanded = !!btn.closest('.hero-art-card.expanded');
                         const inActiveWorkModal = !!btn.closest('.work-detail-modal.active');
+                        const isHint = btn.classList.contains('carousel-key-hint');
 
                         if (!inHeroExpanded && !inActiveWorkModal) {
                             btn.classList.remove('in-zone');
@@ -2372,13 +2441,35 @@
                             return;
                         }
 
-                        const buffer = inActiveWorkModal ? PROJECT_ESC_BUFFER : ESC_BUFFER;
-                        const rect = btn.getBoundingClientRect();
-                        const inZone =
-                            e.clientX >= rect.left   - buffer &&
-                            e.clientX <= rect.right  + buffer &&
-                            e.clientY >= rect.top    - buffer &&
-                            e.clientY <= rect.bottom + buffer;
+                        const isCloseBtn = btn.classList.contains('tui-close-btn');
+                        let inZone;
+                        if (isHint) {
+                            // hint uses normal buffer on all sides
+                            const buffer = inActiveWorkModal ? PROJECT_ESC_BUFFER : ESC_BUFFER;
+                            const rect = btn.getBoundingClientRect();
+                            inZone =
+                                e.clientX >= rect.left   - buffer &&
+                                e.clientX <= rect.right  + buffer &&
+                                e.clientY >= rect.top    - buffer &&
+                                e.clientY <= rect.bottom + buffer;
+                        } else if (isCloseBtn && inActiveWorkModal) {
+                            // [esc] in work modal: no left buffer (hint sits there),
+                            // normal buffer on other 3 sides — prevents bleed-over from hint
+                            const rect = btn.getBoundingClientRect();
+                            inZone =
+                                e.clientX >= rect.left   &&
+                                e.clientX <= rect.right  + PROJECT_ESC_BUFFER &&
+                                e.clientY >= rect.top    - PROJECT_ESC_BUFFER &&
+                                e.clientY <= rect.bottom + PROJECT_ESC_BUFFER;
+                        } else {
+                            const buffer = inActiveWorkModal ? PROJECT_ESC_BUFFER : ESC_BUFFER;
+                            const rect = btn.getBoundingClientRect();
+                            inZone =
+                                e.clientX >= rect.left   - buffer &&
+                                e.clientX <= rect.right  + buffer &&
+                                e.clientY >= rect.top    - buffer &&
+                                e.clientY <= rect.bottom + buffer;
+                        }
 
                         if (inZone) {
                             btn.classList.add('in-zone');
@@ -2401,6 +2492,58 @@
                     forwardingClick = false;
                 }
             });
+
+            // ── Hero card mouse-move parallax — depth layers ──
+            const PARALLAX_CARDS = [
+                { selector: '[data-index="a"]', depth: 1.0 },
+                { selector: '[data-index="s"]', depth: 0.6 },
+                { selector: '[data-index="d"]', depth: 0.4 },
+                { selector: '[data-index="f"]', depth: 0.7 },
+            ];
+            const PARALLAX_MAX = 6; // px
+            const PARALLAX_LERP = 0.15;
+
+            const px = { targetX: 0, targetY: 0, currentX: 0, currentY: 0, animating: false };
+            window.parallaxState = px;
+
+            const heroVisuals = document.querySelector('.hero-visuals');
+            if (heroVisuals && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                heroVisuals.addEventListener('mousemove', (e) => {
+                    const rect = heroVisuals.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    px.targetX = ((e.clientX - centerX) / (rect.width / 2)) * PARALLAX_MAX;
+                    px.targetY = ((e.clientY - centerY) / (rect.height / 2)) * PARALLAX_MAX;
+                });
+
+                heroVisuals.addEventListener('mouseleave', () => {
+                    px.targetX = 0;
+                    px.targetY = 0;
+                });
+
+                function updateParallax() {
+                    requestAnimationFrame(updateParallax);
+                    if (px.animating) return;
+                    if (document.querySelector('.hero-art-card.expanded')) return;
+
+                    px.currentX += (px.targetX - px.currentX) * PARALLAX_LERP;
+                    px.currentY += (px.targetY - px.currentY) * PARALLAX_LERP;
+
+                    const atRest = Math.abs(px.currentX) < 0.05 && Math.abs(px.currentY) < 0.05
+                        && px.targetX === 0 && px.targetY === 0;
+
+                    PARALLAX_CARDS.forEach(({ selector, depth }) => {
+                        const card = document.querySelector(selector);
+                        if (!card || card.classList.contains('expanded')) return;
+                        if (atRest) {
+                            card.style.transform = '';
+                        } else {
+                            card.style.transform = `translate(${px.currentX * depth}px, ${px.currentY * depth}px)`;
+                        }
+                    });
+                }
+                updateParallax();
+            }
         } // end if (!isTouch)
 
         // [o] open 버튼 클릭 동작
@@ -2696,6 +2839,12 @@
                 return;
             }
 
+            // Clear parallax transforms before layout capture
+            if (window.parallaxState) {
+                window.parallaxState.animating = true;
+                document.querySelectorAll('.hero-art-card').forEach(function(c) { c.style.transform = ''; });
+            }
+
             // 1. 카드의 현재 화면 위치 저장
             const from = card.getBoundingClientRect();
 
@@ -2778,6 +2927,7 @@
                 card.style.transition = '';
                 card.classList.remove('expanded');
                 resetCardSize(card);
+                if (window.parallaxState) window.parallaxState.animating = false;
                 cardOverlay.classList.remove('active');
             }, 220);
         }
@@ -3022,6 +3172,16 @@
                 // Close button click
                 const closeBtn = modal.querySelector('.tui-close-btn');
                 if (closeBtn) {
+                    const topBar = closeBtn.closest('.tui-top-bar');
+                    if (topBar && !topBar.querySelector('.carousel-key-hint')) {
+                        const hint = document.createElement('span');
+                        hint.className = 'carousel-key-hint';
+                        hint.innerHTML = '<span class="tui-btn-bracket">[</span><span class="tui-btn-key">←/→</span><span class="tui-btn-bracket">]</span> <span class="hint-nav">nav</span>';
+                        // Wire absorption: same proximity + cursor effect as [esc]
+                        hint.addEventListener('mouseenter', () => activateInteractive(hint));
+                        hint.addEventListener('mouseleave', () => deactivateInteractive(hint));
+                        topBar.insertBefore(hint, closeBtn);
+                    }
                     closeBtn.addEventListener('click', () => closeModal(modal));
                 }
 
@@ -3036,6 +3196,44 @@
                 const mainImg = modal.querySelector('.carousel-main img');
 
                 if (thumbs.length > 0 && mainImg) {
+                    // Build clickable [←] [→] controls beside thumbnail carousel (once per modal)
+                    const thumbsContainer = modal.querySelector('.carousel-thumbs');
+                    if (thumbsContainer && !thumbsContainer.parentElement.classList.contains('carousel-strip')) {
+                        const strip = document.createElement('div');
+                        strip.className = 'carousel-strip';
+
+                        const prevBtn = document.createElement('button');
+                        prevBtn.className = 'carousel-nav-btn prev';
+                        prevBtn.setAttribute('type', 'button');
+                        prevBtn.setAttribute('aria-label', 'Previous image');
+                        prevBtn.textContent = '[←]';
+
+                        const nextBtn = document.createElement('button');
+                        nextBtn.className = 'carousel-nav-btn next';
+                        nextBtn.setAttribute('type', 'button');
+                        nextBtn.setAttribute('aria-label', 'Next image');
+                        nextBtn.textContent = '[→]';
+
+                        thumbsContainer.parentNode.insertBefore(strip, thumbsContainer);
+                        strip.appendChild(prevBtn);
+                        strip.appendChild(thumbsContainer);
+                        strip.appendChild(nextBtn);
+
+                        function navigate(direction) {
+                            let currentIndex = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
+                            if (currentIndex === -1) currentIndex = 0;
+
+                            let newIndex = direction === 'prev' ? currentIndex - 1 : currentIndex + 1;
+                            if (newIndex < 0) newIndex = thumbs.length - 1;
+                            if (newIndex >= thumbs.length) newIndex = 0;
+
+                            thumbs[newIndex].click();
+                        }
+
+                        prevBtn.addEventListener('click', () => navigate('prev'));
+                        nextBtn.addEventListener('click', () => navigate('next'));
+                    }
+
                     thumbs.forEach(thumb => {
                         thumb.addEventListener('click', function() {
                             // Update main image
