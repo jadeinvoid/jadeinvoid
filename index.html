@@ -2724,14 +2724,10 @@
             });
             // Add cursor esc absorption for hero card close buttons
             btn.addEventListener('mouseenter', () => {
-                if (typeof window.activateInteractive === 'function') {
-                    window.activateInteractive(btn);
-                }
+                window.activateInteractive(btn);
             });
             btn.addEventListener('mouseleave', () => {
-                if (typeof window.deactivateInteractive === 'function') {
-                    window.deactivateInteractive(btn);
-                }
+                window.deactivateInteractive(btn);
             });
         });
 
@@ -2991,14 +2987,10 @@
                 const closeBtn = modal.querySelector('.tui-close-btn');
                 if (closeBtn) {
                     closeBtn.addEventListener('mouseenter', () => {
-                        if (typeof window.activateInteractive === 'function') {
-                            window.activateInteractive(closeBtn);
-                        }
+                        window.activateInteractive(closeBtn);
                     });
                     closeBtn.addEventListener('mouseleave', () => {
-                        if (typeof window.deactivateInteractive === 'function') {
-                            window.deactivateInteractive(closeBtn);
-                        }
+                        window.deactivateInteractive(closeBtn);
                     });
                 }
             });
