@@ -2264,6 +2264,7 @@
                 hoveredInteractive = el;
                 document.querySelectorAll('.cursor-trail').forEach(t => t.style.opacity = '0');
             }
+            window.activateInteractive = activateInteractive;
 
             function deactivateInteractive(el) {
                 if (hoveredInteractive !== el) return;
@@ -2271,6 +2272,7 @@
                 customCursor.textContent = '▸';
                 hoveredInteractive = null;
             }
+            window.deactivateInteractive = deactivateInteractive;
 
             // mouseenter/leave 방식 — [esc] 제외한 나머지
             const interactiveSelectors = ['.hero-cta', '.shortcut-btn', '.tag-btn.tag-all'];
