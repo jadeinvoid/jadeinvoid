@@ -1369,6 +1369,43 @@
             overflow: hidden;
         }
 
+        /* Projects modal content uses full available space */
+        .work-detail-modal .tui-content {
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .work-detail-modal .modal-body {
+            flex: 1;
+            min-height: 0;
+            gap: 0;
+            padding: 0;
+            align-items: stretch;
+        }
+
+        /* Micro-pass: slightly prioritize image column for balance */
+        .work-detail-modal .modal-body > .carousel-section {
+            flex: 52;
+        }
+
+        .work-detail-modal .modal-body > .info-section {
+            flex: 48;
+        }
+
+        .work-detail-modal .carousel-section,
+        .work-detail-modal .info-section {
+            height: 100%;
+        }
+
+        .work-detail-modal .carousel-section {
+            display: grid;
+            grid-template-rows: minmax(0, 1fr) auto;
+            min-height: 0;
+            gap: 0;
+        }
+
         /* Carousel Section - Left Column */
         .carousel-section {
             flex: 1;
@@ -1387,6 +1424,13 @@
             background: rgba(232, 254, 197, 0.05);
         }
 
+        .work-detail-modal .carousel-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0;
+        }
+
         .carousel-main img {
             width: 100%;
             height: auto;
@@ -1396,6 +1440,14 @@
             transition: opacity 0.2s ease;
         }
 
+        .work-detail-modal .carousel-main img {
+            width: auto;
+            max-width: 100%;
+            height: 100%;
+            max-height: none;
+            object-fit: contain;
+        }
+
         /* Thumbnail Grid */
         .carousel-thumbs {
             display: flex;
@@ -1403,6 +1455,14 @@
             padding: var(--spacing-sm);
             overflow-x: auto;
             flex-shrink: 0;
+        }
+
+        .work-detail-modal .carousel-thumbs {
+            padding: 0;
+            flex: 0 0 auto;
+            max-height: 90px;
+            overflow-y: hidden;
+            justify-content: center;
         }
 
         .carousel-thumbs::-webkit-scrollbar {
@@ -1443,6 +1503,20 @@
             padding: var(--spacing-md);
             overflow-y: auto;
             border: 1px solid var(--color-border);
+        }
+
+        .work-detail-modal .info-section {
+            padding: 16px;
+            min-height: 0;
+        }
+
+        .work-detail-modal .info-description {
+            flex: 1;
+        }
+
+        .work-detail-modal .tui-bottom-bar {
+            display: flex;
+            justify-content: flex-end;
         }
 
         .info-title {
@@ -2285,20 +2359,26 @@
 
             // [esc] + [o] — proximity 방식 (부모 overflow:hidden 무관)
             const ESC_BUFFER = 32;
+            const PROJECT_ESC_BUFFER = 56;
             document.addEventListener('mousemove', (e) => {
                 ['.tui-close-btn', '.tui-open-btn'].forEach(selector => {
                     document.querySelectorAll(selector).forEach(btn => {
-                        if (!btn.closest('.hero-art-card.expanded')) {
+                        const inHeroExpanded = !!btn.closest('.hero-art-card.expanded');
+                        const inActiveWorkModal = !!btn.closest('.work-detail-modal.active');
+
+                        if (!inHeroExpanded && !inActiveWorkModal) {
                             btn.classList.remove('in-zone');
                             deactivateInteractive(btn);
                             return;
                         }
+
+                        const buffer = inActiveWorkModal ? PROJECT_ESC_BUFFER : ESC_BUFFER;
                         const rect = btn.getBoundingClientRect();
                         const inZone =
-                            e.clientX >= rect.left   - ESC_BUFFER &&
-                            e.clientX <= rect.right  + ESC_BUFFER &&
-                            e.clientY >= rect.top    - ESC_BUFFER &&
-                            e.clientY <= rect.bottom + ESC_BUFFER;
+                            e.clientX >= rect.left   - buffer &&
+                            e.clientX <= rect.right  + buffer &&
+                            e.clientY >= rect.top    - buffer &&
+                            e.clientY <= rect.bottom + buffer;
 
                         if (inZone) {
                             btn.classList.add('in-zone');
@@ -2981,6 +3061,52 @@
             if (backdrop) {
                 backdrop.addEventListener('click', closeAllModals);
             }
+
+            // Keyboard navigation for carousel (Arrow keys with modal scope)
+            document.addEventListener('keydown', (e) => {
+                // Only handle arrow keys when a modal is active
+                const activeModal = document.querySelector('.work-detail-modal.active');
+                if (!activeModal) return;
+                
+                // Don't interfere if user is typing in an input
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                
+                const thumbs = activeModal.querySelectorAll('.carousel-thumbs .thumb');
+                const mainImg = activeModal.querySelector('.carousel-main img');
+                if (thumbs.length === 0 || !mainImg) return;
+                
+                // Find current active index
+                let currentIndex = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
+                if (currentIndex === -1) currentIndex = 0;
+                
+                let newIndex = currentIndex;
+                
+                if (e.key === 'ArrowLeft') {
+                    newIndex = currentIndex - 1;
+                    if (newIndex < 0) newIndex = thumbs.length - 1; // Wrap to last
+                } else if (e.key === 'ArrowRight') {
+                    newIndex = currentIndex + 1;
+                    if (newIndex >= thumbs.length) newIndex = 0; // Wrap to first
+                } else {
+                    return; // Not an arrow key, exit
+                }
+                
+                // Trigger the same behavior as clicking the thumbnail
+                const targetThumb = thumbs[newIndex];
+                const fullSrc = targetThumb.getAttribute('data-full-src');
+                
+                if (fullSrc) {
+                    mainImg.style.opacity = '0';
+                    setTimeout(() => {
+                        mainImg.src = fullSrc;
+                        mainImg.style.opacity = '1';
+                    }, 200);
+                }
+                
+                // Update active state (visual feedback)
+                thumbs.forEach(t => t.classList.remove('active'));
+                targetThumb.classList.add('active');
+            });
 
             // Add cursor esc absorption for modal close buttons (like hero cards)
             modals.forEach(modal => {
