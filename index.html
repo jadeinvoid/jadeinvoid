@@ -362,6 +362,15 @@
             transition: opacity 0.15s ease;
         }
 
+        .tui-close-btn:hover {
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+
+        .tui-close-btn:hover .tui-btn-key {
+            color: var(--color-accent-2);
+        }
+
         .tui-btn-bracket {
             color: var(--color-border);
         }
@@ -1296,6 +1305,23 @@
             transform: scale(1);
         }
 
+        /* Full-screen backdrop behind all modals */
+        .work-detail-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .work-detail-backdrop.active {
+            display: block;
+            opacity: 1;
+        }
+
         /* Modal Overlay - Click to close */
         .modal-overlay {
             position: absolute;
@@ -1354,7 +1380,8 @@
 
         /* Main Image Display */
         .carousel-main {
-            flex: 1;
+            flex: 0 0 45vh;
+            max-height: 45vh;
             min-height: 0;
             overflow: hidden;
             border: 1px solid var(--color-border);
@@ -1777,6 +1804,8 @@
             </div>
 
             <!-- Project Detail Modals -->
+            <div class="work-detail-backdrop"></div>
+
             <!-- Modal 001 -->
             <div class="work-detail-modal" id="modal-001" data-project="001" data-images="3" data-main-image="work_design/project1_main.jpg" data-process-images="work_design/p1_1.jpg,work_design/p1_2.jpg,work_design/p1_3.jpg">
                 <div class="modal-overlay"></div>
@@ -2834,9 +2863,12 @@
 
             // Open modal when clicking work card
             function openModal(projectNum, card) {
+                closeAllModals();
                 const modal = document.getElementById(`modal-${projectNum}`);
+                const backdrop = document.querySelector('.work-detail-backdrop');
                 if (modal) {
                     lastClickedCard = card;
+                    if (backdrop) backdrop.classList.add('active');
                     animateModalOpen(card, modal);
                     document.body.style.overflow = 'hidden';
                 }
@@ -2844,6 +2876,8 @@
 
             // Close modal
             function closeModal(modal) {
+                const backdrop = document.querySelector('.work-detail-backdrop');
+                if (backdrop) backdrop.classList.remove('active');
                 if (lastClickedCard) {
                     animateModalClose(modal, lastClickedCard);
                 } else {
@@ -2921,6 +2955,12 @@
                     });
                 }
             });
+
+            // Backdrop click to close all modals
+            const backdrop = document.querySelector('.work-detail-backdrop');
+            if (backdrop) {
+                backdrop.addEventListener('click', closeAllModals);
+            }
 
             // ESC key to close modals
             document.addEventListener('keydown', function(e) {
