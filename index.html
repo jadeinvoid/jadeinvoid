@@ -2991,13 +2991,13 @@
                 const closeBtn = modal.querySelector('.tui-close-btn');
                 if (closeBtn) {
                     closeBtn.addEventListener('mouseenter', () => {
-                        if (typeof activateInteractive === 'function') {
-                            activateInteractive(closeBtn);
+                        if (typeof window.activateInteractive === 'function') {
+                            window.activateInteractive(closeBtn);
                         }
                     });
                     closeBtn.addEventListener('mouseleave', () => {
-                        if (typeof deactivateInteractive === 'function') {
-                            deactivateInteractive(closeBtn);
+                        if (typeof window.deactivateInteractive === 'function') {
+                            window.deactivateInteractive(closeBtn);
                         }
                     });
                 }
