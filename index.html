@@ -1390,8 +1390,9 @@
 
         .carousel-main img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            max-height: 50vh;
+            object-fit: contain;
             display: block;
             transition: opacity 0.2s ease;
         }
@@ -2236,7 +2237,7 @@
                 trail.style.color = color;
                 trail.style.position = 'fixed';
                 trail.style.pointerEvents = 'none';
-                trail.style.zIndex = '10001';
+                trail.style.zIndex = '9998';
                 trail.style.fontSize = `${Math.random() * 8 + 16}px`;
                 trail.style.fontFamily = 'monospace';
                 trail.style.textShadow = `0 0 8px ${color}, 0 0 16px ${color}`;
@@ -2317,6 +2318,7 @@
             let forwardingClick = false;
             document.addEventListener('click', (e) => {
                 if (forwardingClick) return;
+                if (document.querySelector('.work-detail-modal.active')) return; // Don't forward when modal open
                 if (hoveredInteractive && !hoveredInteractive.contains(e.target)) {
                     forwardingClick = true;
                     hoveredInteractive.click();
@@ -2822,9 +2824,13 @@
         }
 
         // FLIP animation for modal closing
-        function animateModalClose(modal, card) {
+        function animateModalClose(modal, card, closingModalId) {
             if (prefersReducedMotion || !card) {
-                closeModal(modal);
+                // Direct close without animation (avoid recursive call to closeModal)
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                const backdrop = document.querySelector('.work-detail-backdrop');
+                if (backdrop) backdrop.classList.remove('active');
                 return;
             }
 
@@ -2842,8 +2848,10 @@
             modal.style.opacity = '0';
             modal.style.transition = 'opacity var(--modal-timing) var(--modal-easing), transform var(--modal-timing) var(--modal-easing)';
 
-            // Remove active class after animation
+            // Remove active class after animation - only if this modal is still closing
             setTimeout(() => {
+                // Guard: don't close if a different modal is now open
+                if (currentOpenModalId && currentOpenModalId !== closingModalId) return;
                 modal.classList.remove('active');
                 modal.style.transform = '';
                 modal.style.opacity = '';
@@ -2852,9 +2860,9 @@
             }, 300);
         }
 
-        // Store reference to last clicked card
+        // Store reference to last clicked card and current open modal
         let lastClickedCard = null;
-
+        let currentOpenModalId = null;
 
         // Modal open/close functionality
         (function() {
@@ -2863,7 +2871,13 @@
 
             // Open modal when clicking work card
             function openModal(projectNum, card) {
-                closeAllModals();
+                const isSwitching = currentOpenModalId && currentOpenModalId !== projectNum;
+                if (isSwitching) {
+                    // Snap close any other modal immediately (no animation)
+                    const oldModal = document.getElementById(`modal-${currentOpenModalId}`);
+                    if (oldModal) oldModal.classList.remove('active');
+                }
+                currentOpenModalId = projectNum;
                 const modal = document.getElementById(`modal-${projectNum}`);
                 const backdrop = document.querySelector('.work-detail-backdrop');
                 if (modal) {
@@ -2874,12 +2888,15 @@
                 }
             }
 
-            // Close modal
             function closeModal(modal) {
+                const modalId = modal.id.replace('modal-', '');
+                if (currentOpenModalId === modalId) {
+                    currentOpenModalId = null;
+                }
                 const backdrop = document.querySelector('.work-detail-backdrop');
                 if (backdrop) backdrop.classList.remove('active');
                 if (lastClickedCard) {
-                    animateModalClose(modal, lastClickedCard);
+                    animateModalClose(modal, lastClickedCard, modalId);
                 } else {
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
