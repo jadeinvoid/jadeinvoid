@@ -2722,6 +2722,17 @@
                     if (c.classList.contains('expanded')) collapseCard(c);
                 });
             });
+            // Add cursor esc absorption for hero card close buttons
+            btn.addEventListener('mouseenter', () => {
+                if (typeof window.activateInteractive === 'function') {
+                    window.activateInteractive(btn);
+                }
+            });
+            btn.addEventListener('mouseleave', () => {
+                if (typeof window.deactivateInteractive === 'function') {
+                    window.deactivateInteractive(btn);
+                }
+            });
         });
 
         // Close expanded card when clicking overlay
