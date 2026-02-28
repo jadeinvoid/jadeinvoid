@@ -1127,6 +1127,42 @@
         }
         .skill-item:last-child { border-right: none; }
 
+        /* ── CONTACT SOCIAL LINKS ── */
+        .social-links {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .social-links a {
+            color: var(--color-text-primary);
+            opacity: 0.6;
+            transition: opacity 0.15s ease, transform 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .contact-email {
+            font-size: 0.9em;
+            color: var(--color-text-secondary);
+        }
+
+        .contact-email a {
+            color: var(--color-text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .contact-email a:hover {
+            border-bottom-color: var(--color-text-primary);
+        }
+
         /* ── FOOTER ── */
         .footer-main {
             border-top: 1px solid var(--color-border);
@@ -2239,9 +2275,32 @@
                 <span class="section-status">── open to work ──</span>
             </div>
             <div class="container" style="padding: var(--spacing-xl) var(--spacing-md);">
-                <p> Feel free to reach out for collaborations or inquiries:</p>
-                <p>Email: <a href="mailto:yjcho0602@gmail.com">yjcho0602@gmail.com</a></p>
-                <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile">yourprofile</a></p>
+                <p style="margin-bottom: var(--spacing-lg);"> Feel free to reach out for collaborations or inquiries:</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/jadeyejincho/" aria-label="LinkedIn" target="_blank" rel="noopener">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/jadeinvoid" aria-label="GitHub" target="_blank" rel="noopener">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.artstation.com/jadeyejincho" aria-label="ArtStation" target="_blank" rel="noopener">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M0 17.723l2.027 3.505h.001a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24 .025c0-.484-.143-.935-.388-1.314L15.728 2.728a2.424 2.424 0 0 0-2.164-1.333H9.419L21.598 22.54l1.92-3.325c.378-.637.482-.919.482-1.467zM13.27 13.709L7.337 3.680H4.554l5.882 10.029z"/>
+                        </svg>
+                    </a>
+                    <a href="https://am-i-jade.itch.io/" aria-label="itch.io" target="_blank" rel="noopener">
+                        <svg width="22" height="22" viewBox="0 0 245.4 220.5" fill="currentColor">
+                            <path d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516C0 62.144 12.46 73.86 23.773 73.86c13.584 0 24.902-11.258 24.902-24.62 0 13.362 10.93 24.62 24.515 24.62 13.586 0 24.165-11.258 24.165-24.62 0 13.362 11.622 24.62 25.207 24.62h.246c13.586 0 25.208-11.258 25.208-24.62 0 13.362 10.58 24.62 24.164 24.62 13.585 0 24.515-11.258 24.515-24.62 0 13.362 11.32 24.62 24.903 24.62 11.313 0 23.773-11.715 23.773-25.046V38.298c-.2-6.354-21.287-30.578-31.988-36.933C181.678-1.15 62.86-.645 31.99 1.365zm83.397 107.885c-13.793.01-25.29 1.923-35.06 5.37-4.685 1.65-9.03 2.388-12.956 2.388-11.366 0-18.635-5.148-18.635-5.148v57.858c2.566 13.98 23.31 33.43 42.794 33.43h79.266c19.484 0 40.228-19.45 42.794-33.43v-57.858s-7.27 5.148-18.635 5.148c-3.927 0-8.27-.738-12.956-2.388-9.77-3.447-21.268-5.36-35.06-5.37h-.548z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="contact-email">Email: <a href="mailto:yjcho0602@gmail.com">yjcho0602@gmail.com</a></p>
             </div>
         </section>
     </main>
