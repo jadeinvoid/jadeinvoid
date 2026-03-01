@@ -1,0 +1,22 @@
+TASK: Update About section body text in index.html
+STATUS: COMPLETED
+
+CHANGES MADE:
+- File: /home/jade/Jade/MUIjade/index.html
+- Lines: 1995-1999
+- Old text: "Based in Montréal, rooted in Seoul. I design terminal interfaces and illustration systems that carry the clarity of Korean craft — purposeful, minimal, with meaning in every element."
+- New text: "Based in Montreal, rooted in Korea. I focus on crafting terminal interfaces and illustrating experiences. Currently working as: Illustration & Animation assistant at an unannounced project."
+
+VERIFICATION:
+✓ Old text located at line 1996-1998
+✓ HTML structure preserved (<p class="about-body">...</p>)
+✓ New text inserted correctly
+✓ Grep confirmed: "Based in Montreal, rooted in Korea" found in index.html
+✓ No other sections modified
+✓ CSS and JavaScript untouched
+
+COMMIT READY:
+Message: fix(content): update About section body text
+- Change location from Seoul to Korea
+- Update description to focus on terminal interfaces and illustrating
+- Add current work information
