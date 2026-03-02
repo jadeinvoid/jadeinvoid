@@ -262,7 +262,13 @@
          .hero-art-card:nth-child(3).floating { animation-duration: 3.8s; animation-delay: -2.5s; }
          .hero-art-card:nth-child(4).floating { animation-duration: 5s;   animation-delay: -0.7s; }
 
-        .hero-art-card:hover { background-color: rgba(232, 254, 197, 0.03); }
+         /* When a floating card is expanded, stop the float and restore centering */
+         .hero-art-card.floating.expanded {
+             transform: translate(-50%, -50%) !important;
+             animation: none;
+         }
+
+         .hero-art-card:hover { background-color: rgba(232, 254, 197, 0.03); }
         .hero-art-card:hover .tui-frame,
         .hero-art-card:hover .tui-top-bar,
         .hero-art-card:hover .tui-bottom-bar { border-color: var(--color-accent-1); }
@@ -284,12 +290,12 @@
              opacity: 1 !important;
          }
 
-         /* Overlay */
+         /* Overlay — dark scrim so the expanded card pops against it */
          .hero-art-card-overlay {
              display: none;
              position: fixed;
              inset: 0;
-             background-color: rgba(6, 107, 195, 0.95);
+             background-color: rgba(0, 0, 0, 0.72);
              z-index: 9999;
              cursor: pointer !important;
          }
