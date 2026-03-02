@@ -307,6 +307,14 @@
             min-height: 0;
             overflow: hidden;
             will-change: transform;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 350ms ease-out, transform 350ms ease-out;
+        }
+
+        .hero-art-card.visible {
+            opacity: 1;
+            transform: scale(1);
         }
 
         /* expand/collapse 애니메이션 — JS가 transition을 직접 제어 */
@@ -616,7 +624,7 @@
         }
 
         .hero-title {
-            font-size: clamp(1.6em, 3.5vw + 0.5vh, 2.5em);
+            font-size: 3.5em;
             line-height: 1.1;
             font-weight: bold;
             margin-bottom: 0;
@@ -1853,7 +1861,7 @@
             <div class="hero-content">
                 <p class="hero-subtitle">Illustrator & UX Designer</p>
                 <h1 class="hero-title">
-                     Designing at the<br>
+                    Designing at the<br>
                     edge of terminal<br>
                     and canvas.<span class="cursor">_</span>
                 </h1>
@@ -3429,6 +3437,18 @@
                         closeModal(activeModal);
                     }
                 }
+            });
+
+            // ── Hero Section Entrance Animations ──
+            // Reveal hero cards animation
+            function revealHeroCards() {
+                const cards = document.querySelectorAll('.hero-art-card');
+                cards.forEach(card => card.classList.add('visible'));
+            }
+
+            // Initialize on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                revealHeroCards();
             });
         })();
 
