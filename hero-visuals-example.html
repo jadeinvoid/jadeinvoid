@@ -463,9 +463,9 @@
 
          /* ── MOBILE ───────────────────────────────────────────────────────── */
          @media (max-width: 768px) {
-             .card-sm  { width: clamp(140px, 38vw, 200px); height: clamp(115px, 22vh, 180px); }
-             .card-md  { width: clamp(170px, 46vw, 240px); height: clamp(140px, 26vh, 220px); }
-             .card-lg  { width: clamp(200px, 52vw, 280px); height: clamp(165px, 30vh, 260px); }
+             .card-sm  { width: clamp(100px, 26vw, 140px); height: clamp(80px,  14vh, 120px); }
+             .card-md  { width: clamp(120px, 32vw, 165px); height: clamp(100px, 17vh, 145px); }
+             .card-lg  { width: clamp(140px, 38vw, 195px); height: clamp(120px, 20vh, 170px); }
 
             .hero-art-card.expanded {
                 width: 95vw !important;
@@ -779,13 +779,16 @@
             var zones;
 
             if (isMobile) {
-                // Mobile: 4 corners of the full viewport, no center exclusion
-                // Cards are small enough to coexist with the text
+                // Mobile: cards go below the centered text block.
+                // Two left/right columns, each split into a top and bottom sub-zone
+                // to stagger cards vertically and reduce overlap.
+                var mBottom = usableH * 0.60;
+                var mMid    = usableH * 0.80;
                 zones = [
-                    { x: [edgePad,            vw * 0.50 - edgePad], y: [edgePad,              usableH * 0.46 - edgePad] },
-                    { x: [vw * 0.50 + edgePad, vw - edgePad],       y: [edgePad,              usableH * 0.46 - edgePad] },
-                    { x: [edgePad,            vw * 0.50 - edgePad], y: [usableH * 0.54 + edgePad, usableH - edgePad]     },
-                    { x: [vw * 0.50 + edgePad, vw - edgePad],       y: [usableH * 0.54 + edgePad, usableH - edgePad]     },
+                    { x: [edgePad,            vw * 0.50 - edgePad], y: [mBottom + edgePad, mMid - edgePad]      },
+                    { x: [vw * 0.50 + edgePad, vw - edgePad],       y: [mBottom + edgePad, mMid - edgePad]      },
+                    { x: [edgePad,            vw * 0.50 - edgePad], y: [mMid    + edgePad, usableH - edgePad]   },
+                    { x: [vw * 0.50 + edgePad, vw - edgePad],       y: [mMid    + edgePad, usableH - edgePad]   },
                 ];
             } else {
                 // Desktop: safe center zone, 4 outer quadrants
