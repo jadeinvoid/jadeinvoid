@@ -1192,6 +1192,47 @@
             transform: translateX(-50%);
         }
 
+        /* ── KEYBOARD BAR — persistent bottom status line, desktop only ── */
+        #kb-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 150;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 7px var(--spacing-md);
+            background: rgba(3, 32, 58, 0.92);
+            border-top: 1px solid var(--color-border);
+            font-family: var(--font-family-body);
+            font-size: 0.72em;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.06em;
+            pointer-events: none;
+            user-select: none;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            transition: opacity 0.2s ease;
+        }
+        #kb-bar .kb-key {
+            color: var(--color-accent-1);
+            font-weight: 600;
+            margin: 0 1px;
+        }
+        #kb-bar .kb-sep {
+            margin: 0 14px;
+            opacity: 0.35;
+        }
+        /* extra scroll room for the bar, desktop only */
+        @media (pointer: fine) and (min-width: 769px) {
+            body { padding-bottom: 34px; }
+        }
+        /* hide on touch and narrow viewports */
+        @media (pointer: coarse), (max-width: 768px) {
+            #kb-bar { display: none; }
+        }
+
         /* ── TOUCH DEVICES — restore cursor, hide custom cursor ── */
         @media (pointer: coarse) {
             *, *::before, *::after { cursor: auto !important; }
@@ -2349,6 +2390,9 @@
         <a href="#main-content">↑  Back to top</a>
     </footer>
 
+    <!-- KEYBOARD BAR — persistent bottom status line, desktop only -->
+    <div id="kb-bar" aria-hidden="true"></div>
+
     <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -3450,6 +3494,40 @@
             document.addEventListener('DOMContentLoaded', function() {
                 revealHeroCards();
             });
+        })();
+
+        // ── Keyboard Bar — context-aware bottom status line ──
+        (function() {
+            const bar = document.getElementById('kb-bar');
+            if (!bar) return;
+
+            const STATES = {
+                default: '<span class="kb-key">[a]</span><span class="kb-key">[s]</span><span class="kb-key">[d]</span><span class="kb-key">[f]</span>&nbsp;cards&nbsp;<span class="kb-sep">·</span>&nbsp;<span class="kb-key">[1]</span><span class="kb-key">[2]</span><span class="kb-key">[3]</span>&nbsp;filter&nbsp;<span class="kb-sep">·</span>&nbsp;<span class="kb-key">[esc]</span>&nbsp;close',
+                card:    '<span class="kb-key">[esc]</span>&nbsp;close card&nbsp;<span class="kb-sep">·</span>&nbsp;<span class="kb-key">[o]</span>&nbsp;open in projects',
+                modal:   '<span class="kb-key">[←]</span><span class="kb-key">[→]</span>&nbsp;navigate&nbsp;<span class="kb-sep">·</span>&nbsp;<span class="kb-key">[esc]</span>&nbsp;close',
+            };
+
+            let currentState = 'default';
+
+            function updateBar() {
+                const modalOpen    = !!document.querySelector('.work-detail-modal.active');
+                const cardExpanded = !!document.querySelector('.hero-art-card.expanded');
+                const nextState    = modalOpen ? 'modal' : cardExpanded ? 'card' : 'default';
+                if (nextState === currentState) return;
+                currentState = nextState;
+                bar.style.opacity = '0';
+                setTimeout(function() {
+                    bar.innerHTML = STATES[nextState];
+                    bar.style.opacity = '1';
+                }, 120);
+            }
+
+            const observer = new MutationObserver(updateBar);
+            document.querySelectorAll('.hero-art-card, .work-detail-modal').forEach(function(el) {
+                observer.observe(el, { attributes: true, attributeFilter: ['class'] });
+            });
+
+            bar.innerHTML = STATES.default;
         })();
 
     </script>
