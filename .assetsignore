@@ -1,0 +1,35 @@
+# Raw video source files (>25MB, over Cloudflare's limit)
+work_illustration/Concept Art/**/*.mov
+work_illustration/Concept Art/**/logo_ver_1_copy.mp4
+
+# Source/working files (too large, not served)
+work_illustration/Concept Art/**/*.psd
+
+# Git internals
+.git/
+
+# Wrangler internals
+.wrangler/
+
+# Claude / editor config (never expose)
+.claude/
+
+# Dev/planning files not needed on the deployed site
+.sisyphus/
+CLAUDE.md
+AGENTS.md
+SESSION_LOG.md
+CRITIQUE.md
+STYLE-REFERENCE.md
+critique-projects-2026-03-02.md
+design-critique.md
+figma-content-spec.md
+README-figma-workflow.md
+sync-from-figma.js
+wireframe.html
+portfolio-prototype.html
+portfolio-prototype (8).html
+hero-visuals-example.html
+wrangler.toml
+.gitignore
+.assetsignore
