@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node
+node_modules/
+
+# Large asset folders — too big for git, store separately
+work_illustration/Concept Art/
+
+# QA evidence screenshots — ephemeral, not source
+.sisyphus/evidence/*.png
+.sisyphus/evidence/*.jpg
+
+# Draft/prototype HTML files
+portfolio-prototype*.html
+hero-visuals-example.html
+
+# Local environment
+.env
+.env.local

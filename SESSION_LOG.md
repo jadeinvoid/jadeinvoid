@@ -290,3 +290,43 @@ If session is lost, here are the key CSS variable values to verify:
 **Priority 2:** Test all filter combinations thoroughly
 **Priority 3:** Verify mobile experience (especially tag-group slide transitions)
 **Priority 4:** Consider adding lazy loading for project thumbnails
+
+
+
+
+
+
+
+
+
+---
+
+##  Design Critique — 2026-03-09
+
+Conducted via Interface Craft design critique methodology. Placeholders (cards 001–006 thumbnails/titles) and cursor trail neon colors are **excluded** — placeholders deferred to end of project, trail colors are an intentional design decision (pop of color post-Obangsaek system).
+
+---
+
+### Visual Design
+
+**Hero subtitle letter-spacing** — `.hero-subtitle` uses `letter-spacing: 0.25em`, which is more than 2× any other uppercase monospace element on the page (section titles: `0.15em`, nav: `0.12em`, skill items: `0.08em`). In a monospace font with `text-transform: uppercase`, this compounds: characters are already fixed-width, and stacking uppercase + monospace + `0.25em` makes the label read as strained rather than intentional. Suggested fix: `0.15em` to match the section title register, or `0.18em` as a middle ground.
+
+**`about-left` panel is empty on render** — The left column of the About section contains only `#ascii-canvas`, which is invisible until the user moves their mouse over it. On first render (and on mobile where the interaction never triggers), the panel is a blank box divided by a border — reads as broken, not minimal. Needs at least one static element: a vertical stats list, a sparse ASCII composition, or a short tools/influences list.
+
+**`Noto Sans KR` is referenced but not loaded** — `.vertical-text-accent` sets `font-family: 'Noto Sans KR', sans-serif` but there is no `@font-face` declaration or `<link>` loading this font anywhere in the file. The Korean text falls back to the system sans-serif at a different weight and metric than intended. Fix: either add a Google Fonts `<link>` for Noto Sans KR, or switch to the existing GeistMono stack and accept the monospace rendering.
+
+---
+
+### Consistency & Conventions
+
+**Card `f` close button markup inconsistency** — The `[f]` hero card (Process / Misc) has `<button class="tui-close-btn" aria-label="Close">[esc]</button>` — plain text, no span structure. All other cards use `<span class="tui-btn-bracket">[</span><span class="tui-btn-key">esc</span><span class="tui-btn-bracket">]</span>`. At runtime both display `[esc]`, but the styled hover state (`.tui-btn-key` turns gold / `--color-accent-2`) won't fire on the `f` card because `.tui-btn-key` doesn't exist inside it. Fix: replace with the standard span structure.
+
+**`nav-status` vs contact `section-status` opacity mismatch** — "Available for projects" in the header uses `opacity: 0.85` and a pulsing dot — clearly visible. "── open to work ──" in the contact section header uses `opacity: 0.3` — nearly invisible. Both communicate availability. Calibrate to the same prominence level, or differentiate deliberately.
+
+---
+
+### Interface Design
+
+**Contact section has no human call to action** — The section contains a heading, an email address, and 4 social icons. There is no sentence that invites action. The availability status ("open to work") is visually suppressed at `opacity: 0.3`. Consider adding one short, direct line — even something minimal fits the TUI aesthetic.
+
+**Tag filter two-step pattern is undiscovered after first visit** — The hint toast ("press [1] [2] [3] to filter") is shown once via `localStorage` and never again. Returning visitors and anyone who dismisses it early get no guidance on the two-step flow (category shortcut → sub-tag → filter). The pattern is non-standard enough that silent discovery is unreliable. Consider a persistent but subtle indicator, or collapse the two steps into one.
