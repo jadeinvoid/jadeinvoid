@@ -8,8 +8,26 @@ Thumbs.db
 # Node
 node_modules/
 
-# Large asset folders — too big for git, store separately
-work_illustration/Concept Art/
+# Concept Art — exclude raw/source files only; web-ready assets are tracked
+# Raw video source files (628MB each)
+work_illustration/Concept Art/**/*.mov
+work_illustration/Concept Art/**/logo_ver_1_copy.mp4
+# Source files (.psd)
+work_illustration/Concept Art/**/*.psd
+# Unreferenced "withoutLogo" folders
+"work_illustration/Concept Art/KRWZ/BlackMarket/withoutLogo/"
+"work_illustration/Concept Art/KRWZ/Hotel/withoutLogo/"
+# Unreferenced raw colour study source files
+"work_illustration/Concept Art/Side Scroller/colour study.png"
+"work_illustration/Concept Art/Side Scroller/colour study2.png"
+"work_illustration/Concept Art/Side Scroller/colour study3.png"
+"work_illustration/Concept Art/Side Scroller/colourstudy_1.png"
+"work_illustration/Concept Art/Side Scroller/Fin/"
+# Unreferenced LL poster/graffiti source files
+work_illustration/Concept Art/LL/graffiti1_lowRez.png
+work_illustration/Concept Art/LL/poster1_lowRez.jpg
+work_illustration/Concept Art/LL/poster2_lowRez.jpg
+work_illustration/Concept Art/LL/poster3_texture3.jpg
 
 # QA evidence screenshots — ephemeral, not source
 .sisyphus/evidence/*.png
