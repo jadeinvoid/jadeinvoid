@@ -46,6 +46,39 @@ body {
     padding-top: var(--mobile-header-inset);
     background: #fff;
   }
+
+  /* Keep the mobile compositions anchored to the actual header bottom. */
+  .site-root .figma-mobile-work-page {
+    padding-top: calc(var(--mobile-header-inset) + 202px);
+  }
+
+  .site-root .figma-mobile-work-back {
+    top: calc(var(--mobile-header-inset) + 69px);
+  }
+
+  .site-root .figma-mobile-work-heading {
+    top: calc(var(--mobile-header-inset) + 99px);
+  }
+
+  .site-root .figma-mobile-contact-intro {
+    top: calc(var(--mobile-header-inset) - 100px);
+  }
+
+  .site-root .figma-mobile-contact-social {
+    top: calc(var(--mobile-header-inset) + 475px);
+  }
+
+  .site-root .figma-mobile-contact-page {
+    min-height: calc(var(--mobile-header-inset) + 692px);
+  }
+
+  .site-root .figma-mobile-category-layout {
+    top: calc(var(--mobile-header-inset) - 152px);
+  }
+
+  .site-root .figma-mobile-category-page {
+    min-height: calc(var(--mobile-header-inset) + 550px);
+  }
 }
 
 .site-not-found {
