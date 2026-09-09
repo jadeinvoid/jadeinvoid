@@ -21,7 +21,7 @@ npm test
 npm run build
 ```
 
-The production build is written to `dist/`. Client-side routes fall back to `index.html` through the generated `_redirects` file.
+The production build is written to `dist/`. Client-side navigation routes fall back to `index.html` through Cloudflare's native single-page application routing.
 
 ## Cloudflare deployment
 

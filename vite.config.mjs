@@ -33,7 +33,6 @@ function siteReleaseAssets() {
       }
       console.log(`Lossless PNG optimization saved ${(savedBytes / 1024 / 1024).toFixed(2)} MiB`)
       await copyFile(resolve(projectRoot, 'cloudflare/_headers'), resolve(outputRoot, '_headers'))
-      await writeFile(resolve(outputRoot, '_redirects'), '/* /index.html 200\n')
     },
   }
 }
