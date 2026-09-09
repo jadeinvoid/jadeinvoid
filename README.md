@@ -22,3 +22,9 @@ npm run build
 ```
 
 The production build is written to `dist/`. Client-side routes fall back to `index.html` through the generated `_redirects` file.
+
+## Cloudflare deployment
+
+`choja.design` uses the existing `jadeinvoid` Workers Static Assets deployment. Run `npm run deploy` with an authenticated Wrangler session to build and publish it.
+
+The build losslessly recompresses legacy PNGs, preserves the published content-hashed assets, and includes Cloudflare `_headers` rules for year-long immutable caching of hashed JavaScript, CSS, and published media. HTML and unversioned assets retain Cloudflare's default revalidation policy. The same `dist/` asset output is compatible with Cloudflare Pages.
