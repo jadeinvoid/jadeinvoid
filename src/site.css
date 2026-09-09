@@ -20,6 +20,34 @@ body {
   min-height: 100%;
 }
 
+@media (max-width: 640px) {
+  .site-root {
+    --mobile-header-inset: calc(env(safe-area-inset-top, 0px) + 8px);
+  }
+
+  .site-root .figma-mobile-landing-header-spacer { height: 0; }
+
+  .site-root .figma-mobile-landing-page .figma-landing-header-wrap {
+    height: calc(var(--mobile-header-inset) + 60px);
+    padding-top: var(--mobile-header-inset);
+  }
+
+  .site-root .figma-mobile-category-page .figma-landing-header-wrap,
+  .site-root .figma-mobile-contact-page .figma-landing-header-wrap,
+  .site-root .figma-mobile-work-page .figma-landing-header-wrap {
+    top: var(--mobile-header-inset);
+  }
+
+  .site-root .figma-work-detail-page {
+    --landing-header-total-height: calc(var(--mobile-header-inset) + 60px);
+  }
+
+  .site-root .figma-work-detail-page > .figma-landing-header-wrap {
+    padding-top: var(--mobile-header-inset);
+    background: #fff;
+  }
+}
+
 .site-not-found {
   min-height: 100%;
   display: grid;
