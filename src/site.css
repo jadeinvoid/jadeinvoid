@@ -73,11 +73,46 @@ body {
   }
 
   .site-root .figma-mobile-category-layout {
-    top: calc(var(--mobile-header-inset) - 152px);
+    position: relative;
+    inset: auto;
+    display: grid;
+    gap: 4px;
+    width: min(100%, 390px);
+    padding-block: 60px 80px;
+  }
+
+  .site-root .figma-mobile-category-layout .figma-mobile-category-choice {
+    position: relative;
+    top: auto;
+  }
+
+  .site-root .figma-mobile-category-choice > strong { left: 50%; }
+
+  .site-root .figma-mobile-category-choice.category-ux .figma-mobile-category-hat {
+    left: calc(50% + 28px);
+  }
+
+  .site-root .figma-mobile-category-choice.category-illustration .figma-mobile-category-hat {
+    left: max(8px, calc(50% - 180px));
+  }
+
+  .site-root .figma-mobile-category-choice.category-visual .figma-mobile-category-hat {
+    left: max(8px, calc(50% - 160px));
+  }
+
+  .site-root .figma-mobile-category-choice.category-other .figma-mobile-category-hat {
+    left: calc(50% + 37px);
   }
 
   .site-root .figma-mobile-category-page {
-    min-height: calc(var(--mobile-header-inset) + 550px);
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: calc(var(--mobile-header-inset) + 84px) 12px calc(env(safe-area-inset-bottom, 0px) + 24px);
+  }
+
+  .site-root .figma-mobile-category-page .figma-landing-header-wrap {
+    width: calc(100% - 50px);
   }
 }
 
