@@ -1,0 +1,38 @@
+:root {
+  color: #1f0f0f;
+  background: #fff;
+}
+
+body {
+  overflow: hidden;
+  background: #fff;
+}
+
+.site-root {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: auto;
+  background: #fff;
+}
+
+.site-root > .figma-landing-page {
+  min-height: 100%;
+}
+
+.site-not-found {
+  min-height: 100%;
+  display: grid;
+  place-content: center;
+  justify-items: start;
+  padding: 32px;
+  background: #fff;
+  color: #1f0f0f;
+  font-family: Handjet, ui-sans-serif, sans-serif;
+}
+
+.site-not-found p,
+.site-not-found h1 { margin: 0; }
+.site-not-found p { color: #f06; font-size: 18px; }
+.site-not-found h1 { font-size: clamp(42px, 9vw, 96px); }
+.site-not-found button { margin-top: 24px; padding: 10px 14px; border: 2px solid currentColor; background: transparent; cursor: pointer; }

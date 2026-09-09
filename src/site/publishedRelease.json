@@ -1,0 +1,4381 @@
+{
+  "format": "choja-site-release",
+  "version": 1,
+  "id": "release-20260909031157",
+  "createdAt": "2026-09-09T03:11:57.537Z",
+  "content": {
+    "ux": {
+      "explanation": "Reshaping fragmented flow into a one unified, useful and approachable experiences.",
+      "projects": [
+        {
+          "title": "Waypoint",
+          "meta": "Case study / UX design",
+          "slug": "making-complex-tools-feel-obvious",
+          "summary": "if I became a worm would you still love me?",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "src": "/published/8e94b537f93cbaf0ba2f.png",
+              "alt": "",
+              "caption": "Click to enlarge the image",
+              "id": "making-complex-tools-feel-obvious-image-0"
+            },
+            {
+              "type": "image",
+              "src": "/published/52630535ac72c1c4b349.png",
+              "alt": "",
+              "caption": "",
+              "id": "making-complex-tools-feel-obvious-image-1"
+            },
+            {
+              "type": "image",
+              "src": "/published/a59fbd63cb96388a5256.png",
+              "alt": "",
+              "caption": "",
+              "id": "making-complex-tools-feel-obvious-image-2"
+            },
+            {
+              "type": "image",
+              "src": "/published/f5ede08cdf22bf9362ed.png",
+              "alt": "",
+              "caption": "",
+              "id": "making-complex-tools-feel-obvious-image-3"
+            },
+            {
+              "type": "image",
+              "src": "/published/5d7e9411cc67e7180ad8.png",
+              "alt": "",
+              "caption": "",
+              "id": "making-complex-tools-feel-obvious-image-4"
+            },
+            {
+              "type": "image",
+              "src": "/published/c2bcc543125dfd7ffa5c.png",
+              "alt": "",
+              "caption": "",
+              "id": "making-complex-tools-feel-obvious-image-5"
+            },
+            {
+              "type": "image",
+              "src": "/published/57d2ca0654f06d441616.png",
+              "alt": "",
+              "caption": "",
+              "id": "making-complex-tools-feel-obvious-image-6"
+            },
+            {
+              "type": "image",
+              "src": "/published/cc0c6417db822ec8c807.png",
+              "alt": "",
+              "caption": "",
+              "id": "making-complex-tools-feel-obvious-image-7"
+            },
+            {
+              "type": "image",
+              "src": "/published/331fb882fbacf2695060.png",
+              "alt": "",
+              "caption": "",
+              "id": "making-complex-tools-feel-obvious-image-8"
+            },
+            {
+              "type": "image",
+              "src": "/published/85b773de3248c5b53105.png",
+              "alt": "",
+              "caption": "",
+              "id": "making-complex-tools-feel-obvious-image-9"
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtkc9o3g-xtsz",
+              "type": "image",
+              "src": "/published/9630a57ff4e16915f211.png",
+              "alt": "Screenshot of Waypoint ChatGPT plugin prototype",
+              "caption": ""
+            },
+            {
+              "id": "text-mtm0q1p9-z7zr",
+              "type": "text",
+              "content": "Starting something new often requires learning new skills and, in some cases, earning the credentials to support them. Adults seek educational opportunities for many different reasons, each shaped by their own goals and circumstances. Yet when exploring programs in Canada, finding an option that aligns with practical constraints such as cost, location, schedule, and delivery format can be difficult. Comparing these options often requires navigating information across multiple sources, and rarely does every condition align perfectly in one place.\n\nAs LLMs advance, information becomes more accessible, yet easier access does not guarantee greater trust. AI can help users search, summarize, and compare information across multiple sources, but users may still need to understand where individual details came from, whether they are current, and how faithfully they reflect the original source. Waypoint explores how a ChatGPT-based comparison experience might reduce the effort of program research while keeping source information and uncertainty traceable throughout the decision-making process.",
+              "style": "paragraph",
+              "width": 100
+            },
+            {
+              "id": "text-mtm111u7-h6q9",
+              "type": "text",
+              "content": "I began the project by asking:\n\n- How do adults currently find and compare education or training programs?\n- What makes program comparison difficult when information is spread across different provider websites?\n- Where do users compromise, change direction, or stop exploring?\n- How does AI-assisted research change the way users evaluate and verify information?\n\nEarly conversations and observations suggested a recurring pattern: people often began with one promising program or a specific learning goal, then expanded their search when the initial option no longer fit their circumstances. This led them across institutional, government, and directory websites, where information about tuition, location, program structure, and requirements was often presented in different ways. Rather than simply finding more options, users had to repeatedly interpret these differences through their own priorities while keeping track of how each alternative compared with their original choice.\n\nAs more alternatives entered the search, the effort shifted from discovery to managing trade-offs. Users needed to remember what mattered to them, distinguish meaningful differences, and determine which information still required further investigation. AI could reduce some of this effort by gathering and organizing information into a more consistent comparison. However, synthesis introduced a different challenge: the relationship between individual details and their original sources could become less visible, making it harder to understand what was directly stated, what had been interpreted, and what remained uncertain.\n\nThe research shifted the opportunity from simply helping users find more programs to helping them maintain context as their search expands: preserving their starting point, applying consistent criteria, prioritizing meaningful differences, and keeping AI-synthesized information traceable to its sources.\n\nBuilding on the research findings, I translated the experience into four design principles: preserve the user’s original program as a reference point, prioritize meaningful differences over completeness, keep source information traceable without overwhelming the interface, and support decision-making without positioning AI as an authority. Because Waypoint is designed to live within ChatGPT rather than function as a standalone product, I used ChatGPT’s existing interaction and visual language as a foundation, allowing conversation to handle intent and refinement while the plugin UI handles structured exploration and comparison. This led to a progressively disclosed experience in which users can scan alternatives through lightweight program cards, understand how each option aligns with their criteria through explicit values and match states, access source details when needed, and move from inline exploration to a focused comparison view when evaluating trade-offs.\n\nThe resulting experience supports a progression from exploration to evaluation: users begin with an existing program, review alternatives against their own criteria, compare meaningful trade-offs, and trace important details back to their sources when needed.\n\nWaypoint began as an exploration of how AI could make fragmented program research more efficient, but the project ultimately became more about how that convenience should be designed responsibly. Designing within ChatGPT pushed me to consider not only what information AI could surface, but how users could maintain context, understand trade-offs, and return to the original evidence behind a synthesized response. Rather than attempting to determine the “best” program, the final direction focuses on giving users a clearer and more traceable way to make that judgment themselves.\n\nNext, I would validate the comparison hierarchy and provenance patterns with users, particularly whether the amount and timing of source information supports confidence without adding unnecessary cognitive load.",
+              "style": "paragraph",
+              "width": 100
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "custom:text-mtm0q1p9-z7zr",
+                "custom:image-mtkc9o3g-xtsz",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 533,
+              "copyWidth": 527,
+              "mediaGap": 10,
+              "mediaHeight": 441,
+              "secondOffset": 28,
+              "bodyGap": 0,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "body",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "introduction": "A prototype ChatGPT Plugin for Canadian adults exploring and comparing education and training programs.",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": true
+          },
+          "services": [
+            "Research",
+            "Plugin UX"
+          ],
+          "fieldNoteFooterEnabled": false,
+          "fullTextFormat": "markdown",
+          "fullTextContent": "",
+          "fieldNoteFooterPlacement": "below",
+          "thumbnail": {
+            "source": "media",
+            "id": "making-complex-tools-feel-obvious-image-0"
+          }
+        },
+        {
+          "title": "Improving search and filter patterns of a marine natural product database",
+          "meta": "UX strategy / Case Study",
+          "slug": "a-kinder-way-through-the-workflow",
+          "summary": "A service journey was reframed to acknowledge uncertainty, explain what happens next, and keep support close to the moments that n",
+          "rationale": [
+            "The three major features + patterns I mapped out are:",
+            "Search - \nUsers can describe in plain words to pull datasets, add tags by typing \"#\" to invoke the chip that serves as a filter category. When the chips are activated, a combobox will appear and serve as a query interpretation row rather than a E-commerce style fuzzy search. In order to handle disambiguation, the search will expose the exact rule that caused ambiguity on the combobox, such as “matched multiple fields.” Once the system can map the term unambiguously, the chip will convert into a committed state but users are still able to edit afterwards. Unresolved chips stay in a provisional state until the user chooses a field, or they fall back to keyword-only search. I gave clear visual difference by using colour and icon to distinguish between states. ",
+            "For more efficient navigation, keyboard can be used to let users stay in flow without touching the mouse. The basic arrow up / down to move between suggested query lists, backspace having two behaviours: being able to edit the query chip when the text is active, and move focus to previous chip when there is no active text. ",
+            "Filter - \nAfter the query is completed and user enters the results page, the applied filters will be highlighted, making them immediately visible in the side bar. The filter categories are organized to show the hierarchy with the high-level filters being at the top that establish search context. The low-priority filter categories with low immediate relevance are pushed down and collapsed by default. These include not being directly referenced in the query, lower domain importance for current workflow and having low-variance facets in the current results set. ",
+            "Chip - ",
+            "In the input field, each chip communicates its query role and displays a field label plus value, such as `Taxon: Sponge`, `Activity: Antifungal`, or `Depth: Shallow`. Chips communicate both query logic, such as required, excluded, or optional, and resolution state, such as provisional or committed. In the case of having multiple completed chips that reside in the same category, they will be grouped and combined as one chip that can be expanded on users' demand. Grouped chips summarize count or scope, for example `Activity: Antifungal +2`, while preserving access to full values on expansion.",
+            "In the results page, active chips will have the same order as the filter category to reduce nuance. For expressing cases like \"not,\" \"between\" or \"all of,\" chips will use the explicit operator, boolean semantics visible to users. The key for designing the chip pattern was to make the logic consistent and remove as much ambiguity as possible. The chip bar will be inevitably crowded as users add more filter items. To minimize this, once the chips exceed the length of chip bar, the chips show the shortest meaningful value and users can hover / keyboard navigate to reveal the full rule. Further, a button will appear at the right edge indicating the number of chips that are not shown in the chip bar, ex) \"+4 more.\" Users then can click and expand the list of chips, take action of editing or deleting them. ",
+            "----",
+            "**Trial & Error**",
+            "I initially planned to create a fictional marine natural database for my case study. At that time, I focused on giving visual clarity and merging fragmented user flow. I had set an expectation of what my project would look like, but I did not have a clear goal other than simplifying the user flow and ended up trying to address too many problem at once. Ultimately, I had to go through a re-evaluation process after finishing my lo-fi prototype as I felt that I was digging into details that really did not align with the vision I had at the beginning of this project. It was a good learning experience so I think it's worth documenting the journey that led me to my final concept. ",
+            "Design Phase",
+            "With my design, I worked on the known user pain points of hard-to-use filters and having many dead-end strings. At this stage, I planned to improve the search and filter experience by progressive disclosure and contextual layer for users to discover different options. I saw other improvement opportunity of CMNPD's keyword suggestion on their homepage, to build a design for a guided entry cards and pre-curated filters for easier first-time entry.",
+            "I wanted the visuals to be ocean-themed and calm, and created Figma design system accordingly. In the wireframe, the search results are organized into cards and lists, and keywords are shown as chips in the result item, so users can easily navigate through them without visual overload. ",
+            "Prototype Phase",
+            "Once I finished mocking up the components and major screens, I began prototyping the screens and interaction with Cursor, with my Figma designs connected with MCP. I used Storybook to test interactivity component by component. I used Meta Astryx design system as a base and implemented my Figma design on top of their components. By the time I started setting the components up on a screen, I slowly realized I fell into a pitfall of implementing tiny visual details without audit, obsessing over small icon animation and other unimportant details. So I wanted to take some time off from prototyping and get a quick feedback from small group of people.",
+            "After presenting my prototype to a few users with knowledge in development and similar academic fields, I received unanimous feedback that while the flow was simple and fast, it traded off the professionalism that scientific software have. Making it feel more like a E-Commerce platform rather than a sophisticated tool. And so I would ",
+            "I consider this project an ongoing experiment and aim to return to it with deeper research and higher‑fidelity interaction design."
+          ],
+          "media": [
+            {
+              "type": "image",
+              "src": "/published/dc4c51919f29afe6352e.png",
+              "alt": "",
+              "caption": "",
+              "id": "a-kinder-way-through-the-workflow-image-0"
+            },
+            {
+              "type": "image",
+              "src": "/published/0e435987ba9e9eb86809.png",
+              "alt": "",
+              "caption": "",
+              "id": "a-kinder-way-through-the-workflow-image-1"
+            },
+            {
+              "type": "image",
+              "src": "/published/cf5ce22e3c691dad46e2.png",
+              "alt": "",
+              "caption": "",
+              "id": "a-kinder-way-through-the-workflow-image-2"
+            },
+            {
+              "type": "image",
+              "src": "/published/df2e2c3e6bd7dbfccb48.png",
+              "alt": "",
+              "caption": "",
+              "id": "a-kinder-way-through-the-workflow-image-3"
+            },
+            {
+              "type": "image",
+              "src": "/published/f72f3ad226347b363397.png",
+              "alt": "",
+              "caption": "",
+              "id": "a-kinder-way-through-the-workflow-image-4"
+            },
+            {
+              "type": "image",
+              "src": "/published/687cbf3761a510d2b63e.png",
+              "alt": "",
+              "caption": "",
+              "id": "a-kinder-way-through-the-workflow-image-5"
+            },
+            {
+              "type": "image",
+              "src": "/published/e2b6ce36043a5d50dc63.png",
+              "alt": "",
+              "caption": "",
+              "id": "a-kinder-way-through-the-workflow-image-6"
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "text-mtm1jv7g-auoi",
+              "type": "text",
+              "content": "Scientific databases reject mistakes instead of teaching from them. CMNPD (Comprehensive Marine Natural Products Database) gives researchers a powerful query builder, but only if they already know every parameter. When a search returns zero results, the tool offers no path forward.\n\nI noticed that most of the scientific database software were - I would say as a non-professional - feeling quite unintuitive and outdated. They almost feel self-explanatory, making mistakes didn't lead to a learning experience but rather a rejection. As of 2026, many data-heavy websites are making efforts to remove the friction of accessing large data. The modern filter patterns use adaptive interfaces providing immediate interaction and reducing the user effort. \n\nI redesigned the search and filter flow so professionals and students researching marine natural products for human health applications can navigate confidently without needing to master the system's internal logic first.",
+              "style": "paragraph",
+              "width": 100
+            },
+            {
+              "id": "text-mtm1kfgs-qvzk",
+              "type": "text",
+              "content": "Even though the database had professional and thorough details on the compounds, the user flow felt fragmented and was often met with \"dead-ends\" as it lacks at supporting clear goals and wayfinding. CMNPD offers a very extensive query builder, but it requires understanding of every parameters to use it to the full potential. When the query returns no result, it does not provide guidance towards the next step. \n\nMy user groups would be students and professionals researching for marine natural products for human health needs, they have the knowledge and skills to use the product. However, users must build their own flow by jumping between sections as each section offer different mental models. Each time the tool creates isolation of research flow, users lose momentum and efficiency resulting in higher cognitive load. \n\nI focused on conceptualizing a search and filter flow that aid professionals to navigate and tailor search results based on contextual search customization. I did not intend to reinvent the basics nor undermine the professionals by watering down the features. By consolidating the quick search with query builder, it becomes a powerful tool to streamline the workflow and deliver accurate results, giving ability to access the data without friction & lessen the cognitive load. ",
+              "style": "paragraph",
+              "width": 100
+            },
+            {
+              "id": "image-mtm28w9a-iwv4",
+              "type": "image",
+              "src": "/published/286cab00cdd51d7269b8.png",
+              "alt": "compound",
+              "caption": ""
+            },
+            {
+              "id": "image-mtm7to9l-8jqd",
+              "type": "image",
+              "src": "/published/b0d289ee235e1ed7b3ae.webp",
+              "alt": "compound-1",
+              "caption": "",
+              "thumbnailSrc": "/published/d31b9fdf060f9cc806a0.webp",
+              "fullSrc": "/published/9e320b4eff9802469b94.webp"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "custom:text-mtm1jv7g-auoi",
+                "custom:text-mtm1kfgs-qvzk",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 750,
+              "copyWidth": 812,
+              "mediaGap": 14,
+              "mediaHeight": 440,
+              "secondOffset": 7,
+              "bodyGap": 54,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "year": "2026",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": true
+          },
+          "services": [
+            "Wireframing",
+            "Prototyping",
+            "User flow"
+          ],
+          "introduction": "",
+          "fullTextFormat": "markdown",
+          "fullTextContent": "The three major features + patterns I mapped out are:\n\nSearch - \nUsers can describe in plain words to pull datasets, add tags by typing \"#\" to invoke the chip that serves as a filter category. When the chips are activated, a combobox will appear and serve as a query interpretation row rather than a E-commerce style fuzzy search. In order to handle disambiguation, the search will expose the exact rule that caused ambiguity on the combobox, such as “matched multiple fields.” Once the system can map the term unambiguously, the chip will convert into a committed state but users are still able to edit afterwards. Unresolved chips stay in a provisional state until the user chooses a field, or they fall back to keyword-only search. I gave clear visual difference by using colour and icon to distinguish between states. \n\nFor more efficient navigation, keyboard can be used to let users stay in flow without touching the mouse. The basic arrow up / down to move between suggested query lists, backspace having two behaviours: being able to edit the query chip when the text is active, and move focus to previous chip when there is no active text. \n\nFilter - \nAfter the query is completed and user enters the results page, the applied filters will be highlighted, making them immediately visible in the side bar. The filter categories are organized to show the hierarchy with the high-level filters being at the top that establish search context. The low-priority filter categories with low immediate relevance are pushed down and collapsed by default. These include not being directly referenced in the query, lower domain importance for current workflow and having low-variance facets in the current results set. \n\nChip - \n\nIn the input field, each chip communicates its query role and displays a field label plus value, such as `Taxon: Sponge`, `Activity: Antifungal`, or `Depth: Shallow`. Chips communicate both query logic, such as required, excluded, or optional, and resolution state, such as provisional or committed. In the case of having multiple completed chips that reside in the same category, they will be grouped and combined as one chip that can be expanded on users' demand. Grouped chips summarize count or scope, for example `Activity: Antifungal +2`, while preserving access to full values on expansion.\n\nIn the results page, active chips will have the same order as the filter category to reduce nuance. For expressing cases like \"not,\" \"between\" or \"all of,\" chips will use the explicit operator, boolean semantics visible to users. The key for designing the chip pattern was to make the logic consistent and remove as much ambiguity as possible. The chip bar will be inevitably crowded as users add more filter items. To minimize this, once the chips exceed the length of chip bar, the chips show the shortest meaningful value and users can hover / keyboard navigate to reveal the full rule. Further, a button will appear at the right edge indicating the number of chips that are not shown in the chip bar, ex) \"+4 more.\" Users then can click and expand the list of chips, take action of editing or deleting them. \n\n----\n\n**Trial & Error**\n\nI initially planned to create a fictional marine natural database for my case study. At that time, I focused on giving visual clarity and merging fragmented user flow. I had set an expectation of what my project would look like, but I did not have a clear goal other than simplifying the user flow and ended up trying to address too many problem at once. Ultimately, I had to go through a re-evaluation process after finishing my lo-fi prototype as I felt that I was digging into details that really did not align with the vision I had at the beginning of this project. It was a good learning experience so I think it's worth documenting the journey that led me to my final concept. \n\nDesign Phase\n\nWith my design, I worked on the known user pain points of hard-to-use filters and having many dead-end strings. At this stage, I planned to improve the search and filter experience by progressive disclosure and contextual layer for users to discover different options. I saw other improvement opportunity of CMNPD's keyword suggestion on their homepage, to build a design for a guided entry cards and pre-curated filters for easier first-time entry.\n\nI wanted the visuals to be ocean-themed and calm, and created Figma design system accordingly. In the wireframe, the search results are organized into cards and lists, and keywords are shown as chips in the result item, so users can easily navigate through them without visual overload. \n\nPrototype Phase\n\nOnce I finished mocking up the components and major screens, I began prototyping the screens and interaction with Cursor, with my Figma designs connected with MCP. I used Storybook to test interactivity component by component. I used Meta Astryx design system as a base and implemented my Figma design on top of their components. By the time I started setting the components up on a screen, I slowly realized I fell into a pitfall of implementing tiny visual details without audit, obsessing over small icon animation and other unimportant details. So I wanted to take some time off from prototyping and get a quick feedback from small group of people.\n\nAfter presenting my prototype to a few users with knowledge in development and similar academic fields, I received unanimous feedback that while the flow was simple and fast, it traded off the professionalism that scientific software have. Making it feel more like a E-Commerce platform rather than a sophisticated tool. And so I would \n\nI consider this project an ongoing experiment and aim to return to it with deeper research and higher‑fidelity interaction design.",
+          "fieldNoteFooterEnabled": false,
+          "thumbnail": {
+            "source": "media",
+            "id": "a-kinder-way-through-the-workflow-image-0"
+          }
+        },
+        {
+          "title": "Figma TUI Design System",
+          "meta": "Design System / TUI",
+          "slug": "a-service-shaped-around-people",
+          "summary": "Includes 40+ components, ASCII box drawing library, modular patterns, and complete documentation. Perfect for CLI tools, developer tools, and retro-style applications.",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "src": "/published/da548d6cdf4f66417d6e.png",
+              "alt": "Title-Page",
+              "caption": "",
+              "id": "a-service-shaped-around-people-image-0"
+            },
+            {
+              "type": "image",
+              "src": "/published/1a6757d7dd5a7ae032ad.png",
+              "alt": "Table-of-contents",
+              "caption": "",
+              "id": "a-service-shaped-around-people-image-1"
+            },
+            {
+              "type": "image",
+              "src": "/published/195650850e404c94591a.png",
+              "alt": "lazygit-style",
+              "caption": "",
+              "id": "a-service-shaped-around-people-image-2"
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "text-mtkllz4y-cstp",
+              "type": "text",
+              "content": "Includes 40+ components, ASCII box drawing library, modular patterns, and complete documentation. Perfect for CLI tools, developer tools, and retro-style applications.",
+              "style": "paragraph",
+              "width": 100
+            },
+            {
+              "id": "image-mtm2dcvu-fxga",
+              "type": "image",
+              "src": "/published/da548d6cdf4f66417d6e.png",
+              "alt": "Title-Page",
+              "caption": ""
+            },
+            {
+              "id": "image-mtm2ddnj-8tqn",
+              "type": "image",
+              "src": "/published/1a6757d7dd5a7ae032ad.png",
+              "alt": "Table-of-contents",
+              "caption": ""
+            },
+            {
+              "id": "image-mtm2dewk-ymfs",
+              "type": "image",
+              "src": "/published/195650850e404c94591a.png",
+              "alt": "lazygit-style",
+              "caption": ""
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "custom:text-mtkllz4y-cstp",
+                "media",
+                "custom:image-mtm2dcvu-fxga",
+                "custom:image-mtm2ddnj-8tqn",
+                "custom:image-mtm2dewk-ymfs",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 590,
+              "copyWidth": 600,
+              "mediaGap": 14,
+              "mediaHeight": 443,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "carousel",
+              "mediaEnabled": false,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "fullTextContent": "",
+          "introduction": "A basic design system made in [Figma](https://www.figma.com/community/file/1605441651613376418/tui-design-system-terminal-user-interface-components-v0-1) for building modern terminal user interfaces. ",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": true
+          },
+          "services": [
+            "Design System",
+            "Terminal UI"
+          ],
+          "fieldNoteFooterEnabled": true,
+          "fieldNoteLabels": {
+            "outcome": "Community Engagement",
+            "process": "",
+            "credits": "Credits"
+          },
+          "fieldNoteFooter": {
+            "outcome": "- 390+ Users\n- 20+ Likes\n",
+            "process": []
+          },
+          "credits": [
+            "Icons: [Lucide](https://lucide.dev) - Beautiful & consistent icon toolkit (ISC License)",
+            "Inspired by modern TUI applications:",
+            "- lazygit (Git TUI)",
+            "- bottom (System monitor)",
+            "- yazi (File manager)",
+            "- k9s (Kubernetes TUI)"
+          ],
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtm2dcvu-fxga"
+          }
+        }
+      ]
+    },
+    "illustration": {
+      "explanation": "Creating illustration that have distinct and expressive voices with stylistic versatility.",
+      "projects": [
+        {
+          "title": "천도제 - Reincarnation (2026)",
+          "meta": "Art Direction / Illustration",
+          "slug": "characters-with-something-to-say",
+          "summary": "",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "src": "/published/158b16ff71d4bde7ae83.png",
+              "alt": "1",
+              "caption": "",
+              "id": "characters-with-something-to-say-image-0"
+            },
+            {
+              "type": "image",
+              "src": "/published/f14c35d34296b41f2f88.png",
+              "alt": "2",
+              "caption": "",
+              "id": "characters-with-something-to-say-image-1"
+            },
+            {
+              "type": "image",
+              "src": "/published/991e4046c28e878d9ca0.png",
+              "alt": "3",
+              "caption": "",
+              "id": "characters-with-something-to-say-image-2"
+            },
+            {
+              "type": "image",
+              "src": "/published/22540790eedea86ed26d.png",
+              "alt": "4",
+              "caption": "",
+              "id": "characters-with-something-to-say-image-3"
+            },
+            {
+              "type": "image",
+              "src": "/published/2f007cdf6b79a80e520a.png",
+              "alt": "5",
+              "caption": "",
+              "id": "characters-with-something-to-say-image-4"
+            },
+            {
+              "type": "image",
+              "src": "/published/525cc12b70f9f299025e.png",
+              "alt": "6",
+              "caption": "",
+              "id": "characters-with-something-to-say-image-5"
+            },
+            {
+              "type": "image",
+              "src": "/published/c941ad7f1a3766abb09e.png",
+              "alt": "7",
+              "caption": "",
+              "id": "characters-with-something-to-say-image-6"
+            },
+            {
+              "type": "image",
+              "src": "/published/3ef6c2a288c94cb94fa6.png",
+              "alt": "8",
+              "caption": "",
+              "id": "characters-with-something-to-say-image-7"
+            },
+            {
+              "type": "image",
+              "src": "/published/2e0d0617524741f78107.png",
+              "alt": "9",
+              "caption": "",
+              "id": "characters-with-something-to-say-image-8"
+            },
+            {
+              "type": "image",
+              "src": "/published/2c907693dbc38a5f6640.png",
+              "alt": "10",
+              "caption": "",
+              "id": "characters-with-something-to-say-image-9"
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "youtube-mtm7gemy-h6ii",
+              "type": "youtube",
+              "url": "https://www.youtube.com/watch?v=lhNZNKXXLdI",
+              "title": "",
+              "caption": ""
+            },
+            {
+              "id": "text-mtlnt5gm-ouzi",
+              "type": "text",
+              "content": "From January 2026 to May 2026, I was responsible for creating concept art and animated illustration, along with art direction for an indie short animated film directed by Min Chung. Working closely with the director, I expanded the initial concept into cohesive visual assets that maintain consistency in tone, mood, and narrative across the film.\n\nThe project explored a traditional Korean shamanic ritual, so the visual language was heavily influenced by Korean folk paintings and traditional colour palette (Obangsaek; blue, red, yellow, white and black). The clothing of the two characters, the shaman and the masked spirit, was also based on Korean traditional costumes: the shamanic dress \"Mubok\" and the Korean traditional mask \"Tal\" and mask dance costume. I iterated between different facial structures and accessories, continuing communication with the director to support the best visual outcome. To create cohesion with backgrounds made using hanji (Korean traditional paper), I layered scanned hanji textures over digital drawings to help unify the mixed-media aesthetic.",
+              "style": "paragraph",
+              "width": 100
+            },
+            {
+              "id": "text-mtlntp17-18kj",
+              "type": "text",
+              "content": "Although the project initially leaned toward a more narrative-driven approach, it evolved into a more abstract and experimental animated piece, and I adapted the visual direction accordingly. My role bridged cultural research, visual development, and art direction to shape the film's final aesthetic.",
+              "style": "paragraph",
+              "width": 100
+            },
+            {
+              "id": "image-mtm6904j-rdnw",
+              "type": "image",
+              "src": "/published/6463c16fde6f01c63839.webp",
+              "alt": "11",
+              "caption": "",
+              "thumbnailSrc": "/published/e21c71f96fcc8880d397.webp",
+              "fullSrc": "/published/e0f106ac241f0106eeeb.webp"
+            },
+            {
+              "id": "image-mtm693t9-534p",
+              "type": "image",
+              "src": "/published/fb0d787179f3cc54e175.webp",
+              "alt": "14",
+              "caption": "",
+              "thumbnailSrc": "/published/c071fe8fed92574bde70.webp",
+              "fullSrc": "/published/b39fda7311b6849207f6.webp"
+            },
+            {
+              "id": "image-mtm696dc-z0c0",
+              "type": "image",
+              "src": "/published/4f5c50815b770f145ff2.webp",
+              "alt": "15",
+              "caption": "",
+              "thumbnailSrc": "/published/4e620a5d639ebaf4f29f.webp",
+              "fullSrc": "/published/b3d62f8eb192715c641b.webp"
+            },
+            {
+              "id": "image-mtm7jkma-dn1v",
+              "type": "image",
+              "src": "/published/a4ecaa9eb9e0520477c2.webp",
+              "alt": "cheondoje-thumbnail",
+              "caption": "",
+              "thumbnailSrc": "/published/7ebce8b3a3d34e8b0bc5.webp",
+              "fullSrc": "/published/5780526f1e29f5647b7d.webp"
+            },
+            {
+              "id": "image-mtm6pe7j-vp7q",
+              "type": "image",
+              "src": "/published/ef2aecfb6f5d65db53db.webp",
+              "alt": "screening_TO",
+              "caption": "",
+              "thumbnailSrc": "/published/9ed6b361a7c52630feca.webp",
+              "fullSrc": "/published/d65ecae338f85a3a116f.webp"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "custom:youtube-mtm7gemy-h6ii",
+                "media",
+                "custom:text-mtlnt5gm-ouzi",
+                "custom:text-mtlntp17-18kj",
+                "custom:image-mtm6904j-rdnw",
+                "custom:image-mtm693t9-534p",
+                "custom:image-mtm696dc-z0c0",
+                "custom:image-mtm7jkma-dn1v",
+                "custom:image-mtm6pe7j-vp7q",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 394,
+              "copyWidth": 359,
+              "mediaGap": 14,
+              "mediaHeight": 440,
+              "secondOffset": 28,
+              "bodyGap": 50,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "custom:youtube-mtm7gemy-h6ii",
+                "custom:text-mtlnt5gm-ouzi",
+                "custom:text-mtlntp17-18kj",
+                "custom:image-mtm6904j-rdnw",
+                "custom:image-mtm693t9-534p",
+                "custom:image-mtm696dc-z0c0",
+                "custom:image-mtm7jkma-dn1v",
+                "custom:image-mtm6pe7j-vp7q",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "custom:youtube-mtm7gemy-h6ii",
+                "custom:text-mtlnt5gm-ouzi",
+                "custom:text-mtlntp17-18kj",
+                "custom:image-mtm6904j-rdnw",
+                "custom:image-mtm693t9-534p",
+                "custom:image-mtm696dc-z0c0",
+                "custom:image-mtm7jkma-dn1v",
+                "custom:image-mtm6pe7j-vp7q",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "introduction": "A short animated film directed by Min Chung",
+          "role": "Art Director & Illustrator",
+          "services": [
+            "Animation",
+            "Concept Art",
+            "Visual Storytelling"
+          ],
+          "fieldNoteFooterEnabled": true,
+          "fieldNoteLabels": {
+            "outcome": "Screenings",
+            "process": "",
+            "credits": "Credits"
+          },
+          "fieldNoteFooter": {
+            "outcome": "Toronto Made: The World in a City (June 2026)\nArras Film Festival (November 2026)",
+            "process": [
+              ""
+            ]
+          },
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtm7jkma-dn1v"
+          },
+          "credits": [
+            "Director - Min Chung",
+            "Art Director & Illustrator - Jade Cho"
+          ]
+        },
+        {
+          "title": "Looped & Loaded",
+          "meta": "Concept Art / Game Art",
+          "slug": "a-small-world-of-odd-creatures",
+          "summary": "",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "id": "image-mtm7enk5-76yzp",
+              "src": "/published/669962da887eda07e828.webp",
+              "thumbnailSrc": "/published/5ebb96750827c060e3d5.webp",
+              "fullSrc": "/published/a5111a77de3c300d3bc6.webp",
+              "alt": "",
+              "caption": "Koji - Effects & Accessory"
+            },
+            {
+              "type": "image",
+              "id": "image-mtm7eo8p-xuziw",
+              "src": "/published/784fe369979455f5f8e6.webp",
+              "thumbnailSrc": "/published/7ab70dc29a0a04c5eedf.webp",
+              "fullSrc": "/published/c9580309ce4e7129dceb.webp",
+              "alt": "",
+              "caption": "Koji - Costumes & Hairstyle"
+            },
+            {
+              "type": "image",
+              "id": "image-mtm7fmq4-eac7c",
+              "src": "/published/bc582bdb8360896afffc.webp",
+              "alt": "",
+              "caption": "Assets",
+              "thumbnailSrc": "/published/dc9412190c3eb4f0d318.webp",
+              "fullSrc": "/published/d002461f3bb98297c95d.webp"
+            },
+            {
+              "type": "image",
+              "id": "image-mtm7fe8k-ihz2b",
+              "src": "/published/8fa1ffcc1caf8717f063.webp",
+              "thumbnailSrc": "/published/a195d1ce4bd0675ec2e7.webp",
+              "fullSrc": "/published/e9fcf667e5cb309ca7ed.webp",
+              "alt": "",
+              "caption": "Prop Redesign - Wall Decorations"
+            },
+            {
+              "type": "image",
+              "id": "image-mtm7ff01-oaqbm",
+              "src": "/published/dea86b0a9ab62b9c2893.webp",
+              "thumbnailSrc": "/published/40f952f6e52a6a3313ad.webp",
+              "fullSrc": "/published/41a94d13675054841d35.webp",
+              "alt": "",
+              "caption": "Prop Redesign - Furnitures"
+            },
+            {
+              "type": "image",
+              "id": "image-mtm7ffis-vzuxl",
+              "src": "/published/6a74b4536ea886fb60eb.webp",
+              "thumbnailSrc": "/published/77e4baf9a6ae963f3f4d.webp",
+              "fullSrc": "/published/cdbf1b3e185d123e1355.webp",
+              "alt": "",
+              "caption": "Prop Redesign - Bar Table"
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtm8ca1i-vrc2",
+              "type": "image",
+              "src": "/published/2eeabace477d08e68de4.webp",
+              "alt": "coverImage_copy",
+              "caption": "",
+              "thumbnailSrc": "/published/6a10aa8eaeaaec53f089.webp",
+              "fullSrc": "/published/150576ffe3e847f95b6f.webp",
+              "showInProject": false
+            },
+            {
+              "id": "image-mtm8dev4-jgdj",
+              "type": "image",
+              "src": "/published/478e5a7f1288dc2013de.gif",
+              "alt": "",
+              "caption": "In-game Recording",
+              "thumbnailSrc": "/published/478e5a7f1288dc2013de.gif",
+              "fullSrc": "/published/478e5a7f1288dc2013de.gif"
+            },
+            {
+              "id": "text-mtm8e4zj-r33v",
+              "type": "text",
+              "content": "I was responsible for making different enemy characters and painting textures for 3D assets in-game. I decided to further develop one of the character Koji, and his dive bar. I focused on iterating further and giving personality on his outfits and dive bar props after the jam ended.\n\nAs the enemy character designer, my challenge was building opponents that felt distinct from Mai while still belonging to the same rhythm-soaked city. Koji and Naomi had to read as threats the moment players saw them: visually bold, culturally grounded, and immediately different from the hero they were playing as.\n\nWorking within an 11-person team, I owned the visual identity of the game's enemy cast. That meant designing Koji and Naomi from concept through to texture-ready assets, while staying in sync with the 3D pipeline and the game's broader Japanese Y2K street aesthetic.\n\nThe goal was to build a character who felt like he owned the block, someone whose silhouette alone communicated confidence and opposition.\n\n+) I redesigned the environment prop after the jam finished!",
+              "style": "paragraph",
+              "width": 60
+            },
+            {
+              "id": "image-mtm8r2j3-c2fy",
+              "type": "image",
+              "src": "/published/4d7371bd068581d2740f.webp",
+              "alt": "",
+              "caption": "Alternative Title Graffiti Sticker",
+              "thumbnailSrc": "/published/4dfe894945af35ecfd4e.webp",
+              "fullSrc": "/published/35f7f0a39a4f73d788a7.webp"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "custom:text-mtm8e4zj-r33v",
+                "custom:image-mtm8ca1i-vrc2",
+                "custom:image-mtm8dev4-jgdj",
+                "custom:image-mtm8r2j3-c2fy",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 586,
+              "copyWidth": 600,
+              "mediaGap": 15,
+              "mediaHeight": 172,
+              "secondOffset": 14,
+              "bodyGap": 51,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "introduction": "Participated in [Boss Rush Jam 2025](https://nanocomputer.itch.io/looped-and-loaded) as a enemy character designer & texture artist.",
+          "year": "2025",
+          "role": "Character Designer & Texture Artist",
+          "services": [
+            "Indie Game",
+            "Character Design",
+            "Environment Design"
+          ],
+          "fieldNoteFooterEnabled": false,
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtm8ca1i-vrc2"
+          }
+        },
+        {
+          "title": "Lionfish",
+          "meta": "World building / Narrative",
+          "slug": "scenes-from-an-imaginary-place",
+          "summary": "",
+          "rationale": [],
+          "media": [],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtmduony-p4rl",
+              "type": "image",
+              "src": "/published/9b1029589ea77a42885f.webp",
+              "alt": "lionfish",
+              "caption": "",
+              "thumbnailSrc": "/published/e82fb86fbbfe0d2d38f1.webp",
+              "fullSrc": "/published/b3ba93c09a914837e647.webp"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "custom:image-mtmduony-p4rl",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 557,
+              "copyWidth": 531,
+              "mediaGap": 14,
+              "mediaHeight": 170,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "grid",
+              "mediaEnabled": false,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "fieldNoteFooterEnabled": false,
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": false
+          },
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtmduony-p4rl"
+          },
+          "introduction": "Personal digital illustration exploring composition and light. Drawn with Photoshop. ",
+          "year": "2025"
+        },
+        {
+          "title": "KRWZ - Black Market Environment",
+          "meta": "Concept Art / World building",
+          "slug": "pictures-for-curious-readers",
+          "summary": "",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "id": "image-mtn5yjsr-3mift",
+              "src": "/published/f8022a8531ffcc5ea7af.webp",
+              "thumbnailSrc": "/published/45c0011c1eefd802dcdf.webp",
+              "fullSrc": "/published/c3c770fcb8c277ab682e.webp",
+              "alt": "",
+              "caption": "Energy barrier"
+            },
+            {
+              "type": "image",
+              "id": "image-mtn5ykhb-skj54",
+              "src": "/published/3b628acad481c5bb74bd.webp",
+              "thumbnailSrc": "/published/e34324b48b794a54429b.webp",
+              "fullSrc": "/published/1d3eec466c676249745e.webp",
+              "alt": "",
+              "caption": "Elevator to the main level"
+            },
+            {
+              "type": "image",
+              "id": "image-mtn5yl1s-85oo8",
+              "src": "/published/d70a8a7b8cb8964616bb.webp",
+              "thumbnailSrc": "/published/470d9d0cdf9d6e1836de.webp",
+              "fullSrc": "/published/418a68c67aac0acab841.webp",
+              "alt": "",
+              "caption": "Loot in a trap"
+            },
+            {
+              "type": "image",
+              "id": "image-mtn5yllk-wge4g",
+              "src": "/published/fa7412d00ac0e265bd67.webp",
+              "thumbnailSrc": "/published/c04b90d646d5b5da7285.webp",
+              "fullSrc": "/published/9c66c0361af6fa324d14.webp",
+              "alt": "",
+              "caption": "Store front design 1"
+            },
+            {
+              "type": "image",
+              "id": "image-mtn5ym89-wewee",
+              "src": "/published/3e9297bab23d6327d2c6.webp",
+              "thumbnailSrc": "/published/184883374e5aa48c6a06.webp",
+              "fullSrc": "/published/0e08a8682bc648470c53.webp",
+              "alt": "",
+              "caption": "Store front design 2"
+            },
+            {
+              "type": "image",
+              "id": "image-mtn5zbsp-0mu24",
+              "src": "/published/dbbae65495ddad4a1dd4.webp",
+              "thumbnailSrc": "/published/9370ac951ea46e5bb13b.webp",
+              "fullSrc": "/published/8ed2823834ddf9764e54.webp",
+              "alt": "",
+              "caption": "3D Process"
+            },
+            {
+              "type": "image",
+              "id": "image-mtn5zc4j-jzqhw",
+              "src": "/published/39ed71e3a9b7dd824ac1.webp",
+              "thumbnailSrc": "/published/d0214fb6540160d89f0b.webp",
+              "fullSrc": "/published/bc9476bb7842f36bed4c.webp",
+              "alt": "",
+              "caption": "3D Process"
+            },
+            {
+              "type": "image",
+              "id": "image-mtn5zcf0-p0uut",
+              "src": "/published/b00561303fc750194269.webp",
+              "thumbnailSrc": "/published/37b3a14a27baa0f7f6e2.webp",
+              "fullSrc": "/published/abaa7dec07b6385d9369.webp",
+              "alt": "",
+              "caption": "Asset sketches"
+            },
+            {
+              "type": "image",
+              "id": "image-mtn5zcr6-huxp8",
+              "src": "/published/2e8e42fe664084567167.webp",
+              "thumbnailSrc": "/published/01b000f6d8e7cfe0bfee.webp",
+              "fullSrc": "/published/44030c57358729c43831.webp",
+              "alt": "",
+              "caption": "Asset sketches"
+            },
+            {
+              "type": "image",
+              "id": "image-mtn5zd2i-oczmx",
+              "src": "/published/e39a2ec92af0ca31a145.webp",
+              "thumbnailSrc": "/published/0d8c4533a638c1bc3e63.webp",
+              "fullSrc": "/published/d9171d7a1942ce6c4eb9.webp",
+              "alt": "",
+              "caption": "Asset sketches"
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtn5vgst-1rqu",
+              "type": "image",
+              "src": "/published/ef40bd25700b07b8bda7.webp",
+              "alt": "Thumbnail_BlackMarket",
+              "caption": "",
+              "thumbnailSrc": "/published/79d68b90b46939e41bd3.webp",
+              "fullSrc": "/published/d3fb459c52126a9d67ae.webp",
+              "showInProject": false
+            },
+            {
+              "id": "image-mtn5vyqv-nbj8",
+              "type": "image",
+              "src": "/published/1cdc0fb458fbfcc49b08.webp",
+              "alt": "BlackMarket_OV",
+              "caption": "",
+              "thumbnailSrc": "/published/66a528234c27548b157d.webp",
+              "fullSrc": "/published/14ad267dc89b1913d103.webp"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "custom:text-mtn615ps-szj5",
+                "custom:image-mtn5vyqv-nbj8",
+                "media",
+                "custom:image-mtn5vgst-1rqu",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 600,
+              "copyWidth": 600,
+              "mediaGap": 14,
+              "mediaHeight": 180,
+              "secondOffset": 28,
+              "bodyGap": 59,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtn5vgst-1rqu"
+          },
+          "fieldNoteFooterEnabled": false,
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": true
+          },
+          "year": "2024",
+          "services": [
+            "Environment Concept Art"
+          ],
+          "introduction": "Environment concept art of a small hidden market in a space cruise ship where the merchants sell illegal goods. Designed to feel cramped, lived-in, and deliberately out of sight. ",
+          "fullTextContent": ""
+        },
+        {
+          "title": "KRWZ - Hotel Environment",
+          "meta": "Concept Art / Worldbuilding",
+          "slug": "loose-lines-and-lively-gestures",
+          "summary": "",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "id": "image-mtqhu40h-zzwbq",
+              "src": "/published/617acd915bb219bcf422.webp",
+              "thumbnailSrc": "/published/5e912fed748820c21e82.webp",
+              "fullSrc": "/published/fa65dfb223344717a775.webp",
+              "alt": "",
+              "caption": "Shelf design 1"
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhu4sl-94pqt",
+              "src": "/published/e8cb457985c55e672435.webp",
+              "thumbnailSrc": "/published/9a00c276cca25d2d59e5.webp",
+              "fullSrc": "/published/b3fd4b32d7bc59815efd.webp",
+              "alt": "",
+              "caption": "Shelf design 2"
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhu5g9-uzg7b",
+              "src": "/published/83267d81fab3ffe920c8.webp",
+              "thumbnailSrc": "/published/ec83fa31b5b2b92c9660.webp",
+              "fullSrc": "/published/80bb9c9a365a4794e532.webp",
+              "alt": "",
+              "caption": "Gate design 1"
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhu61p-gwgsq",
+              "src": "/published/4795fda4f196a31b6632.webp",
+              "thumbnailSrc": "/published/fd96e8752e1730d7293e.webp",
+              "fullSrc": "/published/9d0671739f3bb5a43296.webp",
+              "alt": "",
+              "caption": "Gate design 2"
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhu6n7-tb428",
+              "src": "/published/ba703963051174743b48.webp",
+              "thumbnailSrc": "/published/53390ad0eea87d0ae929.webp",
+              "fullSrc": "/published/6df284cc1d72d7b7dba6.webp",
+              "alt": "",
+              "caption": "Bed capsule design"
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhu79o-870ki",
+              "src": "/published/db23e6738f153ed6a335.webp",
+              "thumbnailSrc": "/published/faf603447e980df095df.webp",
+              "fullSrc": "/published/01cf27935a25ca3a1d2b.webp",
+              "alt": "Hotel_P1",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhuvsi-79vgm",
+              "src": "/published/b931ae60585fd14319af.webp",
+              "thumbnailSrc": "/published/b5732bee79e4178f9b7d.webp",
+              "fullSrc": "/published/b5192eba4010ade6c502.webp",
+              "alt": "",
+              "caption": "3D Process"
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhuw1e-2bjnh",
+              "src": "/published/2204143e00513da5c9a9.webp",
+              "thumbnailSrc": "/published/2aa6d5897d365e15d979.webp",
+              "fullSrc": "/published/930dae933cf7de079762.webp",
+              "alt": "",
+              "caption": "3D Process"
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhuwbe-04z35",
+              "src": "/published/a53834c509ff1e76fb92.webp",
+              "thumbnailSrc": "/published/e6a8b33fe1af285d8cc3.webp",
+              "fullSrc": "/published/832c4585e7061a3fcaca.webp",
+              "alt": "",
+              "caption": "Asset sketches"
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhuwnb-szkts",
+              "src": "/published/30729ac897b8f90e9f2a.webp",
+              "thumbnailSrc": "/published/8b43f91aac51cd8a10a0.webp",
+              "fullSrc": "/published/e02275c0a6592099ef65.webp",
+              "alt": "",
+              "caption": "Asset sketches"
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhuwxq-6a3xi",
+              "src": "/published/fac68ed34973f330769e.webp",
+              "thumbnailSrc": "/published/3d79ab5997e7c1a99730.webp",
+              "fullSrc": "/published/7f60219814e4758172a7.webp",
+              "alt": "",
+              "caption": "Asset sketches"
+            },
+            {
+              "type": "image",
+              "id": "image-mtqhux7x-0oiq9",
+              "src": "/published/7c23105264e6afc32cee.webp",
+              "thumbnailSrc": "/published/3ca32b3faace4cdd6de4.webp",
+              "fullSrc": "/published/ca7b8d28f59b6febfccf.webp",
+              "alt": "",
+              "caption": "Asset sketches"
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtn6q4zx-7pzi",
+              "type": "image",
+              "src": "/published/7d0ea06332f5113fdfa3.webp",
+              "alt": "Thumbnail_Hotel",
+              "caption": "",
+              "thumbnailSrc": "/published/6bad0383aea1acb95925.webp",
+              "fullSrc": "/published/f032b6acc275a4133f1e.webp",
+              "showInProject": false
+            },
+            {
+              "id": "image-mtn6q67h-itc9",
+              "type": "image",
+              "src": "/published/8f08d1c40b013c2db6ca.webp",
+              "alt": "Hotel_OV",
+              "caption": "",
+              "thumbnailSrc": "/published/dec4718eae7477b5506f.webp",
+              "fullSrc": "/published/545b0e7aba82173d0a5c.webp"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "custom:image-mtn6q4zx-7pzi",
+                "custom:image-mtn6q67h-itc9",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 600,
+              "copyWidth": 600,
+              "mediaGap": 14,
+              "mediaHeight": 170,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "fullTextContent": "",
+          "introduction": "Interior concept art of a space cruise ship doubling as covert transport for displaced people en route to the traffickers. The environment is designed to hold two truths at once: the polished facade passengers are meant to see, and the reality underneath. Designed to contrast public-facing glamour with the quiet desperation of its real purpose.",
+          "year": "2024",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": true
+          },
+          "services": [
+            "Environment Concept Art"
+          ],
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtn6q4zx-7pzi"
+          },
+          "fieldNoteFooterEnabled": false
+        },
+        {
+          "title": "Starburst",
+          "meta": "Editorial / Commission",
+          "slug": "an-image-for-the-front-page",
+          "summary": "",
+          "rationale": [],
+          "media": [],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtnbl6vt-8dq5",
+              "type": "image",
+              "src": "/published/036b2c6a9628c3541c89.webp",
+              "alt": "bg_6",
+              "caption": "",
+              "thumbnailSrc": "/published/6fde68fdb7aaf5d691fe.webp",
+              "fullSrc": "/published/c5702e7f553115deb733.webp"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 600,
+              "copyWidth": 600,
+              "mediaGap": 14,
+              "mediaHeight": 170,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "grid",
+              "mediaEnabled": false,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": false
+          },
+          "year": "2025",
+          "introduction": "",
+          "fieldNoteFooterEnabled": false,
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtnbl6vt-8dq5"
+          }
+        },
+        {
+          "title": "Personal Sketches",
+          "meta": "Inspiration / Work in Progress",
+          "slug": "drawing-ideas-into-focus",
+          "summary": "",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "id": "image-mtnc35dw-x715j",
+              "src": "/published/751887132fe076a139b7.webp",
+              "thumbnailSrc": "/published/c55ca897ac958281ccb0.webp",
+              "fullSrc": "/published/610855437a08f9d125b0.webp",
+              "alt": "intertwined",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnc34zp-4n7hy",
+              "src": "/published/eed81cdeede5ec8af843.webp",
+              "thumbnailSrc": "/published/e22a36d64939ed87e561.webp",
+              "fullSrc": "/published/bbdd7560f43c93b85ab6.webp",
+              "alt": "",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnc7v9l-ad19s",
+              "src": "/published/43b78379c726c42561b4.webp",
+              "thumbnailSrc": "/published/8abc6fc6f1d8445aa3c2.webp",
+              "fullSrc": "/published/66f1dfc87bebc6db86be.webp",
+              "alt": "",
+              "caption": "",
+              "showInProject": true
+            },
+            {
+              "type": "image",
+              "id": "image-mtnc33nb-0v7fr",
+              "src": "/published/aac402705dcd44e3c86d.webp",
+              "thumbnailSrc": "/published/69a3a46146160f3a2b01.webp",
+              "fullSrc": "/published/1a6f4db8c78b7dbfc849.webp",
+              "alt": "",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnc357f-9zvtk",
+              "src": "/published/478e31960a340e985da4.webp",
+              "thumbnailSrc": "/published/937e748f43a061555b9b.webp",
+              "fullSrc": "/published/e02bde114e14d58dde58.webp",
+              "alt": "",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnc35kp-wt307",
+              "src": "/published/78d22f909a3ac36eb90e.webp",
+              "thumbnailSrc": "/published/576e1219594bd95bd429.webp",
+              "fullSrc": "/published/e306e745eeedb590dbde.webp",
+              "alt": "",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnc34ia-fv556",
+              "src": "/published/7c0d52441cbdf96898bd.webp",
+              "thumbnailSrc": "/published/ed5267df908543bdd1c7.webp",
+              "fullSrc": "/published/75ac5ae2941172895ce5.webp",
+              "alt": "",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnc36kx-bp63q",
+              "src": "/published/a756989ed969b0491257.webp",
+              "thumbnailSrc": "/published/a6c9ad3b008844e40b31.webp",
+              "fullSrc": "/published/39445fcdc3181e5c0439.webp",
+              "alt": "",
+              "caption": ""
+            }
+          ],
+          "template": "field-note",
+          "blocks": [],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 600,
+              "copyWidth": 600,
+              "mediaGap": 14,
+              "mediaHeight": 384,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "year": "2024-Current",
+          "fieldNoteFooterEnabled": false,
+          "thumbnail": {
+            "source": "media",
+            "id": "image-mtnc35dw-x715j"
+          },
+          "introduction": "Some of my personal sketches over recent years.",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": false
+          }
+        }
+      ]
+    },
+    "visual": {
+      "explanation": "Always looking for opportunities to create something fun, try something new, and expand across different domains.",
+      "projects": [
+        {
+          "title": "Itsybitsy",
+          "meta": "Omarchy Theme Design & Plugins",
+          "slug": "posters-that-refuse-to-whisper",
+          "summary": "",
+          "rationale": [],
+          "media": [],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtqa31ud-7gxm",
+              "type": "image",
+              "src": "/published/40215e64593085f68f3f.webp",
+              "alt": "",
+              "caption": "",
+              "thumbnailSrc": "/published/a073f158552385e5b85d.webp",
+              "fullSrc": "/published/a7c45f83f5b245cafd3f.webp"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 600,
+              "copyWidth": 600,
+              "mediaGap": 14,
+              "mediaHeight": 170,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "grid",
+              "mediaEnabled": false,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "introduction": "A vivid light colour omarchy [theme](https://github.com/jadeinvoid/itsybitsy-omarchy-theme) with hand-drawn digital illustration.",
+          "fieldNoteFooterEnabled": false,
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtqa31ud-7gxm"
+          },
+          "role": "",
+          "services": [],
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": false
+          }
+        },
+        {
+          "title": "Grapefruits",
+          "meta": "Graphics / Motion Design",
+          "slug": "making-information-feel-inviting",
+          "summary": "",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "id": "image-mtnkxxd8-f7yd8",
+              "src": "/published/2dc51eb7544bf1bcedd9.webp",
+              "thumbnailSrc": "/published/7bc6d0151593d29cfa5f.webp",
+              "fullSrc": "/published/57e48674985b0e30cb26.webp",
+              "alt": "",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnkxx89-hc1ef",
+              "src": "/published/89e81d10e5b5fc907886.webp",
+              "thumbnailSrc": "/published/a850c57904923742ac35.webp",
+              "fullSrc": "/published/c0b82b3df3f826f0ce55.webp",
+              "alt": "",
+              "caption": ""
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "video-mtnktohs-7n6v",
+              "type": "video",
+              "src": "/published/4b0e8a781118212632a0.mp4",
+              "title": "",
+              "caption": ""
+            },
+            {
+              "id": "video-mtnkud1c-hq5r",
+              "type": "video",
+              "src": "/published/1a3a0fe58a86714e846e.mp4",
+              "title": "Frame 6 (1)",
+              "caption": ""
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "custom:video-mtnktohs-7n6v",
+                "custom:video-mtnkud1c-hq5r",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 486,
+              "copyWidth": 490,
+              "mediaGap": 14,
+              "mediaHeight": 170,
+              "secondOffset": 1,
+              "bodyGap": 54,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "fieldNoteFooterEnabled": false,
+          "introduction": "Personal practice using Figma Motion.",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": false
+          },
+          "thumbnail": {
+            "source": "media",
+            "id": "image-mtnkxxd8-f7yd8"
+          }
+        },
+        {
+          "title": "Bath Relief",
+          "meta": "Package Design / Product Design",
+          "slug": "an-identity-built-to-move",
+          "summary": "",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "id": "image-mtnf3z5j-n80kb",
+              "src": "/published/ab6cc761250faf3a2aa3.webp",
+              "thumbnailSrc": "/published/1048c62d88a2baaed12a.webp",
+              "fullSrc": "/published/27a30c9dd8f15ddcdac9.webp",
+              "alt": "BathRelief_Presentation_p-01",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf3zkd-x5pn5",
+              "src": "/published/9628bcf9220e886054e9.webp",
+              "thumbnailSrc": "/published/f6512fcc362709d99b8b.webp",
+              "fullSrc": "/published/ef69ad2356896d1bc275.webp",
+              "alt": "BathRelief_Presentation_p-02",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf3zw1-rft7d",
+              "src": "/published/e8b3e584ad5926ad7c6f.webp",
+              "thumbnailSrc": "/published/cacbd20ff5e36fb4b55b.webp",
+              "fullSrc": "/published/0e71a8d11e11ab5d880e.webp",
+              "alt": "BathRelief_Presentation_p-03",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf4095-5e5cc",
+              "src": "/published/ccab30088f6ecadce777.webp",
+              "thumbnailSrc": "/published/a152f5503dbc069b6590.webp",
+              "fullSrc": "/published/4f84d89be764c95fd59a.webp",
+              "alt": "BathRelief_Presentation_p-04",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf40j9-zbm1h",
+              "src": "/published/44ad6842b9ca2226e00c.webp",
+              "thumbnailSrc": "/published/f65da896c39d3bef46c1.webp",
+              "fullSrc": "/published/42cc84c256fa79740804.webp",
+              "alt": "BathRelief_Presentation_p-05",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf40ub-30poo",
+              "src": "/published/11a51195a6108fd91a82.webp",
+              "thumbnailSrc": "/published/63a228cbc91f9703f291.webp",
+              "fullSrc": "/published/9aa374012eea1c3c4841.webp",
+              "alt": "BathRelief_Presentation_p-06",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf417a-g8q8k",
+              "src": "/published/796a3676e5e002742bbc.webp",
+              "thumbnailSrc": "/published/04212bd46448eb5fa261.webp",
+              "fullSrc": "/published/0645b7938b27bbc34bec.webp",
+              "alt": "BathRelief_Presentation_p-07",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf41fo-rllob",
+              "src": "/published/e4a0770663458b1de05c.webp",
+              "thumbnailSrc": "/published/9c83e82d4e650a03d45f.webp",
+              "fullSrc": "/published/94edd78b692b965d281e.webp",
+              "alt": "BathRelief_Presentation_p-08",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf41p5-k3adn",
+              "src": "/published/4bfe0afbba09738a4cca.webp",
+              "thumbnailSrc": "/published/f4743fc1f990c4456730.webp",
+              "fullSrc": "/published/1f7ee9b4e78d3eeb3713.webp",
+              "alt": "BathRelief_Presentation_p-09",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf41y1-zecyu",
+              "src": "/published/802e0cd72b9758ae936c.webp",
+              "thumbnailSrc": "/published/4bfe135abe750b189b9d.webp",
+              "fullSrc": "/published/92e9bc7d23ec19a7baae.webp",
+              "alt": "BathRelief_Presentation_p-10",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf4264-i6bxv",
+              "src": "/published/2016133a4fbdef7c8a21.webp",
+              "thumbnailSrc": "/published/fece41117737623b1aaa.webp",
+              "fullSrc": "/published/f2bc43262390927e7d99.webp",
+              "alt": "BathRelief_Presentation_p-11",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf42do-3b3bd",
+              "src": "/published/4da10e6cfc2a53342b77.webp",
+              "thumbnailSrc": "/published/cfeaeaeaad6aa41f15ab.webp",
+              "fullSrc": "/published/0489616e44045248f7b1.webp",
+              "alt": "BathRelief_Presentation_p-12",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf42kx-825tl",
+              "src": "/published/b6511409d0d83f9e3b62.webp",
+              "thumbnailSrc": "/published/73e51fa43677373a7d85.webp",
+              "fullSrc": "/published/a6c37cc463ca58156da2.webp",
+              "alt": "BathRelief_Presentation_p-13",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf42tu-lch54",
+              "src": "/published/72f9b8f24cb9148ad28e.webp",
+              "thumbnailSrc": "/published/626aa3d0e5ea37419e57.webp",
+              "fullSrc": "/published/c9bb01a951447b38c31b.webp",
+              "alt": "BathRelief_Presentation_p-14",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf432r-sg1jw",
+              "src": "/published/3c0ce57c1934d9d4cc95.webp",
+              "thumbnailSrc": "/published/ad8838d99e5396f3c08b.webp",
+              "fullSrc": "/published/d4aa629629250b130c4a.webp",
+              "alt": "BathRelief_Presentation_p-15",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf43b9-6wre1",
+              "src": "/published/83405f5e6a405b2ab4cc.webp",
+              "thumbnailSrc": "/published/db04dc1d9879381ebe96.webp",
+              "fullSrc": "/published/ac1bdbd080390a3207d7.webp",
+              "alt": "BathRelief_Presentation_p-16",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf43ky-f0k2b",
+              "src": "/published/37d0b0ba4e68c35e6c04.webp",
+              "thumbnailSrc": "/published/f37f76fd1f6c28c2ad92.webp",
+              "fullSrc": "/published/419c1ec538087f4fe0ba.webp",
+              "alt": "BathRelief_Presentation_p-17",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf43th-ajdoo",
+              "src": "/published/f332ffa298c120cdc8d2.webp",
+              "thumbnailSrc": "/published/b9478853ca6d07f9145d.webp",
+              "fullSrc": "/published/f2919dc7fb395efa26cb.webp",
+              "alt": "BathRelief_Presentation_p-18",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf441y-0l6yr",
+              "src": "/published/3bf1d67ce5b4ed8f8a22.webp",
+              "thumbnailSrc": "/published/8af3734099fedabcbc28.webp",
+              "fullSrc": "/published/fccd987ed1866999bad6.webp",
+              "alt": "BathRelief_Presentation_p-19",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf44cd-3ngb2",
+              "src": "/published/9b49ebfe23c49996d138.webp",
+              "thumbnailSrc": "/published/e821df91b78f0cc164a7.webp",
+              "fullSrc": "/published/9cd493484c5df62644f3.webp",
+              "alt": "BathRelief_Presentation_p-20",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtnf44ml-2h9j8",
+              "src": "/published/bfbde183dda0707dffce.webp",
+              "thumbnailSrc": "/published/d3dafec6b2fe13cee794.webp",
+              "fullSrc": "/published/924e3a91bf6aa2c9317c.webp",
+              "alt": "BathRelief_Presentation_p-21",
+              "caption": ""
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtnf560l-jh7q",
+              "type": "image",
+              "src": "/published/a1cb68b61179f05b0ac8.webp",
+              "alt": "BathRelief_Thumbnail_1",
+              "caption": "",
+              "thumbnailSrc": "/published/fa335c72103b56c3449b.webp",
+              "fullSrc": "/published/fefe9b55a2d7aa01e337.webp"
+            },
+            {
+              "id": "text-mtnevyxv-bhrw",
+              "type": "text",
+              "content": "I contributed to the packaging design iteration, team communication & document QA as part of a three-person student team exploring visual directions across multiple layout and label concepts. I also served as the communication bridge between team members, relaying feedback and keeping the project moving through challenges. Toward the final stages, I went through English copy review and full document QA across all deliverables.\n",
+              "style": "paragraph",
+              "width": 100
+            },
+            {
+              "id": "image-mtnf5iqq-pn23",
+              "type": "image",
+              "src": "/published/e7d2c4564d88035f88aa.webp",
+              "alt": "BathRelief_MockUp2",
+              "caption": "",
+              "thumbnailSrc": "/published/692a8f77d605775d4cd8.webp",
+              "fullSrc": "/published/01a92d3594a8ed90ff53.webp"
+            },
+            {
+              "id": "image-mtnf6q23-pwr7",
+              "type": "image",
+              "src": "/published/a4292facffa4348087f7.webp",
+              "alt": "BathRelief_MockUp1",
+              "caption": "",
+              "thumbnailSrc": "/published/959d26548867fbda6f37.webp",
+              "fullSrc": "/published/7c1548d96fb6f540b1aa.webp"
+            },
+            {
+              "id": "text-mtnfct7t-t0pv",
+              "type": "text",
+              "content": "The project moved through many distinct phases: market research and competitor analysis, brand strategy development, name exploration, and packaging iteration. My primary contribution was in the iteration phase, working through label layout variations across the three scent lines (On the Cloud, Floating on the Ocean, Thick Forest), testing how photography, typography, and color could carry the brand's sensory concept across a cohesive product family.",
+              "style": "paragraph",
+              "width": 100
+            },
+            {
+              "id": "text-mtnfdgij-jl63",
+              "type": "text",
+              "content": "The final product came out as a fully resolved packaging system with three scent variants, custom dielines with an integrated bath orb holder, and a bilingual label system ready for Canadian retail spaces. The presentation covered the full pipeline from market research to physical mockup.\n\nThis project also taught me that design work and team dynamics are inseparable. Keeping communication clear under pressure is its own skill and that it is easy to undervalue until it's the thing holding everything together.",
+              "style": "paragraph",
+              "width": 100
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "custom:text-mtnevyxv-bhrw",
+                "custom:image-mtnf5iqq-pn23",
+                "custom:text-mtnfct7t-t0pv",
+                "custom:image-mtnf560l-jh7q",
+                "custom:image-mtnf6q23-pwr7",
+                "custom:text-mtnfdgij-jl63",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 403,
+              "copyWidth": 402,
+              "mediaGap": 14,
+              "mediaHeight": 440,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 2,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "custom:image-mtnf560l-jh7q",
+                "custom:text-mtnevyxv-bhrw",
+                "custom:image-mtnf5iqq-pn23",
+                "custom:image-mtnf6q23-pwr7",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "custom:image-mtnf560l-jh7q",
+                "custom:text-mtnevyxv-bhrw",
+                "custom:image-mtnf5iqq-pn23",
+                "custom:image-mtnf6q23-pwr7",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "year": "2023",
+          "role": "Designer / QA",
+          "services": [
+            "Research",
+            "Brand Design",
+            "Storytelling"
+          ],
+          "fieldNoteLabels": {
+            "outcome": "",
+            "process": "",
+            "credits": "Team"
+          },
+          "credits": [
+            "Julia Juyon Song",
+            "Jade Cho",
+            "Gahyun Lim"
+          ],
+          "fieldNoteFooter": {
+            "outcome": "",
+            "process": [
+              ""
+            ]
+          },
+          "introduction": "Package design for a fictional bath bomb line",
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtnf560l-jh7q"
+          },
+          "fullTextContent": ""
+        }
+      ]
+    },
+    "other": {
+      "explanation": "Experiments, archived works, odd jobs and side quests.",
+      "projects": [
+        {
+          "title": "The Doll",
+          "meta": "Animated Illustration ",
+          "slug": "objects-made-for-the-occasion",
+          "summary": "",
+          "rationale": [],
+          "media": [],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "video-mtngyydd-z999",
+              "type": "video",
+              "src": "/published/8e5f1789ef1f6b2fda10.mp4",
+              "title": "Cho_Jade__GDES4008_A2_Final",
+              "caption": "",
+              "thumbnailSrc": "/published/20d7ebc440e943a6fee8.webp"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "custom:video-mtngyydd-z999",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 600,
+              "copyWidth": 600,
+              "mediaGap": 14,
+              "mediaHeight": 170,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "grid",
+              "mediaEnabled": false,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "fieldNoteFooterEnabled": false,
+          "introduction": "Animated illustration done with Procreate",
+          "year": "2023",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": false
+          },
+          "thumbnail": {
+            "source": "block",
+            "id": "video-mtngyydd-z999"
+          }
+        },
+        {
+          "title": "Reborn",
+          "meta": "Animated Illustration",
+          "slug": "notes-from-an-unfinished-idea",
+          "summary": "",
+          "rationale": [],
+          "media": [],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtni074n-s2yp",
+              "type": "image",
+              "src": "/published/6632727619b50493b79e.gif",
+              "alt": "RabbitAni-copy2",
+              "caption": "",
+              "thumbnailSrc": "/published/6632727619b50493b79e.gif",
+              "fullSrc": "/published/6632727619b50493b79e.gif"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "custom:image-mtni074n-s2yp",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 600,
+              "copyWidth": 600,
+              "mediaGap": 14,
+              "mediaHeight": 170,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "grid",
+              "mediaEnabled": false,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "introduction": "",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": false
+          },
+          "year": "2023",
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtni074n-s2yp"
+          },
+          "fieldNoteFooterEnabled": false
+        },
+        {
+          "title": "Amphibitopia",
+          "meta": "Archived",
+          "slug": "posters-fragments-and-tests",
+          "summary": "",
+          "rationale": [],
+          "media": [],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtnikjng-4gv7",
+              "type": "image",
+              "src": "/published/22f386052f30b46ccaf8.webp",
+              "alt": "",
+              "caption": "Frogbus",
+              "thumbnailSrc": "/published/4c5f50789bd4c933d1c5.webp",
+              "fullSrc": "/published/2caba2ed12fcd4dcc163.webp"
+            },
+            {
+              "id": "image-mtnikl0f-jcmf",
+              "type": "image",
+              "src": "/published/f022fb98fec21e8e2c03.webp",
+              "alt": "",
+              "caption": "Turtlehicle",
+              "thumbnailSrc": "/published/358ef61d98d35b47ccb8.webp",
+              "fullSrc": "/published/22c36f5f7ff27fdca654.webp"
+            },
+            {
+              "id": "text-mtniktp5-tyyx",
+              "type": "text",
+              "content": "Personal project where I created two attraction vehicle designs inspired by swamp animals. The goal was to let each animal's form and personality drive the design rather than working from a generic vehicle base.",
+              "style": "paragraph",
+              "width": 100
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "custom:text-mtniktp5-tyyx",
+                "custom:image-mtnikjng-4gv7",
+                "custom:image-mtnikl0f-jcmf",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 600,
+              "copyWidth": 600,
+              "mediaGap": 14,
+              "mediaHeight": 170,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "grid",
+              "mediaEnabled": false,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "fieldNoteFooterEnabled": false,
+          "introduction": "",
+          "year": "2022",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": false
+          },
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtnikjng-4gv7"
+          }
+        },
+        {
+          "title": "Hansel & Gretel - Location Redesign",
+          "meta": "Archived",
+          "slug": "the-projects-between-projects",
+          "summary": "",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "id": "image-mtnjded5-riwcl",
+              "src": "/published/fde4510ab8775f310de8.webp",
+              "thumbnailSrc": "/published/5a7c51064b0b16342524.webp",
+              "fullSrc": "/published/8268f88ef94dbbbe4d94.webp",
+              "alt": "",
+              "caption": "Background"
+            },
+            {
+              "type": "image",
+              "id": "image-mtnjdfbd-x5uqx",
+              "src": "/published/3b3d8b5e67b64c7a5fc8.webp",
+              "thumbnailSrc": "/published/f8129fa715dcbbb82c19.webp",
+              "fullSrc": "/published/9602bfaa0240fc1f1813.webp",
+              "alt": "",
+              "caption": "Props"
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "text-mtnj0bax-ix93",
+              "type": "text",
+              "content": "A location redesign for Hansel & Gretel — the witch's candy house reinterpreted through the lens of a beached whale carcass. (Less sugary, more salty...?)",
+              "style": "paragraph",
+              "width": 100
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "custom:text-mtnj0bax-ix93",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 374,
+              "copyWidth": 456,
+              "mediaGap": 9,
+              "mediaHeight": 283,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 2,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "year": "2023",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": false
+          },
+          "introduction": "",
+          "fieldNoteFooterEnabled": false,
+          "thumbnail": {
+            "source": "media",
+            "id": "image-mtnjded5-riwcl"
+          }
+        },
+        {
+          "title": "Side-Scroller",
+          "meta": "Archived",
+          "slug": "a-strange-little-interaction",
+          "summary": "",
+          "rationale": [],
+          "media": [
+            {
+              "type": "image",
+              "id": "image-mtonwrp0-2wirh",
+              "src": "/published/a48c88ea6944167c8dbd.webp",
+              "thumbnailSrc": "/published/42ffea1a6a0869d80040.webp",
+              "fullSrc": "/published/1ea3a7b3f3e3971c8d09.webp",
+              "alt": "",
+              "caption": "Protagonist Character Design"
+            },
+            {
+              "type": "image",
+              "id": "image-mtonwsdi-umuhw",
+              "src": "/published/a4528c8b2ad4f9e5cf6c.webp",
+              "thumbnailSrc": "/published/9b09a14cab4866a67ed7.webp",
+              "fullSrc": "/published/eee380f4c0255bc08d94.webp",
+              "alt": "a3antag copy",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtonwt18-b39k2",
+              "src": "/published/70248c7b4afcbf8777b5.webp",
+              "thumbnailSrc": "/published/9306dfc5b9f1f426a9f9.webp",
+              "fullSrc": "/published/b4dd93c466956c019c69.webp",
+              "alt": "a3obst copy",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "id": "image-mtonwps2-jn3bx",
+              "src": "/published/d26a35c68cefa11163dd.webp",
+              "thumbnailSrc": "/published/b1ba0806c0c5eeb665b9.webp",
+              "fullSrc": "/published/2795773928b4fb729200.webp",
+              "alt": "colourstudy copy",
+              "caption": ""
+            }
+          ],
+          "template": "field-note",
+          "blocks": [
+            {
+              "id": "image-mtnk82hx-klgr",
+              "type": "image",
+              "src": "/published/ef34ade2a82a3a00e886.webp",
+              "alt": "",
+              "caption": "",
+              "thumbnailSrc": "/published/e9d2bf094e7955aba138.webp",
+              "fullSrc": "/published/807316df1b0f73f6c6fa.webp"
+            },
+            {
+              "id": "image-mtonssqv-ab1n",
+              "type": "image",
+              "src": "/published/1b2fdb31df88c3956449.webp",
+              "alt": "",
+              "caption": "",
+              "thumbnailSrc": "/published/505a466d53bc78f8d4e8.webp",
+              "fullSrc": "/published/a8ac24fe5de3dcfac36a.webp"
+            }
+          ],
+          "fieldNoteLayout": {
+            "desktop": {
+              "order": [
+                "intro",
+                "media",
+                "custom:image-mtnk82hx-klgr",
+                "custom:image-mtonssqv-ab1n",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 516,
+              "copyWidth": 425,
+              "mediaGap": 14,
+              "mediaHeight": 400,
+              "secondOffset": 28,
+              "bodyGap": 54,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "split"
+            },
+            "tablet": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 500,
+              "copyWidth": 500,
+              "mediaGap": 12,
+              "mediaHeight": 185,
+              "secondOffset": 18,
+              "bodyGap": 36,
+              "mediaMode": "grid",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            },
+            "mobile": {
+              "order": [
+                "intro",
+                "media",
+                "fullText",
+                "footer"
+              ],
+              "titleWidth": 340,
+              "copyWidth": 340,
+              "mediaGap": 10,
+              "mediaHeight": 220,
+              "secondOffset": 0,
+              "bodyGap": 24,
+              "mediaMode": "carousel",
+              "mediaEnabled": true,
+              "mediaPlacement": "header",
+              "slidesPerView": 1,
+              "loop": true,
+              "showDots": true,
+              "titleX": 0,
+              "titleY": 0,
+              "introLayout": "stacked"
+            }
+          },
+          "year": "2022",
+          "fieldNoteFactVisibility": {
+            "year": true,
+            "role": false,
+            "scope": false
+          },
+          "introduction": "Background and character design for a fictional mobile side-scroller game that takes place in an ancient ruin.",
+          "thumbnail": {
+            "source": "block",
+            "id": "image-mtnk82hx-klgr"
+          },
+          "fieldNoteFooterEnabled": false
+        }
+      ]
+    }
+  },
+  "runtime": {
+    "uiLab": {
+      "screen": "work",
+      "category": "visual",
+      "background": "#ffffff",
+      "frameColor": "#000000",
+      "strokeFrequency": 100,
+      "strokeWiggle": 30,
+      "strokeSmoothen": 60,
+      "projectStagger": 0.09,
+      "hoverGrace": 1,
+      "transition": {
+        "type": "spring",
+        "visualDuration": 0.3,
+        "bounce": 0.16
+      },
+      "openCategory": {
+        "type": "action",
+        "label": "Open category"
+      },
+      "returnLanding": {
+        "type": "action",
+        "label": "Return to landing"
+      }
+    },
+    "character": {
+      "portrait": "portrait-animated",
+      "eyeMode": "paired",
+      "eyes": "eyes-open",
+      "leftEye": "eye-open-left",
+      "rightEye": "eye-open-right",
+      "hand": "hand-landing",
+      "hat": "hat-paperboat-2d",
+      "blink": true,
+      "blinkInterval": 2.1,
+      "blinkDuration": 0.13,
+      "cursorFollow": true,
+      "cursorFollowAmount": 8
+    },
+    "characterLayers": {
+      "portrait": {
+        "visible": true,
+        "motionEnabled": true,
+        "x": 0,
+        "y": 0,
+        "scale": 1,
+        "rotate": 0,
+        "opacity": 1,
+        "zIndex": 1,
+        "idleAmount": 0,
+        "hoverY": -4,
+        "hoverScale": 1.15,
+        "pressScale": 0.96
+      },
+      "eyes": {
+        "visible": true,
+        "motionEnabled": true,
+        "x": 0,
+        "y": 0,
+        "scale": 1,
+        "rotate": 0,
+        "opacity": 1,
+        "zIndex": 3,
+        "idleAmount": 0,
+        "hoverY": 0,
+        "hoverScale": 1.04,
+        "pressScale": 0.96
+      },
+      "leftEye": {
+        "visible": true,
+        "motionEnabled": true,
+        "x": 0,
+        "y": 0,
+        "scale": 1,
+        "rotate": 0,
+        "opacity": 1,
+        "zIndex": 3,
+        "idleAmount": 0,
+        "hoverY": 0,
+        "hoverScale": 1.04,
+        "pressScale": 0.96
+      },
+      "rightEye": {
+        "visible": true,
+        "motionEnabled": true,
+        "x": 0,
+        "y": 0,
+        "scale": 1,
+        "rotate": 0,
+        "opacity": 1,
+        "zIndex": 3,
+        "idleAmount": 0,
+        "hoverY": 0,
+        "hoverScale": 1.04,
+        "pressScale": 0.96
+      },
+      "hand": {
+        "visible": true,
+        "motionEnabled": true,
+        "x": -17,
+        "y": 2,
+        "scale": 1,
+        "rotate": 0,
+        "opacity": 1,
+        "zIndex": 5,
+        "idleAmount": 0,
+        "hoverY": 0,
+        "hoverScale": 1.04,
+        "pressScale": 0.96
+      },
+      "hat": {
+        "visible": false,
+        "motionEnabled": false,
+        "x": -26,
+        "y": -41,
+        "scale": 1,
+        "rotate": 0,
+        "opacity": 1,
+        "zIndex": 6,
+        "idleAmount": 0,
+        "hoverY": 0,
+        "hoverScale": 1.04,
+        "pressScale": 0.96
+      }
+    },
+    "transform": {
+      "x": 106,
+      "y": -87,
+      "z": 0,
+      "scale": 0.6,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "opacity": 1,
+      "blur": 0,
+      "borderRadius": 0,
+      "zIndex": 1
+    },
+    "hatLab": {
+      "view": "stack",
+      "selected": "hat-cap-3d",
+      "stackCount": 4,
+      "dropOrder": "other,visual,illustration,ux",
+      "landingOffsetX": -0.15,
+      "landingOffsetY": -0.98,
+      "hatScale": 1.5,
+      "gravity": 1500,
+      "bounce": 0,
+      "friction": 1,
+      "airDrag": 0.015,
+      "dropInterval": 0.15,
+      "dropSpread": 54,
+      "spin": 75,
+      "stackAssist": 0.72,
+      "headWidth": 230,
+      "headCurve": 37,
+      "showColliders": false,
+      "dropStack": {
+        "type": "action",
+        "label": "Drop stack"
+      },
+      "resetStack": {
+        "type": "action",
+        "label": "Clear stack"
+      }
+    },
+    "hitbox": {
+      "editing": false,
+      "showOverlay": false,
+      "resetProfile": {
+        "type": "action",
+        "label": "Reset hitbox"
+      }
+    },
+    "capCollider": {
+      "showPreview": true,
+      "offsetX": 0,
+      "offsetY": 0,
+      "offsetZ": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "scaleZ": 1,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0
+    },
+    "scene": {
+      "background": "#ffffff",
+      "shadows": true,
+      "autoRotate": false,
+      "autoRotateSpeed": 0.65,
+      "resetView": {
+        "type": "action",
+        "label": "Reset stage"
+      }
+    }
+  },
+  "colliders": {
+    "paper-boat": {
+      "outline": [
+        {
+          "x": 0.04999999999999999,
+          "y": 0.4716981132075471
+        },
+        {
+          "x": 0.05555555555555554,
+          "y": 0.4528301886792453
+        },
+        {
+          "x": 0.061111111111111165,
+          "y": 0.44339622641509435
+        },
+        {
+          "x": 0.2568198422698367,
+          "y": 0.45805448836396356
+        },
+        {
+          "x": 0.4666666666666666,
+          "y": 0.018867924528301855
+        },
+        {
+          "x": 0.47777777777777775,
+          "y": 0.009433962264150927
+        },
+        {
+          "x": 0.5,
+          "y": 0.009433962264150927
+        },
+        {
+          "x": 0.7279389282133151,
+          "y": 0.4578695712171186
+        },
+        {
+          "x": 0.9388888888888888,
+          "y": 0.4528301886792453
+        },
+        {
+          "x": 0.9444444444444444,
+          "y": 0.4716981132075471
+        },
+        {
+          "x": 0.9444444444444444,
+          "y": 0.5188679245283019
+        },
+        {
+          "x": 0.9222222222222222,
+          "y": 0.5943396226415094
+        },
+        {
+          "x": 0.888888888888889,
+          "y": 0.6981132075471698
+        },
+        {
+          "x": 0.8611111111111109,
+          "y": 0.7830188679245282
+        },
+        {
+          "x": 0.8333333333333333,
+          "y": 0.8396226415094341
+        },
+        {
+          "x": 0.7365982380319149,
+          "y": 0.7291454730417091
+        },
+        {
+          "x": 0.4953249667553192,
+          "y": 0.6814068328246863
+        },
+        {
+          "x": 0.2790163730053192,
+          "y": 0.7038014298632305
+        },
+        {
+          "x": 0.1611111111111111,
+          "y": 0.8396226415094341
+        },
+        {
+          "x": 0.15000000000000002,
+          "y": 0.8301886792452831
+        },
+        {
+          "x": 0.1388888888888889,
+          "y": 0.8018867924528302
+        },
+        {
+          "x": 0.1166666666666667,
+          "y": 0.7358490566037736
+        },
+        {
+          "x": 0.08888888888888889,
+          "y": 0.6509433962264152
+        }
+      ]
+    },
+    "beret": {
+      "outline": [
+        {
+          "x": 0.17222222222222228,
+          "y": 0.506578947368421
+        },
+        {
+          "x": 0.1777777777777778,
+          "y": 0.46710526315789475
+        },
+        {
+          "x": 0.21378213479958835,
+          "y": 0.44343567706964676
+        },
+        {
+          "x": 0.2425970805736602,
+          "y": 0.4325449771292398
+        },
+        {
+          "x": 0.27077873083621395,
+          "y": 0.41621362959544517
+        },
+        {
+          "x": 0.31927861209330555,
+          "y": 0.41164430033634186
+        },
+        {
+          "x": 0.42298075210438824,
+          "y": 0.4184724351177259
+        },
+        {
+          "x": 0.45,
+          "y": 0.3421052631578947
+        },
+        {
+          "x": 0.46111111111111114,
+          "y": 0.3421052631578947
+        },
+        {
+          "x": 0.5019183988838166,
+          "y": 0.40506142764405134
+        },
+        {
+          "x": 0.556051971462121,
+          "y": 0.40221323568483214
+        },
+        {
+          "x": 0.6483547922658786,
+          "y": 0.415451262811115
+        },
+        {
+          "x": 0.7051402897986648,
+          "y": 0.4391280701844383
+        },
+        {
+          "x": 0.7349843407789535,
+          "y": 0.4581316814673216
+        },
+        {
+          "x": 0.7666666666666667,
+          "y": 0.48026315789473684
+        },
+        {
+          "x": 0.7666666666666667,
+          "y": 0.5131578947368421
+        },
+        {
+          "x": 0.7500000000000001,
+          "y": 0.6381578947368421
+        },
+        {
+          "x": 0.6636726274507216,
+          "y": 0.504528128871863
+        },
+        {
+          "x": 0.49313142366150353,
+          "y": 0.4915506577733048
+        },
+        {
+          "x": 0.3050426567406391,
+          "y": 0.4996655939216493
+        },
+        {
+          "x": 0.23333333333333336,
+          "y": 0.6381578947368421
+        },
+        {
+          "x": 0.22222222222222227,
+          "y": 0.625
+        },
+        {
+          "x": 0.1777777777777778,
+          "y": 0.5328947368421053
+        }
+      ]
+    },
+    "magician": {
+      "outline": [
+        {
+          "x": 0.22039215670105813,
+          "y": 0.5463221228555223
+        },
+        {
+          "x": 0.28021219522653507,
+          "y": 0.4532969357075081
+        },
+        {
+          "x": 0.19612283909574468,
+          "y": 0.19093251329787234
+        },
+        {
+          "x": 0.34190076462765956,
+          "y": 0.11875
+        },
+        {
+          "x": 0.47416264960106386,
+          "y": 0.07819148936170213
+        },
+        {
+          "x": 0.5718188996010638,
+          "y": 0.09505277593085107
+        },
+        {
+          "x": 0.6846845910904256,
+          "y": 0.2834254488031915
+        },
+        {
+          "x": 0.6915101396276596,
+          "y": 0.4012882313829787
+        },
+        {
+          "x": 0.7091775486845925,
+          "y": 0.41109615865140425
+        },
+        {
+          "x": 0.8402565259123413,
+          "y": 0.439662361120411
+        },
+        {
+          "x": 0.8690978589993931,
+          "y": 0.45664784725409147
+        },
+        {
+          "x": 0.8281549782130937,
+          "y": 0.5459436158584461
+        },
+        {
+          "x": 0.720431737670528,
+          "y": 0.545798948573519
+        },
+        {
+          "x": 0.6243027564846821,
+          "y": 0.5431756084734718
+        },
+        {
+          "x": 0.45339213031374515,
+          "y": 0.5887183147126215
+        },
+        {
+          "x": 0.32580947205583555,
+          "y": 0.6639101698319971
+        },
+        {
+          "x": 0.22875693491569254,
+          "y": 0.7335205475648813
+        },
+        {
+          "x": 0.21666666666666665,
+          "y": 0.8388888888888889
+        },
+        {
+          "x": 0.12222222222222222,
+          "y": 0.7444444444444445
+        },
+        {
+          "x": 0.10456504637570256,
+          "y": 0.5972663889156319
+        }
+      ]
+    }
+  },
+  "hitboxes": {
+    "paper-boat": {
+      "outline": [
+        {
+          "x": 0.05200714760638298,
+          "y": 0.47132502543234994
+        },
+        {
+          "x": 0.25556848404255317,
+          "y": 0.45613626087939413
+        },
+        {
+          "x": 0.4996052194148936,
+          "y": 0.023433084661467166
+        },
+        {
+          "x": 0.7188642785904256,
+          "y": 0.43628489883576355
+        },
+        {
+          "x": 0.9296563331117021,
+          "y": 0.48510088165479825
+        },
+        {
+          "x": 0.841557928856383,
+          "y": 0.8304863230473607
+        },
+        {
+          "x": 0.16951670545212766,
+          "y": 0.8474765457217136
+        }
+      ]
+    },
+    "beret": {
+      "outline": [
+        {
+          "x": 0.1611328125,
+          "y": 0.5150653150490602
+        },
+        {
+          "x": 0.2131607380319149,
+          "y": 0.3918484257398432
+        },
+        {
+          "x": 0.3853785738031915,
+          "y": 0.3742882334397289
+        },
+        {
+          "x": 0.47003823138297873,
+          "y": 0.34193856641841036
+        },
+        {
+          "x": 0.6974422373670213,
+          "y": 0.38879447925286675
+        },
+        {
+          "x": 0.7773853058510638,
+          "y": 0.4496271229853805
+        },
+        {
+          "x": 0.7485039893617021,
+          "y": 0.648995645663396
+        },
+        {
+          "x": 0.22798578789893617,
+          "y": 0.649340446073216
+        }
+      ]
+    },
+    "magician": {
+      "outline": [
+        {
+          "x": 0.08495054853723404,
+          "y": 0.6859873670212766
+        },
+        {
+          "x": 0.06565824468085106,
+          "y": 0.3392557347074468
+        },
+        {
+          "x": 0.1965591755319149,
+          "y": 0.14910654920212765
+        },
+        {
+          "x": 0.43,
+          "y": 0.04
+        },
+        {
+          "x": 0.66,
+          "y": 0.06
+        },
+        {
+          "x": 0.7188331117021277,
+          "y": 0.28656291555851066
+        },
+        {
+          "x": 0.8439058344414894,
+          "y": 0.3521796043882979
+        },
+        {
+          "x": 0.8457654587765957,
+          "y": 0.7013526429521276
+        },
+        {
+          "x": 0.5863011136968085,
+          "y": 0.9028985206117022
+        },
+        {
+          "x": 0.27667885638297873,
+          "y": 0.851888713430851
+        }
+      ]
+    },
+    "portrait": {
+      "outline": [
+        {
+          "x": 0.38,
+          "y": 0.1
+        },
+        {
+          "x": 0.52,
+          "y": 0.09
+        },
+        {
+          "x": 0.7179188829787234,
+          "y": 0.1185318317819149
+        },
+        {
+          "x": 0.7147918051861702,
+          "y": 0.2630838597074468
+        },
+        {
+          "x": 0.7508934507978723,
+          "y": 0.3818816489361702
+        },
+        {
+          "x": 0.74,
+          "y": 0.48
+        },
+        {
+          "x": 0.81,
+          "y": 0.5
+        },
+        {
+          "x": 0.82,
+          "y": 0.57
+        },
+        {
+          "x": 0.76,
+          "y": 0.6
+        },
+        {
+          "x": 0.7,
+          "y": 0.59
+        },
+        {
+          "x": 0.67,
+          "y": 0.68
+        },
+        {
+          "x": 0.58,
+          "y": 0.76
+        },
+        {
+          "x": 0.66,
+          "y": 0.84
+        },
+        {
+          "x": 0.71,
+          "y": 0.95
+        },
+        {
+          "x": 0.47978307845744683,
+          "y": 0.9828727559840426
+        },
+        {
+          "x": 0.2609707446808511,
+          "y": 0.9706137799202128
+        },
+        {
+          "x": 0.16743891289893617,
+          "y": 0.9280398105053191
+        },
+        {
+          "x": 0.28,
+          "y": 0.77
+        },
+        {
+          "x": 0.30242270611702127,
+          "y": 0.7407060339095745
+        },
+        {
+          "x": 0.22288480718085107,
+          "y": 0.7000228557180851
+        },
+        {
+          "x": 0.18014461436170212,
+          "y": 0.6430913397606383
+        },
+        {
+          "x": 0.15,
+          "y": 0.6
+        },
+        {
+          "x": 0.08,
+          "y": 0.57
+        },
+        {
+          "x": 0.1,
+          "y": 0.51
+        },
+        {
+          "x": 0.12271442819148937,
+          "y": 0.455913397606383
+        },
+        {
+          "x": 0.1301737034574468,
+          "y": 0.2983336103723404
+        },
+        {
+          "x": 0.22279130651595744,
+          "y": 0.17225315824468085
+        }
+      ]
+    }
+  },
+  "timeline": {
+    "durationMs": 4950,
+    "clips": [
+      {
+        "id": "a76fc2fe-3091-495a-b27f-5315eb44f006",
+        "assetId": "hand-landing",
+        "label": "Custom",
+        "interactionType": "custom",
+        "startMs": 0,
+        "durationMs": 3800,
+        "enabled": true,
+        "loop": false,
+        "from": {
+          "x": 99,
+          "y": 117,
+          "z": 0,
+          "scale": 1,
+          "rotateX": -61,
+          "rotateY": -31,
+          "rotateZ": -36,
+          "opacity": 1,
+          "blur": 0,
+          "borderRadius": 0
+        },
+        "to": {
+          "x": 99,
+          "y": 117,
+          "z": 0,
+          "scale": 1,
+          "rotateX": 0,
+          "rotateY": 0,
+          "rotateZ": -6,
+          "opacity": 0,
+          "blur": 0,
+          "borderRadius": 0
+        },
+        "keyframes": [
+          {
+            "id": "831d65e6-11c8-46b4-abc2-d499bc05de7e",
+            "offsetMs": 50,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": -6,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "27732e2f-e6d6-481d-a320-ddc36d254b09",
+            "offsetMs": 350,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": -27,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "8c63a3cb-0cd6-4e1e-8ce4-a7853c7429f8",
+            "offsetMs": 600,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": 16,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "a89821c1-3972-47db-9aec-ae38baf94aa6",
+            "offsetMs": 900,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": -27,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "1648ac42-7e26-4777-a934-e415098d680b",
+            "offsetMs": 1200,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": 16,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "047bdd00-c993-42fc-8d66-2263c44f044b",
+            "offsetMs": 1450,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": -27,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "c1dd9923-7769-4283-a542-eb3a7d9491af",
+            "offsetMs": 1750,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": 16,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "bd442808-8d81-4379-8d48-bc891d3d7a53",
+            "offsetMs": 2050,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": -27,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "d9c18930-e2d6-4dd5-a1ec-9b099191e382",
+            "offsetMs": 2300,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": 16,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "9da26611-ecb4-4b85-8773-869e836738bd",
+            "offsetMs": 2600,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": -27,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "4991a6fb-3843-4165-83b5-e87367b2106b",
+            "offsetMs": 2900,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": 16,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "d6d91aef-8bdf-4171-b1e9-f9d8da63ca73",
+            "offsetMs": 3150,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": -27,
+              "opacity": 1,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          },
+          {
+            "id": "725f6631-6002-41c6-be30-def5988bb8b7",
+            "offsetMs": 3450,
+            "state": {
+              "x": 99,
+              "y": 117,
+              "z": 0,
+              "scale": 1,
+              "rotateX": 0,
+              "rotateY": 0,
+              "rotateZ": 16,
+              "opacity": 0,
+              "blur": 0,
+              "borderRadius": 0
+            }
+          }
+        ],
+        "transition": {
+          "type": "tween",
+          "easing": "easeOut",
+          "bezier": [
+            0.22,
+            1,
+            0.36,
+            1
+          ],
+          "spring": {
+            "type": "spring",
+            "visualDuration": 0.55,
+            "bounce": 0.18
+          }
+        }
+      }
+    ]
+  },
+  "assets": [
+    "character/eyes/eye-closed.png",
+    "character/eyes/eyes-open.png",
+    "character/eyes/individual/eye-closed-left.png",
+    "character/eyes/individual/eye-closed-right.png",
+    "character/eyes/individual/eye-open-left.png",
+    "character/eyes/individual/eye-open-right.png",
+    "character/hand/cursor-hand-click.png",
+    "character/hand/cursor-hand.png",
+    "character/hand/heart-hand.png",
+    "character/hand/landing-hand.png",
+    "character/hand/largeheart-hand.png",
+    "character/portrait/Untitled_Artwork-1.png",
+    "character/portrait/no-eyes/portrait-no-eyes-4fps.gif",
+    "character/portrait/no-eyes/portrait1.png",
+    "character/portrait/no-eyes/portrait2.png",
+    "character/portrait/no-eyes/portrait3.png",
+    "character/portrait/no-eyes/portrait4.png",
+    "fonts/handjet-latin-variable.woff2",
+    "landing-page-hats/hat-beret-2.png",
+    "landing-page-hats/hat-cap.glb",
+    "landing-page-hats/hat-magician.png",
+    "landing-page-hats/hat-paperboat.png",
+    "published/01a92d3594a8ed90ff53.webp",
+    "published/01b000f6d8e7cfe0bfee.webp",
+    "published/01cf27935a25ca3a1d2b.webp",
+    "published/036b2c6a9628c3541c89.webp",
+    "published/04212bd46448eb5fa261.webp",
+    "published/0489616e44045248f7b1.webp",
+    "published/0645b7938b27bbc34bec.webp",
+    "published/0d8c4533a638c1bc3e63.webp",
+    "published/0e08a8682bc648470c53.webp",
+    "published/0e435987ba9e9eb86809.png",
+    "published/0e71a8d11e11ab5d880e.webp",
+    "published/1048c62d88a2baaed12a.webp",
+    "published/11a51195a6108fd91a82.webp",
+    "published/14ad267dc89b1913d103.webp",
+    "published/150576ffe3e847f95b6f.webp",
+    "published/158b16ff71d4bde7ae83.png",
+    "published/184883374e5aa48c6a06.webp",
+    "published/195650850e404c94591a.png",
+    "published/1a3a0fe58a86714e846e.mp4",
+    "published/1a6757d7dd5a7ae032ad.png",
+    "published/1a6f4db8c78b7dbfc849.webp",
+    "published/1b2fdb31df88c3956449.webp",
+    "published/1cdc0fb458fbfcc49b08.webp",
+    "published/1d3eec466c676249745e.webp",
+    "published/1ea3a7b3f3e3971c8d09.webp",
+    "published/1f7ee9b4e78d3eeb3713.webp",
+    "published/2016133a4fbdef7c8a21.webp",
+    "published/20d7ebc440e943a6fee8.webp",
+    "published/2204143e00513da5c9a9.webp",
+    "published/22540790eedea86ed26d.png",
+    "published/22c36f5f7ff27fdca654.webp",
+    "published/22f386052f30b46ccaf8.webp",
+    "published/2795773928b4fb729200.webp",
+    "published/27a30c9dd8f15ddcdac9.webp",
+    "published/286cab00cdd51d7269b8.png",
+    "published/2aa6d5897d365e15d979.webp",
+    "published/2c907693dbc38a5f6640.png",
+    "published/2caba2ed12fcd4dcc163.webp",
+    "published/2dc51eb7544bf1bcedd9.webp",
+    "published/2e0d0617524741f78107.png",
+    "published/2e8e42fe664084567167.webp",
+    "published/2eeabace477d08e68de4.webp",
+    "published/2f007cdf6b79a80e520a.png",
+    "published/30729ac897b8f90e9f2a.webp",
+    "published/331fb882fbacf2695060.png",
+    "published/358ef61d98d35b47ccb8.webp",
+    "published/35f7f0a39a4f73d788a7.webp",
+    "published/37b3a14a27baa0f7f6e2.webp",
+    "published/37d0b0ba4e68c35e6c04.webp",
+    "published/39445fcdc3181e5c0439.webp",
+    "published/39ed71e3a9b7dd824ac1.webp",
+    "published/3b3d8b5e67b64c7a5fc8.webp",
+    "published/3b628acad481c5bb74bd.webp",
+    "published/3bf1d67ce5b4ed8f8a22.webp",
+    "published/3c0ce57c1934d9d4cc95.webp",
+    "published/3ca32b3faace4cdd6de4.webp",
+    "published/3d79ab5997e7c1a99730.webp",
+    "published/3e9297bab23d6327d2c6.webp",
+    "published/3ef6c2a288c94cb94fa6.png",
+    "published/40215e64593085f68f3f.webp",
+    "published/40f952f6e52a6a3313ad.webp",
+    "published/418a68c67aac0acab841.webp",
+    "published/419c1ec538087f4fe0ba.webp",
+    "published/41a94d13675054841d35.webp",
+    "published/42cc84c256fa79740804.webp",
+    "published/42ffea1a6a0869d80040.webp",
+    "published/43b78379c726c42561b4.webp",
+    "published/44030c57358729c43831.webp",
+    "published/44ad6842b9ca2226e00c.webp",
+    "published/45c0011c1eefd802dcdf.webp",
+    "published/470d9d0cdf9d6e1836de.webp",
+    "published/478e31960a340e985da4.webp",
+    "published/478e5a7f1288dc2013de.gif",
+    "published/4795fda4f196a31b6632.webp",
+    "published/4b0e8a781118212632a0.mp4",
+    "published/4bfe0afbba09738a4cca.webp",
+    "published/4bfe135abe750b189b9d.webp",
+    "published/4c5f50789bd4c933d1c5.webp",
+    "published/4d7371bd068581d2740f.webp",
+    "published/4da10e6cfc2a53342b77.webp",
+    "published/4dfe894945af35ecfd4e.webp",
+    "published/4e620a5d639ebaf4f29f.webp",
+    "published/4f5c50815b770f145ff2.webp",
+    "published/4f84d89be764c95fd59a.webp",
+    "published/505a466d53bc78f8d4e8.webp",
+    "published/525cc12b70f9f299025e.png",
+    "published/52630535ac72c1c4b349.png",
+    "published/53390ad0eea87d0ae929.webp",
+    "published/545b0e7aba82173d0a5c.webp",
+    "published/576e1219594bd95bd429.webp",
+    "published/5780526f1e29f5647b7d.webp",
+    "published/57d2ca0654f06d441616.png",
+    "published/57e48674985b0e30cb26.webp",
+    "published/5a7c51064b0b16342524.webp",
+    "published/5d7e9411cc67e7180ad8.png",
+    "published/5e912fed748820c21e82.webp",
+    "published/5ebb96750827c060e3d5.webp",
+    "published/610855437a08f9d125b0.webp",
+    "published/617acd915bb219bcf422.webp",
+    "published/626aa3d0e5ea37419e57.webp",
+    "published/63a228cbc91f9703f291.webp",
+    "published/6463c16fde6f01c63839.webp",
+    "published/6632727619b50493b79e.gif",
+    "published/669962da887eda07e828.webp",
+    "published/66a528234c27548b157d.webp",
+    "published/66f1dfc87bebc6db86be.webp",
+    "published/687cbf3761a510d2b63e.png",
+    "published/692a8f77d605775d4cd8.webp",
+    "published/69a3a46146160f3a2b01.webp",
+    "published/6a10aa8eaeaaec53f089.webp",
+    "published/6a74b4536ea886fb60eb.webp",
+    "published/6bad0383aea1acb95925.webp",
+    "published/6df284cc1d72d7b7dba6.webp",
+    "published/6fde68fdb7aaf5d691fe.webp",
+    "published/70248c7b4afcbf8777b5.webp",
+    "published/72f9b8f24cb9148ad28e.webp",
+    "published/73e51fa43677373a7d85.webp",
+    "published/751887132fe076a139b7.webp",
+    "published/75ac5ae2941172895ce5.webp",
+    "published/77e4baf9a6ae963f3f4d.webp",
+    "published/784fe369979455f5f8e6.webp",
+    "published/78d22f909a3ac36eb90e.webp",
+    "published/796a3676e5e002742bbc.webp",
+    "published/79d68b90b46939e41bd3.webp",
+    "published/7ab70dc29a0a04c5eedf.webp",
+    "published/7bc6d0151593d29cfa5f.webp",
+    "published/7c0d52441cbdf96898bd.webp",
+    "published/7c1548d96fb6f540b1aa.webp",
+    "published/7c23105264e6afc32cee.webp",
+    "published/7d0ea06332f5113fdfa3.webp",
+    "published/7ebce8b3a3d34e8b0bc5.webp",
+    "published/7f60219814e4758172a7.webp",
+    "published/802e0cd72b9758ae936c.webp",
+    "published/807316df1b0f73f6c6fa.webp",
+    "published/80bb9c9a365a4794e532.webp",
+    "published/8268f88ef94dbbbe4d94.webp",
+    "published/83267d81fab3ffe920c8.webp",
+    "published/832c4585e7061a3fcaca.webp",
+    "published/83405f5e6a405b2ab4cc.webp",
+    "published/85b773de3248c5b53105.png",
+    "published/89e81d10e5b5fc907886.webp",
+    "published/8abc6fc6f1d8445aa3c2.webp",
+    "published/8af3734099fedabcbc28.webp",
+    "published/8b43f91aac51cd8a10a0.webp",
+    "published/8e5f1789ef1f6b2fda10.mp4",
+    "published/8e94b537f93cbaf0ba2f.png",
+    "published/8ed2823834ddf9764e54.webp",
+    "published/8f08d1c40b013c2db6ca.webp",
+    "published/8fa1ffcc1caf8717f063.webp",
+    "published/924e3a91bf6aa2c9317c.webp",
+    "published/92e9bc7d23ec19a7baae.webp",
+    "published/9306dfc5b9f1f426a9f9.webp",
+    "published/930dae933cf7de079762.webp",
+    "published/9370ac951ea46e5bb13b.webp",
+    "published/937e748f43a061555b9b.webp",
+    "published/94edd78b692b965d281e.webp",
+    "published/959d26548867fbda6f37.webp",
+    "published/9602bfaa0240fc1f1813.webp",
+    "published/9628bcf9220e886054e9.webp",
+    "published/9630a57ff4e16915f211.png",
+    "published/991e4046c28e878d9ca0.png",
+    "published/9a00c276cca25d2d59e5.webp",
+    "published/9aa374012eea1c3c4841.webp",
+    "published/9b09a14cab4866a67ed7.webp",
+    "published/9b1029589ea77a42885f.webp",
+    "published/9b49ebfe23c49996d138.webp",
+    "published/9c66c0361af6fa324d14.webp",
+    "published/9c83e82d4e650a03d45f.webp",
+    "published/9cd493484c5df62644f3.webp",
+    "published/9d0671739f3bb5a43296.webp",
+    "published/9e320b4eff9802469b94.webp",
+    "published/9ed6b361a7c52630feca.webp",
+    "published/a073f158552385e5b85d.webp",
+    "published/a152f5503dbc069b6590.webp",
+    "published/a195d1ce4bd0675ec2e7.webp",
+    "published/a1cb68b61179f05b0ac8.webp",
+    "published/a4292facffa4348087f7.webp",
+    "published/a4528c8b2ad4f9e5cf6c.webp",
+    "published/a48c88ea6944167c8dbd.webp",
+    "published/a4ecaa9eb9e0520477c2.webp",
+    "published/a5111a77de3c300d3bc6.webp",
+    "published/a53834c509ff1e76fb92.webp",
+    "published/a59fbd63cb96388a5256.png",
+    "published/a6c37cc463ca58156da2.webp",
+    "published/a6c9ad3b008844e40b31.webp",
+    "published/a756989ed969b0491257.webp",
+    "published/a7c45f83f5b245cafd3f.webp",
+    "published/a850c57904923742ac35.webp",
+    "published/a8ac24fe5de3dcfac36a.webp",
+    "published/aac402705dcd44e3c86d.webp",
+    "published/ab6cc761250faf3a2aa3.webp",
+    "published/abaa7dec07b6385d9369.webp",
+    "published/ac1bdbd080390a3207d7.webp",
+    "published/ad8838d99e5396f3c08b.webp",
+    "published/b00561303fc750194269.webp",
+    "published/b0d289ee235e1ed7b3ae.webp",
+    "published/b1ba0806c0c5eeb665b9.webp",
+    "published/b39fda7311b6849207f6.webp",
+    "published/b3ba93c09a914837e647.webp",
+    "published/b3d62f8eb192715c641b.webp",
+    "published/b3fd4b32d7bc59815efd.webp",
+    "published/b4dd93c466956c019c69.webp",
+    "published/b5192eba4010ade6c502.webp",
+    "published/b5732bee79e4178f9b7d.webp",
+    "published/b6511409d0d83f9e3b62.webp",
+    "published/b931ae60585fd14319af.webp",
+    "published/b9478853ca6d07f9145d.webp",
+    "published/ba703963051174743b48.webp",
+    "published/bbdd7560f43c93b85ab6.webp",
+    "published/bc582bdb8360896afffc.webp",
+    "published/bc9476bb7842f36bed4c.webp",
+    "published/bfbde183dda0707dffce.webp",
+    "published/c04b90d646d5b5da7285.webp",
+    "published/c071fe8fed92574bde70.webp",
+    "published/c0b82b3df3f826f0ce55.webp",
+    "published/c2bcc543125dfd7ffa5c.png",
+    "published/c3c770fcb8c277ab682e.webp",
+    "published/c55ca897ac958281ccb0.webp",
+    "published/c5702e7f553115deb733.webp",
+    "published/c941ad7f1a3766abb09e.png",
+    "published/c9580309ce4e7129dceb.webp",
+    "published/c9bb01a951447b38c31b.webp",
+    "published/ca7b8d28f59b6febfccf.webp",
+    "published/cacbd20ff5e36fb4b55b.webp",
+    "published/cc0c6417db822ec8c807.png",
+    "published/ccab30088f6ecadce777.webp",
+    "published/cdbf1b3e185d123e1355.webp",
+    "published/cf5ce22e3c691dad46e2.png",
+    "published/cfeaeaeaad6aa41f15ab.webp",
+    "published/d002461f3bb98297c95d.webp",
+    "published/d0214fb6540160d89f0b.webp",
+    "published/d26a35c68cefa11163dd.webp",
+    "published/d31b9fdf060f9cc806a0.webp",
+    "published/d3dafec6b2fe13cee794.webp",
+    "published/d3fb459c52126a9d67ae.webp",
+    "published/d4aa629629250b130c4a.webp",
+    "published/d65ecae338f85a3a116f.webp",
+    "published/d70a8a7b8cb8964616bb.webp",
+    "published/d9171d7a1942ce6c4eb9.webp",
+    "published/da548d6cdf4f66417d6e.png",
+    "published/db04dc1d9879381ebe96.webp",
+    "published/db23e6738f153ed6a335.webp",
+    "published/dbbae65495ddad4a1dd4.webp",
+    "published/dc4c51919f29afe6352e.png",
+    "published/dc9412190c3eb4f0d318.webp",
+    "published/dea86b0a9ab62b9c2893.webp",
+    "published/dec4718eae7477b5506f.webp",
+    "published/df2e2c3e6bd7dbfccb48.png",
+    "published/e02275c0a6592099ef65.webp",
+    "published/e02bde114e14d58dde58.webp",
+    "published/e0f106ac241f0106eeeb.webp",
+    "published/e21c71f96fcc8880d397.webp",
+    "published/e22a36d64939ed87e561.webp",
+    "published/e2b6ce36043a5d50dc63.png",
+    "published/e306e745eeedb590dbde.webp",
+    "published/e34324b48b794a54429b.webp",
+    "published/e39a2ec92af0ca31a145.webp",
+    "published/e4a0770663458b1de05c.webp",
+    "published/e6a8b33fe1af285d8cc3.webp",
+    "published/e7d2c4564d88035f88aa.webp",
+    "published/e821df91b78f0cc164a7.webp",
+    "published/e82fb86fbbfe0d2d38f1.webp",
+    "published/e8b3e584ad5926ad7c6f.webp",
+    "published/e8cb457985c55e672435.webp",
+    "published/e9d2bf094e7955aba138.webp",
+    "published/e9fcf667e5cb309ca7ed.webp",
+    "published/ec83fa31b5b2b92c9660.webp",
+    "published/ed5267df908543bdd1c7.webp",
+    "published/eed81cdeede5ec8af843.webp",
+    "published/eee380f4c0255bc08d94.webp",
+    "published/ef2aecfb6f5d65db53db.webp",
+    "published/ef34ade2a82a3a00e886.webp",
+    "published/ef40bd25700b07b8bda7.webp",
+    "published/ef69ad2356896d1bc275.webp",
+    "published/f022fb98fec21e8e2c03.webp",
+    "published/f032b6acc275a4133f1e.webp",
+    "published/f14c35d34296b41f2f88.png",
+    "published/f2919dc7fb395efa26cb.webp",
+    "published/f2bc43262390927e7d99.webp",
+    "published/f332ffa298c120cdc8d2.webp",
+    "published/f37f76fd1f6c28c2ad92.webp",
+    "published/f4743fc1f990c4456730.webp",
+    "published/f5ede08cdf22bf9362ed.png",
+    "published/f6512fcc362709d99b8b.webp",
+    "published/f65da896c39d3bef46c1.webp",
+    "published/f72f3ad226347b363397.png",
+    "published/f8022a8531ffcc5ea7af.webp",
+    "published/f8129fa715dcbbb82c19.webp",
+    "published/fa335c72103b56c3449b.webp",
+    "published/fa65dfb223344717a775.webp",
+    "published/fa7412d00ac0e265bd67.webp",
+    "published/fac68ed34973f330769e.webp",
+    "published/faf603447e980df095df.webp",
+    "published/fb0d787179f3cc54e175.webp",
+    "published/fccd987ed1866999bad6.webp",
+    "published/fd96e8752e1730d7293e.webp",
+    "published/fde4510ab8775f310de8.webp",
+    "published/fece41117737623b1aaa.webp",
+    "published/fefe9b55a2d7aa01e337.webp",
+    "ui-lab/logo.png",
+    "work_design/BathRelief_Package/BathRelief_Inclusivity.png",
+    "work_design/BathRelief_Package/BathRelief_MockUp1.png",
+    "work_design/BathRelief_Package/BathRelief_MockUp2.png",
+    "work_design/BathRelief_Package/BathRelief_Thumbnail_1.png",
+    "work_design/FigmaTUI/Title-Page.png",
+    "work_design/FigmaTUI/lazygit-style.png",
+    "work_design/Grapefruits/Frame 6.png",
+    "work_design/Grapefruits/Frame 7 (1).png",
+    "work_design/ItsyBitsy/screenshot-2026-09-06_16-36-52.png",
+    "work_design/UX_caseStudy_1/images/slide-01-title.png",
+    "work_design/UX_caseStudy_1/images/slide-04-search-wireframe.png",
+    "work_design/UX_caseStudy_1/images/slide-06-filter-wireframe.png",
+    "work_design/Waypoint/1.png",
+    "work_design/Waypoint/10.png",
+    "work_design/Waypoint/4.png",
+    "work_design/Waypoint/8.png",
+    "work_illustration/Amphibitopia/Amphibitopia1.jpg",
+    "work_illustration/Animation/cheondoje-portfolio-slide/cheondoje-thumbnail.png",
+    "work_illustration/Concept Art/HanselGretel/HG_BG.jpg",
+    "work_illustration/Concept Art/LL/website/coverImage_copy.png",
+    "work_illustration/Concept Art/SDD/main.png",
+    "work_illustration/Concept Art/Side Scroller/website/ChoJ_GDES3117_S002_A4Main Screen iPad.jpg",
+    "work_illustration/bg_6.jpg",
+    "work_illustration/lionfish.jpg",
+    "work_others/pfp2.jpeg",
+    "work_others/sketches/branch.png",
+    "work_others/sketches/crash.jpg",
+    "work_others/sketches/intertwined.jpeg",
+    "work_others/sketches/plant.jpg",
+    "work_others/sketches/tree.png",
+    "work_others/sketches/vent2.jpg",
+    "work_others/sketches/ver4.jpg"
+  ]
+}
