@@ -5,12 +5,13 @@ import { FigmaMobileContact } from '../figma-lab/FigmaMobileContact'
 import { FigmaMobileWorkList } from '../figma-lab/FigmaMobileWorkList'
 import { FigmaProjectsWorkList } from '../figma-lab/FigmaProjectsWorkList'
 import { FigmaWorkDetail } from '../figma-lab/FigmaWorkDetail'
-import { findWorkProject, type WorkListProject } from '../figma-lab/workListData'
+import { type WorkListProject } from '../figma-lab/workListData'
 import { PortfolioContentProvider, usePortfolioContent } from '../portfolio/PortfolioContentContext'
 import { uiCategories, type UiCategoryId } from '../ui-lab/categories'
 import { resolveAssetClipState } from '../timeline/model'
 import type { TimelinePreviewMap } from '../timeline/types'
 import { CURRENT_SITE_RELEASE } from './currentRelease'
+import { createProjectRoutes } from './projectRoutes'
 
 const CATEGORY_IDS = new Set(uiCategories.map((category) => category.id))
 const IGNORE_CATEGORY_CHANGE = (_category: UiCategoryId) => undefined
@@ -70,6 +71,7 @@ function useReleaseTimeline(active: boolean, reduced: boolean) {
 
 function SiteRouter() {
   const { content } = usePortfolioContent()
+  const projectRoutes = useMemo(() => createProjectRoutes(content), [content])
   const mobile = useMobileViewport()
   const [path, setPath] = useState(() => normalizeSitePath(window.location.pathname))
   const [replayKey] = useState(0)
@@ -92,8 +94,8 @@ function SiteRouter() {
     window.scrollTo({ top: 0 })
   }
 
-  const openProject = (category: UiCategoryId, project: WorkListProject) => {
-    navigate(`/work/${encodeURIComponent(project.slug)}?category=${category}`)
+  const openProject = (_category: UiCategoryId, project: WorkListProject) => {
+    navigate(projectRoutes.href(project.slug))
   }
 
   const categoryMatch = path.match(/^\/projects\/([^/]+)$/)
@@ -102,9 +104,17 @@ function SiteRouter() {
     : 'ux'
   const workMatch = path.match(/^\/work\/([^/]+)$/)
   const workLocation = useMemo(
-    () => workMatch ? findWorkProject(decodeURIComponent(workMatch[1]), content) : null,
-    [content, path],
+    () => workMatch ? projectRoutes.find(decodeURIComponent(workMatch[1])) : null,
+    [projectRoutes, path],
   )
+
+  useEffect(() => {
+    if (!workLocation) return
+    const canonicalPath = normalizeSitePath(projectRoutes.href(workLocation.project.slug))
+    if (path === canonicalPath) return
+    window.history.replaceState({}, '', `${canonicalPath}${window.location.search}${window.location.hash}`)
+    setPath(canonicalPath)
+  }, [path, projectRoutes, workLocation])
 
   useEffect(() => {
     if (path !== '/contact' || mobile) return
