@@ -1155,11 +1155,12 @@ kbd { padding: 1px 4px; border: 1px solid var(--hairline-strong); border-radius:
 }
 .figma-landing-animation .figma-landing-expertise-bubble {
   --figma-landing-speech-padding: clamp(18px, 3.5cqw, 36px);
-  top: 82%;
-  /* The portrait artwork occupies 75% of its transparent canvas; leave 20px after it. */
-  left: calc(var(--landing-character-left) + (var(--landing-character-size) * .75) + 47px);
+  top: var(--landing-speech-top);
+  left: var(--landing-speech-left);
+  translate: 0 -50%;
+  transform-origin: -24px 50%;
   width: 600px;
-  max-width: 42cqi;
+  max-width: min(42cqi, calc(100% - var(--landing-speech-left) - 24px));
 }
 .figma-landing-animation .figma-landing-expertise-bubble > .ui-rough-frame {
   min-height: 0;

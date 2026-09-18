@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, motion, type Transition } from 'motion/react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { AnimatePresence, motion, useAnimationFrame, type Transition } from 'motion/react'
 import type { SiteRuntimeConfig } from '../site/runtimeConfig'
 import { getColliderProfile, type ColliderProfiles, type HitboxProfiles } from '../colliders/profiles'
 import type { TimelinePreviewMap } from '../timeline/types'
@@ -39,6 +39,12 @@ const TIMING = {
 const TEXT = {
   instructionOffsetY: 10, // px the instruction rises from
   contactOffsetY: 14, // px the contact block rises from
+}
+
+const INTRO = {
+  title: 'Hello, my name is Jade Cho.',
+  body: 'I am a creative builder',
+  closing: 'wearing many hats!',
 }
 
 const CHARACTER_SCROLL = {
@@ -190,6 +196,28 @@ export function FigmaLandingPage({
     wiggle: values.uiLab.strokeWiggle,
     smoothen: values.uiLab.strokeSmoothen,
   }
+
+  useLayoutEffect(() => {
+    if (mobile) return
+    const page = pageRef.current
+    const character = page?.querySelector<HTMLElement>('.ui-character')
+    if (!page || !character) return
+    // Capture the responsive launch size once for this desktop visit.
+    page.style.setProperty('--landing-character-size', `${character.getBoundingClientRect().width}px`)
+    return () => { page.style.removeProperty('--landing-character-size') }
+  }, [mobile])
+
+  useAnimationFrame(() => {
+    if (mobile || workCategory) return
+    const stage = pageRef.current?.querySelector<HTMLElement>('.figma-landing-animation')
+    const portrait = stage?.querySelector<SVGPolygonElement>('.ui-character-hitbox polygon')
+    if (!stage || !portrait) return
+    const bounds = stage.getBoundingClientRect()
+    const face = portrait.getBoundingClientRect()
+    // Both bubbles share the same tail tip, independent of their text height.
+    stage.style.setProperty('--landing-speech-left', `${face.right - bounds.left + 60}px`)
+    stage.style.setProperty('--landing-speech-top', `${face.top - bounds.top + face.height * .5 + 10}px`)
+  })
 
   useEffect(() => {
     if (reduced) {
@@ -410,7 +438,7 @@ export function FigmaLandingPage({
               </motion.span>
             ))}
           </div>
-          <p className="figma-mobile-landing-intro">Hello, my name is Jade Cho.<br />I am a creative builder<br />wearing many hats!</p>
+          <p className="figma-mobile-landing-intro">{INTRO.title}<br />{INTRO.body}<br />{INTRO.closing}</p>
           <div className="figma-mobile-landing-character ui-lab-stage" style={{ '--ui-bg': '#fff', '--ui-pink': values.uiLab.frameColor } as React.CSSProperties}>
             <UiLabCharacter
               screen="landing"
@@ -550,7 +578,7 @@ export function FigmaLandingPage({
               timelineIsPlaying={timelineIsPlaying}
               hitbox={getColliderProfile('portrait', hitboxes)!}
               showHitbox={values.hitbox.showOverlay}
-              speechBubbleOpen={!workCategory && hoveredCategory !== null}
+              speechBubbleOpen={!workCategory}
               onSpeechBubbleToggle={() => undefined}
             />
           </div>
@@ -573,6 +601,19 @@ export function FigmaLandingPage({
             onActivate={workCategory ? () => undefined : activateCategory}
           />
           <AnimatePresence>
+            {!hoveredCategory && !workCategory && (
+              <UiCharacterSpeechBubble
+                key="introduction"
+                className="figma-landing-expertise-bubble"
+                color={values.uiLab.frameColor}
+                stroke={stroke}
+                reduced={reduced}
+                content="intro"
+                introTitle={INTRO.title}
+                introBody={`${INTRO.body} ${INTRO.closing}`}
+                cornerRadius={40}
+              />
+            )}
             {hoveredCategory && expertise && !workCategory && (
               <UiCharacterSpeechBubble
                 key={hoveredCategory}
