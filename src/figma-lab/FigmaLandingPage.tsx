@@ -167,6 +167,7 @@ export function FigmaLandingPage({
 }: FigmaLandingPageProps) {
   const { content } = usePortfolioContent()
   const { content: introSpeech } = useCharacterSpeech('intro')
+  const [introDismissedByScroll, setIntroDismissedByScroll] = useState(false)
   const pageRef = useRef<HTMLElement>(null)
   const mobileUxCategoryRef = useRef<HTMLButtonElement>(null)
   const [stage, setStage] = useState(reduced ? 2 : 0)
@@ -297,6 +298,7 @@ export function FigmaLandingPage({
 
     let currentOffset = 0
     const syncCharacterToScroll = () => {
+      if (scroller.scrollTop > 0) setIntroDismissedByScroll(true)
       const pageBounds = page.getBoundingClientRect()
       const hitboxBounds = portraitHitbox.getBoundingClientRect()
       const contactBounds = contact.getBoundingClientRect()
@@ -602,7 +604,7 @@ export function FigmaLandingPage({
             onActivate={workCategory ? () => undefined : activateCategory}
           />
           <AnimatePresence>
-            {introSpeech && !hoveredCategory && !workCategory && (
+            {introSpeech && !introDismissedByScroll && !hoveredCategory && !workCategory && (
               <UiCharacterSpeechBubble
                 key="introduction"
                 className="figma-landing-expertise-bubble"
