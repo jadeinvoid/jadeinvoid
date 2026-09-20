@@ -8,7 +8,7 @@ import { UiLabCharacter } from '../ui-lab/UiLabCharacter'
 import { UiLabCursor } from '../ui-lab/UiLabCursor'
 import { UiCap } from '../ui-lab/UiCap'
 import { RoughFrame } from '../ui-lab/RoughFrame'
-import { UiCharacterSpeechBubble } from '../ui-lab/UiCharacterSpeech'
+import { UiCharacterSpeechBubble, useCharacterSpeech } from '../ui-lab/UiCharacterSpeech'
 import { getUiCategory, uiCategories, type UiCategoryId } from '../ui-lab/categories'
 import { selectRandomProjectPreviews, type ProjectPreviewPosition } from '../ui-lab/projectPreviewLayout'
 import { usePortfolioContent } from '../portfolio/PortfolioContentContext'
@@ -166,6 +166,7 @@ export function FigmaLandingPage({
   onOpenProject,
 }: FigmaLandingPageProps) {
   const { content } = usePortfolioContent()
+  const { content: introSpeech } = useCharacterSpeech('intro')
   const pageRef = useRef<HTMLElement>(null)
   const mobileUxCategoryRef = useRef<HTMLButtonElement>(null)
   const [stage, setStage] = useState(reduced ? 2 : 0)
@@ -601,7 +602,7 @@ export function FigmaLandingPage({
             onActivate={workCategory ? () => undefined : activateCategory}
           />
           <AnimatePresence>
-            {!hoveredCategory && !workCategory && (
+            {introSpeech && !hoveredCategory && !workCategory && (
               <UiCharacterSpeechBubble
                 key="introduction"
                 className="figma-landing-expertise-bubble"
